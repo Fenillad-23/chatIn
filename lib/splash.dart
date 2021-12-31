@@ -28,13 +28,15 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: Colors.white,
-      body: Center(
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
-              height: 100,
+              height: 120,
             ),
             ClipRRect(
               borderRadius: BorderRadius.circular(100),
@@ -46,7 +48,7 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             ),
             SizedBox(
-              height: 150,
+              height: 10,
             ),
             const Text(
               "ChatIn",
@@ -57,10 +59,6 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
             Spacer(),
             Lottie.asset('assets/loader/loader.json'),
-            // AwesomeLoader(
-            //   loaderType: AwesomeLoader.AwesomeLoader3,
-            //   color: Colors.white,
-            // ),
           ],
         ),
       ),
