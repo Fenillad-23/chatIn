@@ -72,7 +72,7 @@ class _LoginState extends State<Login> {
                         hintText: 'Enter Your Name',
                       ),
                       validator: (value) => Validators.userNameValidator(
-                          value!.trim(), "user name", 15),
+                          value!.trim(), "User Name", 15),
                     ),
                   ),
                   Padding(
@@ -87,6 +87,8 @@ class _LoginState extends State<Login> {
                         labelText: 'Password',
                         hintText: 'Enter your password',
                       ),
+                      validator: (value) => Validators.passwordValidator(
+                          value!.trim(), "password", 15),
                     ),
                   ),
                   Padding(
