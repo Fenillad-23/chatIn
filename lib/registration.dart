@@ -1,5 +1,6 @@
 import 'package:chattin/login.dart';
 import 'package:flutter/material.dart';
+import 'package:chattin/validation/validation.dart';
 
 class Registration extends StatefulWidget {
   const Registration({Key? key}) : super(key: key);
@@ -16,6 +17,7 @@ class _RegistrationState extends State<Registration> {
       resizeToAvoidBottomInset: true,
       body: SingleChildScrollView(
         child: Form(
+          key: _formKey,
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
             Padding(
                 padding: EdgeInsets.all(15),
@@ -57,7 +59,7 @@ class _RegistrationState extends State<Registration> {
                   ),
                   Padding(
                     padding: EdgeInsets.all(15),
-                    child: TextField(
+                    child: TextFormField(
                       decoration: InputDecoration(
                         prefixIcon: Icon(Icons.person),
                         alignLabelWithHint: true,
@@ -67,11 +69,13 @@ class _RegistrationState extends State<Registration> {
                         labelText: 'User Name',
                         hintText: 'Enter Your Name',
                       ),
+                      validator: (value) => Validators.userNameValidator(
+                          value!.trim(), "User Name", 15),
                     ),
                   ),
                   Padding(
                     padding: EdgeInsets.all(15),
-                    child: TextField(
+                    child: TextFormField(
                       decoration: InputDecoration(
                         prefixIcon: Icon(Icons.phone),
                         alignLabelWithHint: true,
@@ -79,13 +83,16 @@ class _RegistrationState extends State<Registration> {
                           borderRadius: BorderRadius.circular(9),
                         ),
                         labelText: 'Contact no.',
-                        hintText: 'Enter Your Name',
+                        hintText: 'Enter Your Contact No',
                       ),
+                      keyboardType: TextInputType.number,
+                      validator: (value) => Validators.ContactNumberValidator(
+                          value!.trim(), "Contact Number"),
                     ),
                   ),
                   Padding(
                     padding: EdgeInsets.all(15),
-                    child: TextField(
+                    child: TextFormField(
                       decoration: InputDecoration(
                         prefixIcon: Icon(Icons.security_sharp),
                         alignLabelWithHint: true,
@@ -98,13 +105,30 @@ class _RegistrationState extends State<Registration> {
                     ),
                   ),
                   Padding(
+                    padding: EdgeInsets.all(15),
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.security_sharp),
+                        alignLabelWithHint: true,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(9),
+                        ),
+                        labelText: 'Confirm Password',
+                        hintText: 'Confirm your password',
+                      ),
+                    ),
+                  ),
+                  Padding(
                     padding: const EdgeInsets.only(
                         left: 40, right: 40, top: 20, bottom: 20.0),
-                    child: RaisedButton(
-                      onPressed: () {},
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(80.0)),
-                      padding: EdgeInsets.all(0.0),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          // If the form is valid, display a Snackbar.
+                          Scaffold.of(context).showSnackBar(SnackBar(
+                              content: Text('Data is in processing.')));
+                        }
+                      },
                       child: Ink(
                         decoration: BoxDecoration(
                             color: Colors.blue,
