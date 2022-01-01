@@ -9,6 +9,7 @@ class Validators {
     } else if (!regExp.hasMatch(namePtn)) {
       return "$type is invalid";
     }
+
     return null;
   }
 

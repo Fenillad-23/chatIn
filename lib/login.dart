@@ -13,6 +13,15 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   bool _value = false;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final userNameController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  void get_value() {
+    String username = userNameController.text;
+    String password = passwordController.text;
+    print('Login credentials: ' + username + "" + password);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,25 +80,22 @@ class _LoginState extends State<Login> {
                         labelText: 'User Name',
                         hintText: 'Enter Your Name',
                       ),
-                      validator: (value) => Validators.userNameValidator(
-                          value!.trim(), "User Name", 15),
+                      controller: userNameController,
                     ),
                   ),
                   Padding(
                     padding: EdgeInsets.all(15),
                     child: TextFormField(
-                      decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.security_sharp),
-                        alignLabelWithHint: true,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(9),
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.security_sharp),
+                          alignLabelWithHint: true,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(9),
+                          ),
+                          labelText: 'Password',
+                          hintText: 'Enter your password',
                         ),
-                        labelText: 'Password',
-                        hintText: 'Enter your password',
-                      ),
-                      validator: (value) => Validators.passwordValidator(
-                          value!.trim(), "password", 15),
-                    ),
+                        controller: passwordController),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(15),
@@ -125,11 +131,7 @@ class _LoginState extends State<Login> {
                         left: 40, right: 40, top: 20, bottom: 20.0),
                     child: ElevatedButton(
                       onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          // If the form is valid, display a Snackbar.
-                          Scaffold.of(context).showSnackBar(SnackBar(
-                              content: Text('Data is in processing.')));
-                        }
+                        get_value();
                       },
                       child: Ink(
                         decoration: BoxDecoration(
