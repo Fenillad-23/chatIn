@@ -1,7 +1,10 @@
-import 'package:chattin/registration.dart';
-import 'package:chattin/splash.dart';
+import 'package:chattin/Network/network_dio.dart';
+import 'package:chattin/Registration/registration.dart';
+import 'package:chattin/Registration/otp_success.dart';
+import 'package:chattin/Splash_Screen/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:chattin/validation/validation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -13,13 +16,46 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   bool _value = false;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final userNameController = TextEditingController();
-  final passwordController = TextEditingController();
-
-  void get_value() {
-    String username = userNameController.text;
-    String password = passwordController.text;
-    print('Login credentials: ' + username + "" + password);
+  TextEditingController userNameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  NetworkRepository nw = NetworkRepository();
+  bool _isObscure = true;
+  login() async {
+    if (_formKey.currentState!.validate()) {
+      dynamic response = await nw.httpPost(
+        'User/login',
+        {
+          'username': userNameController.text.toString(),
+          'password': passwordController.text.toString(),
+        },
+      );
+      if (response != null &&
+          (response['statusCode'] == 200 || response['statusCode'] == '200')) {
+        SharedPreferences sharedPreferences =
+            await SharedPreferences.getInstance();
+        sharedPreferences.setBool('isRememberMe', _value);
+        // sharedPreferences.setString(
+        //     'email', response['data']['email'].toString());
+        // sharedPreferences.setString(
+        //     'password', passwordController.text.toString());
+        // print('\x1b[95m Email : ${sharedPreferences.getString('email')}');
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Login(),
+          ),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              response['message'].toString(),
+            ),
+          ),
+        );
+      }
+      print('\x1b[93m --- $response');
+    }
   }
 
   @override
@@ -86,8 +122,21 @@ class _LoginState extends State<Login> {
                   Padding(
                     padding: EdgeInsets.all(15),
                     child: TextFormField(
+                        obscureText: _isObscure,
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.security_sharp),
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              _isObscure
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                _isObscure = !_isObscure;
+                              });
+                            },
+                          ),
                           alignLabelWithHint: true,
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(9),
@@ -97,41 +146,41 @@ class _LoginState extends State<Login> {
                         ),
                         controller: passwordController),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(15),
-                    child: Row(
-                      children: [
-                        Checkbox(
-                          value: _value,
-                          onChanged: (newValue) {
-                            setState(() {
-                              _value = newValue!;
-                            });
-                          },
-                          activeColor: Colors.green,
-                        ),
-                        Text("Remember me"),
-                        Spacer(),
-                        GestureDetector(
+                  Row(
+                    children: [
+                      Checkbox(
+                        value: _value,
+                        onChanged: (newValue) {
+                          setState(() {
+                            _value = newValue!;
+                          });
+                        },
+                        activeColor: Colors.green,
+                      ),
+                      Text("Remember me"),
+                      Spacer(),
+                      Padding(
+                        padding: EdgeInsets.only(right: 15),
+                        child: GestureDetector(
                           onTap: () => Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => SplashScreen())),
+                                  builder: (context) => otpSucceed())),
                           child: Text(
                             "Forgot Password",
                             style:
                                 TextStyle(decoration: TextDecoration.underline),
                           ),
-                        )
-                      ],
-                    ),
+                        ),
+                      )
+                    ],
                   ),
                   Padding(
                     padding: const EdgeInsets.only(
                         left: 40, right: 40, top: 20, bottom: 20.0),
                     child: ElevatedButton(
                       onPressed: () {
-                        get_value();
+                        login();
                       },
                       child: Ink(
                         decoration: BoxDecoration(

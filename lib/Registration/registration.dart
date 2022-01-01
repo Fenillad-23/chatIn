@@ -1,6 +1,8 @@
-import 'package:chattin/login.dart';
+import 'package:chattin/Login/login.dart';
+import 'package:chattin/Network/network_dio.dart';
 import 'package:flutter/material.dart';
 import 'package:chattin/validation/validation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Registration extends StatefulWidget {
   const Registration({Key? key}) : super(key: key);
@@ -10,13 +12,66 @@ class Registration extends StatefulWidget {
 }
 
 class _RegistrationState extends State<Registration> {
+  TextEditingController userNameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController contactNoController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
+
+  NetworkRepository nw = NetworkRepository();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  String userNameController = '';
-  String passwordController = '';
-  String contactNumberController = '';
-  String confirmPasswordController = '';
-  void get_value() {
-    print(contactNumberController);
+  bool _isObscure = true;
+  bool obscure = true;
+  registration() async {
+    if (_formKey.currentState!.validate()) {
+      if (passwordController.text == confirmPasswordController.text) {
+        dynamic response = await nw.httpPost(
+          'User/registration',
+          {
+            'username': userNameController.text.toString(),
+            'password': passwordController.text.toString(),
+            'contactNo': contactNoController.text.toString(),
+          },
+        );
+        Map data = {
+          'userName': userNameController.text.toString(),
+          'password': passwordController.text.toString(),
+          'contactNo': contactNoController.text.toString(),
+        };
+        print('\x1b[95m ----$data');
+        if (response != null &&
+            (response['statusCode'] == 200 ||
+                response['statusCode'] == '200')) {
+          SharedPreferences sharedPreferences =
+              await SharedPreferences.getInstance();
+          sharedPreferences.setString(
+              'usename', response['data']['newUser']['username'].toString());
+
+          sharedPreferences.setString(
+              'password', response['data']['newUser']['password'].toString());
+          sharedPreferences.setString(
+              'contact', response['data']['newUser']['contactNo'].toString());
+          // print('\x1b[95m Email : ${sharedPreferences.getString('email')}');
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => Login(),
+            ),
+          );
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text(
+              response['message'].toString(),
+            ),
+          ));
+        }
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(
+            'Password & ConfirmPassword Not Matched!'.toString(),
+          ),
+        ));
+      }
+    }
   }
 
   @override
@@ -69,6 +124,7 @@ class _RegistrationState extends State<Registration> {
                     Padding(
                       padding: EdgeInsets.all(15),
                       child: TextFormField(
+                        controller: userNameController,
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.person),
                           alignLabelWithHint: true,
@@ -79,15 +135,28 @@ class _RegistrationState extends State<Registration> {
                           hintText: 'Enter Your Name',
                         ),
                         validator: (value) => Validators.userNameValidator(
-                            value!.trim(), "User Name", 15),
-                        onChanged: (value) => userNameController = value,
+                            value!.trim(), "User Name"),
                       ),
                     ),
                     Padding(
                       padding: EdgeInsets.all(15),
                       child: TextFormField(
+                        controller: passwordController,
+                        obscureText: _isObscure,
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.security_sharp),
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              _isObscure
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                _isObscure = !_isObscure;
+                              });
+                            },
+                          ),
                           alignLabelWithHint: true,
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(9),
@@ -96,13 +165,43 @@ class _RegistrationState extends State<Registration> {
                           hintText: 'Enter your password',
                         ),
                         validator: (value) => Validators.passwordValidator(
-                            value!.trim(), "Password", 15),
-                        onChanged: (value) => passwordController = value,
+                            value!.trim(), "Password", 8),
                       ),
                     ),
                     Padding(
                       padding: EdgeInsets.all(15),
                       child: TextFormField(
+                        obscureText: obscure,
+                        controller: confirmPasswordController,
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.security_sharp),
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              _isObscure
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                obscure = !obscure;
+                              });
+                            },
+                          ),
+                          alignLabelWithHint: true,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(9),
+                          ),
+                          labelText: 'Confirm Password',
+                          hintText: 'Confirm your password',
+                        ),
+                        validator: (value) => Validators.passwordValidator(
+                            value!.trim(), "Confirm Password", 8),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(15),
+                      child: TextFormField(
+                        controller: contactNoController,
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.phone),
                           alignLabelWithHint: true,
@@ -115,22 +214,6 @@ class _RegistrationState extends State<Registration> {
                         keyboardType: TextInputType.number,
                         validator: (value) => Validators.ContactNumberValidator(
                             value!.trim(), "Contact Number"),
-                        onChanged: (value) => contactNumberController = value,
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(15),
-                      child: TextFormField(
-                        decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.security_sharp),
-                          alignLabelWithHint: true,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(9),
-                          ),
-                          labelText: 'Confirm Password',
-                          hintText: 'Confirm your password',
-                        ),
-                        onChanged: (value) => confirmPasswordController = value,
                       ),
                     ),
                     Padding(
@@ -138,10 +221,7 @@ class _RegistrationState extends State<Registration> {
                           left: 40, right: 40, top: 20, bottom: 20.0),
                       child: ElevatedButton(
                         onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            // If the form is valid, display a Snackbar.
-                            get_value();
-                          }
+                          registration();
                         },
                         child: Ink(
                           decoration: BoxDecoration(

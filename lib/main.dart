@@ -115,7 +115,7 @@
 // }
 
 import 'package:flutter/material.dart';
-import 'package:chattin/splash.dart';
+import 'package:chattin/Splash_Screen/splash.dart';
 
 void main() {
   runApp(const Chattin());
