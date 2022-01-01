@@ -23,49 +23,49 @@ class _RegistrationState extends State<Registration> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      body: Form(
-        key: _formKey,
-        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          Padding(
-              padding: EdgeInsets.all(15),
-              child: Column(children: [
-                SizedBox(
-                  height: 50,
-                ),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(100),
-                  child: Image.asset(
-                    'assets/images/logo_blue.png',
-                    width: 100,
-                    height: 100,
-                    fit: BoxFit.contain,
+      body: SingleChildScrollView(
+        child: Form(
+          key: _formKey,
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+            Padding(
+                padding: EdgeInsets.all(15),
+                child: Column(children: [
+                  SizedBox(
+                    height: 50,
                   ),
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                const Text(
-                  "Register",
-                  style: TextStyle(
-                      color: Colors.blue,
-                      fontSize: 24.0,
-                      fontWeight: FontWeight.bold),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                const Text(
-                  "Register your self by filling below information",
-                  style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 13.0,
-                      fontWeight: FontWeight.bold),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                SingleChildScrollView(
-                  child: Column(children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(100),
+                    child: Image.asset(
+                      'assets/images/logo_blue.png',
+                      width: 100,
+                      height: 100,
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  const Text(
+                    "Register",
+                    style: TextStyle(
+                        color: Colors.blue,
+                        fontSize: 24.0,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  const Text(
+                    "Register your self by filling below information",
+                    style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 13.0,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Column(children: [
                     Padding(
                       padding: EdgeInsets.all(15),
                       child: TextFormField(
@@ -95,6 +95,8 @@ class _RegistrationState extends State<Registration> {
                           labelText: 'Password',
                           hintText: 'Enter your password',
                         ),
+                        validator: (value) => Validators.passwordValidator(
+                            value!.trim(), "Password", 15),
                         onChanged: (value) => passwordController = value,
                       ),
                     ),
@@ -175,9 +177,9 @@ class _RegistrationState extends State<Registration> {
                       ],
                     )
                   ]),
-                ),
-              ]))
-        ]),
+                ]))
+          ]),
+        ),
       ),
     );
   }
