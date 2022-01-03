@@ -33,7 +33,7 @@ class _RegistrationState extends State<Registration> {
           },
         );
         Map data = {
-          'userName': userNameController.text.toString(),
+          'userN  ame': userNameController.text.toString(),
           'password': passwordController.text.toString(),
           'contactNo': contactNoController.text.toString(),
         };
