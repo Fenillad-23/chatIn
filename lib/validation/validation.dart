@@ -13,7 +13,7 @@ class Validators {
 
   static String? passwordValidator(String value, String type, int length) {
     String passPtn =
-        r'^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$';
+        r'^.(?=.{8,})((?=.[!@#$%^&()\-_=+{};:,<.>]){1})(?=.\d)((?=.[a-z]){1})((?=.[A-Z]){1}).*$';
     RegExp regExp = RegExp(passPtn);
     if (value.isEmpty) {
       return "$type is required";
@@ -35,5 +35,16 @@ class Validators {
       return "$type can't be less than 10";
     }
     return null;
+  }
+
+  static String? emailAddressValidator(String value, String type) {
+    String emailptn =
+        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
+    RegExp regExp = RegExp(emailptn);
+    if (value.isEmpty) {
+      return "$type can't be null";
+    } else if (!regExp.hasMatch(emailptn)) {
+      return "please follow the proper format";
+    }
   }
 }
