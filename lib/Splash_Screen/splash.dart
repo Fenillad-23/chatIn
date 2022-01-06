@@ -7,7 +7,7 @@ import 'dart:async';
 import '../main.dart';
 import '../Login/login.dart';
 import 'package:lottie/lottie.dart';
-import 'package:chattin/Registration/otp_screen.dart';
+import 'package:chattin/Login/Forget_Password/forget_password.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);

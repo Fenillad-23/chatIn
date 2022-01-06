@@ -43,7 +43,7 @@ class Validators {
     RegExp regExp = RegExp(emailptn);
     if (value.isEmpty) {
       return "$type can't be null";
-    } else if (!regExp.hasMatch(emailptn)) {
+    } else if (!regExp.hasMatch(value)) {
       return "please follow the proper format";
     }
   }

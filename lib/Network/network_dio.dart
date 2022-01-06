@@ -6,8 +6,8 @@ class NetworkRepository {
     String Url,
     dynamic data,
   ) async {
-    var url = Uri.parse('http://192.168.29.171:3000/$Url');
-    print('\x1b[97m URL : $url');
+    var url = Uri.parse('http://192.168.29.170:3000/$Url');
+    print('\x1b[97m URL : $url----$data');
     dynamic response = await http.post(
       url,
       body: data,

@@ -1,4 +1,5 @@
 import 'package:chattin/Login/login.dart';
+import 'package:chattin/Registration/otp_success.dart';
 import 'package:chattin/Network/network_dio.dart';
 import 'package:flutter/material.dart';
 import 'package:chattin/validation/validation.dart';
@@ -17,6 +18,7 @@ class _RegistrationState extends State<Registration> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController contactNoController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
 
   NetworkRepository nw = NetworkRepository();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -29,14 +31,16 @@ class _RegistrationState extends State<Registration> {
           'User/registration',
           {
             'username': userNameController.text.toString(),
-            'password': passwordController.text.toString(),
             'contactNo': contactNoController.text.toString(),
+            'email': emailController.text.toString(),
+            'password': passwordController.text.toString(),
           },
         );
         Map data = {
-          'userN  ame': userNameController.text.toString(),
-          'password': passwordController.text.toString(),
+          'username': userNameController.text.toString(),
           'contactNo': contactNoController.text.toString(),
+          'email': emailController.text.toString(),
+          'password': passwordController.text.toString(),
         };
         print('\x1b[95m ----$data');
         if (response != null &&
@@ -50,12 +54,14 @@ class _RegistrationState extends State<Registration> {
           sharedPreferences.setString(
               'password', response['data']['newUser']['password'].toString());
           sharedPreferences.setString(
-              'contact', response['data']['newUser']['contactNo'].toString());
+              'contactNo', response['data']['newUser']['contactNo'].toString());
+          sharedPreferences.setString(
+              'email', response['data']['newUser']['email'].toString());
           // print('\x1b[95m Email : ${sharedPreferences.getString('email')}');
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => Login(),
+              builder: (context) => otpSucceed(),
             ),
           );
         } else {
@@ -88,30 +94,30 @@ class _RegistrationState extends State<Registration> {
               child: Column(
                 children: [
                   SizedBox(
-                    height: 50,
+                    height: 30,
                   ),
                   ClipRRect(
-                    borderRadius: BorderRadius.circular(100),
+                    borderRadius: BorderRadius.circular(85),
                     child: Image.asset(
                       'assets/images/logo_blue.png',
-                      width: 100,
-                      height: 100,
+                      width: 85,
+                      height: 85,
                       fit: BoxFit.contain,
                     ),
                   ),
                   SizedBox(
-                    height: 30,
+                    height: 10,
                   ),
                   const Text(
-                    "Register",
+                    "Register Account",
                     style: TextStyle(
                         color: Colors.blue,
                         fontSize: 24.0,
                         fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(
-                    height: 10,
-                  ),
+                  // SizedBox(
+                  //   height: 10,
+                  // ),
                   const Text(
                     "Register your self by filling below information",
                     style: TextStyle(
@@ -120,7 +126,7 @@ class _RegistrationState extends State<Registration> {
                         fontWeight: FontWeight.bold),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
                   Column(
                     children: [
@@ -139,6 +145,42 @@ class _RegistrationState extends State<Registration> {
                           ),
                           validator: (value) => Validators.userNameValidator(
                               value!.trim(), "User Name"),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(15),
+                        child: TextFormField(
+                          controller: emailController,
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(Icons.person),
+                            alignLabelWithHint: true,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(9),
+                            ),
+                            labelText: 'Email',
+                            hintText: 'Enter Your Email Address',
+                          ),
+                          validator: (value) =>
+                              Validators.emailAddressValidator(
+                                  value!.trim(), "email"),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(15),
+                        child: TextFormField(
+                          controller: contactNoController,
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(Icons.person),
+                            alignLabelWithHint: true,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(9),
+                            ),
+                            labelText: 'Contact Number',
+                            hintText: 'Enter Your Contact Number',
+                          ),
+                          validator: (value) =>
+                              Validators.ContactNumberValidator(
+                                  value!.trim(), "contact"),
                         ),
                       ),
                       Padding(
@@ -202,26 +244,8 @@ class _RegistrationState extends State<Registration> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.all(15),
-                        child: TextFormField(
-                          controller: userNameController,
-                          decoration: InputDecoration(
-                            prefixIcon: Icon(Icons.person),
-                            alignLabelWithHint: true,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(9),
-                            ),
-                            labelText: 'Email',
-                            hintText: 'Enter Your Email Address',
-                          ),
-                          validator: (value) =>
-                              Validators.emailAddressValidator(
-                                  value!.trim(), "email"),
-                        ),
-                      ),
-                      Padding(
                         padding: const EdgeInsets.only(
-                            left: 40, right: 40, top: 20, bottom: 20.0),
+                            left: 20, right: 20, top: 20, bottom: 20.0),
                         child: ElevatedButton(
                           onPressed: () {
                             registration();
@@ -232,7 +256,7 @@ class _RegistrationState extends State<Registration> {
                                 borderRadius: BorderRadius.circular(30.0)),
                             child: Container(
                               constraints: BoxConstraints(
-                                  maxWidth: 250.0, minHeight: 50.0),
+                                  maxWidth: 330.0, minHeight: 50.0),
                               alignment: Alignment.center,
                               child: Text(
                                 "Sign Up",
@@ -263,36 +287,6 @@ class _RegistrationState extends State<Registration> {
                       ),
                     ],
                   ),
-                  Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: new Container(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Divider(
-                              color: Colors.black,
-                              height: 10,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Text('OR',
-                          style: TextStyle(color: Colors.black, fontSize: 10)),
-                      Expanded(
-                        child: new Container(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Divider(color: Colors.black, height: 10),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                  ElevatedButton.icon(
-                      onPressed: () => print(''),
-                      icon: Icon(Icons.g_mobiledata, size: 24.5),
-                      label: Text('Sign Up ith Google',
-                          style: TextStyle(color: Colors.black)))
                 ],
               ),
             ),
