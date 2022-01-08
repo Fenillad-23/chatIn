@@ -1,3 +1,4 @@
+import 'package:chattin/Login/login.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
@@ -55,7 +56,10 @@ class _otpSucceedState extends State<otpSucceed> {
                   padding: const EdgeInsets.only(
                       left: 40, right: 40, top: 20, bottom: 20.0),
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (context) => Login()));
+                    },
                     child: Ink(
                       decoration: BoxDecoration(
                           color: Colors.blue,

@@ -1,9 +1,9 @@
 import 'package:chattin/Network/network_dio.dart';
+//import 'package:chattin/Registration/otp.dart';
 import 'package:chattin/Registration/registration.dart';
 import 'package:chattin/Registration/otp_success.dart';
-import 'package:chattin/Splash_Screen/splash.dart';
+import 'package:chattin/Login/Forget_Password/forget_password.dart';
 import 'package:flutter/material.dart';
-import 'package:chattin/validation/validation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Login extends StatefulWidget {
@@ -42,7 +42,7 @@ class _LoginState extends State<Login> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => Login(),
+            builder: (context) => otpSucceed(),
           ),
         );
       } else {
@@ -124,7 +124,7 @@ class _LoginState extends State<Login> {
                     child: TextFormField(
                         obscureText: _isObscure,
                         decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.security_sharp),
+                          prefixIcon: Icon(Icons.lock),
                           suffixIcon: IconButton(
                             icon: Icon(
                               _isObscure
@@ -165,7 +165,8 @@ class _LoginState extends State<Login> {
                           onTap: () => Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => otpSucceed())),
+                                  builder: (context) => ForgetPassword())),
+                          // builder: (context) => otpScreen())),
                           child: Text(
                             "Forgot Password",
                             style:
@@ -177,7 +178,7 @@ class _LoginState extends State<Login> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(
-                        left: 40, right: 40, top: 20, bottom: 20.0),
+                        left: 20, right: 20, top: 20, bottom: 20.0),
                     child: ElevatedButton(
                       onPressed: () {
                         login();
@@ -188,7 +189,7 @@ class _LoginState extends State<Login> {
                             borderRadius: BorderRadius.circular(30.0)),
                         child: Container(
                           constraints:
-                              BoxConstraints(maxWidth: 250.0, minHeight: 50.0),
+                              BoxConstraints(maxWidth: 330.0, minHeight: 50.0),
                           alignment: Alignment.center,
                           child: Text(
                             "Sign In",

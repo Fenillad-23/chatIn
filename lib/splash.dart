@@ -1,9 +1,8 @@
 import 'dart:async';
-import 'package:flutter/cupertino.dart';
+import 'package:chattin/Registration/otp_success.dart';
 import 'package:flutter/material.dart';
-import 'dart:async';
-import 'main.dart';
-import 'package:chattin/Login/login.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../Login/login.dart';
 import 'package:lottie/lottie.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -17,10 +16,28 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(
-        const Duration(seconds: 5),
-        () => Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => Login())));
+    Timer(const Duration(seconds: 3), () {
+      navigator();
+    });
+  }
+
+  navigator() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    if (sharedPreferences.getBool('isRememberMe') == true) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => otpSucceed(),
+        ),
+      );
+    } else {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Login(),
+        ),
+      );
+    }
   }
 
   @override
@@ -42,8 +59,8 @@ class _SplashScreenState extends State<SplashScreen> {
               borderRadius: BorderRadius.circular(100),
               child: Image.asset(
                 'assets/images/logo_blue.png',
-                width: 100,
-                height: 100,
+                width: 150,
+                height: 150,
                 fit: BoxFit.contain,
               ),
             ),
@@ -58,7 +75,17 @@ class _SplashScreenState extends State<SplashScreen> {
                   fontWeight: FontWeight.bold),
             ),
             Spacer(),
-            Lottie.asset('assets/loader/loader.json'),
+            Lottie.asset(
+              'assets/json/loader.json',
+              width: 250,
+            ),
+            Image.asset(
+              'assets/images/Semicolon_logo.jpg',
+              width: 150,
+            ),
+            SizedBox(
+              height: 50,
+            ),
           ],
         ),
       ),
