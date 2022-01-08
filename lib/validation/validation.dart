@@ -13,12 +13,12 @@ class Validators {
 
   static String? passwordValidator(String value, String type, int length) {
     String passPtn =
-        r'^.(?=.{8,})((?=.[!@#$%^&()\-_=+{};:,<.>]){1})(?=.\d)((?=.[a-z]){1})((?=.[A-Z]){1}).*$';
+        r'^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$';
     RegExp regExp = RegExp(passPtn);
     if (value.isEmpty) {
       return "$type is required";
     } else if (value.length <= length) {
-      return "$type less then $length character";
+      return "$type must be greater than $length character";
     } else if (!regExp.hasMatch(value)) {
       return "Invalid - please follow this formate UserName@47";
     }
@@ -43,7 +43,7 @@ class Validators {
     RegExp regExp = RegExp(emailptn);
     if (value.isEmpty) {
       return "$type can't be null";
-    } else if (!regExp.hasMatch(emailptn)) {
+    } else if (!regExp.hasMatch(value)) {
       return "please follow the proper format";
     }
   }

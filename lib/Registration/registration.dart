@@ -3,6 +3,7 @@ import 'package:chattin/Network/network_dio.dart';
 import 'package:flutter/material.dart';
 import 'package:chattin/validation/validation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_signin_button/flutter_signin_button.dart';
 
 class Registration extends StatefulWidget {
   const Registration({Key? key}) : super(key: key);
@@ -33,7 +34,7 @@ class _RegistrationState extends State<Registration> {
           },
         );
         Map data = {
-          'userName': userNameController.text.toString(),
+          'userN  ame': userNameController.text.toString(),
           'password': passwordController.text.toString(),
           'contactNo': contactNoController.text.toString(),
         };
@@ -83,8 +84,9 @@ class _RegistrationState extends State<Registration> {
           key: _formKey,
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
             Padding(
-                padding: EdgeInsets.all(15),
-                child: Column(children: [
+              padding: EdgeInsets.all(15),
+              child: Column(
+                children: [
                   SizedBox(
                     height: 50,
                   ),
@@ -120,144 +122,180 @@ class _RegistrationState extends State<Registration> {
                   SizedBox(
                     height: 20,
                   ),
-                  Column(children: [
-                    Padding(
-                      padding: EdgeInsets.all(15),
-                      child: TextFormField(
-                        controller: userNameController,
-                        decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.person),
-                          alignLabelWithHint: true,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(9),
-                          ),
-                          labelText: 'User Name',
-                          hintText: 'Enter Your Name',
-                        ),
-                        validator: (value) => Validators.userNameValidator(
-                            value!.trim(), "User Name"),
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(15),
-                      child: TextFormField(
-                        controller: passwordController,
-                        obscureText: _isObscure,
-                        decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.security_sharp),
-                          suffixIcon: IconButton(
-                            icon: Icon(
-                              _isObscure
-                                  ? Icons.visibility
-                                  : Icons.visibility_off,
+                  Column(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.all(15),
+                        child: TextFormField(
+                          controller: userNameController,
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(Icons.person),
+                            alignLabelWithHint: true,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(9),
                             ),
-                            onPressed: () {
-                              setState(() {
-                                _isObscure = !_isObscure;
-                              });
-                            },
+                            labelText: 'User Name',
+                            hintText: 'Enter Your Name',
                           ),
-                          alignLabelWithHint: true,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(9),
-                          ),
-                          labelText: 'Password',
-                          hintText: 'Enter your password',
+                          validator: (value) => Validators.userNameValidator(
+                              value!.trim(), "User Name"),
                         ),
-                        validator: (value) => Validators.passwordValidator(
-                            value!.trim(), "Password", 8),
                       ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(15),
-                      child: TextFormField(
-                        obscureText: obscure,
-                        controller: confirmPasswordController,
-                        decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.security_sharp),
-                          suffixIcon: IconButton(
-                            icon: Icon(
-                              _isObscure
-                                  ? Icons.visibility
-                                  : Icons.visibility_off,
+                      Padding(
+                        padding: EdgeInsets.all(15),
+                        child: TextFormField(
+                          controller: passwordController,
+                          obscureText: _isObscure,
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(Icons.security_sharp),
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                _isObscure
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  _isObscure = !_isObscure;
+                                });
+                              },
                             ),
-                            onPressed: () {
-                              setState(() {
-                                obscure = !obscure;
-                              });
-                            },
+                            alignLabelWithHint: true,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(9),
+                            ),
+                            labelText: 'Password',
+                            hintText: 'Enter your password',
                           ),
-                          alignLabelWithHint: true,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(9),
-                          ),
-                          labelText: 'Confirm Password',
-                          hintText: 'Confirm your password',
+                          validator: (value) => Validators.passwordValidator(
+                              value!.trim(), "Password", 8),
                         ),
-                        validator: (value) => Validators.passwordValidator(
-                            value!.trim(), "Confirm Password", 8),
                       ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(15),
-                      child: TextFormField(
-                        controller: contactNoController,
-                        decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.phone),
-                          alignLabelWithHint: true,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(9),
+                      Padding(
+                        padding: EdgeInsets.all(15),
+                        child: TextFormField(
+                          obscureText: obscure,
+                          controller: confirmPasswordController,
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(Icons.security_sharp),
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                _isObscure
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  obscure = !obscure;
+                                });
+                              },
+                            ),
+                            alignLabelWithHint: true,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(9),
+                            ),
+                            labelText: 'Confirm Password',
+                            hintText: 'Confirm your password',
                           ),
-                          labelText: 'Contact no.',
-                          hintText: 'Enter Your Contact No',
+                          validator: (value) => Validators.passwordValidator(
+                              value!.trim(), "Confirm Password", 8),
                         ),
-                        keyboardType: TextInputType.number,
-                        validator: (value) => Validators.ContactNumberValidator(
-                            value!.trim(), "Contact Number"),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          left: 40, right: 40, top: 20, bottom: 20.0),
-                      child: ElevatedButton(
-                        onPressed: () {
-                          registration();
-                        },
-                        child: Ink(
-                          decoration: BoxDecoration(
-                              color: Colors.blue,
-                              borderRadius: BorderRadius.circular(30.0)),
-                          child: Container(
-                            constraints: BoxConstraints(
-                                maxWidth: 250.0, minHeight: 50.0),
-                            alignment: Alignment.center,
+                      Padding(
+                        padding: EdgeInsets.all(15),
+                        child: TextFormField(
+                          controller: userNameController,
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(Icons.person),
+                            alignLabelWithHint: true,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(9),
+                            ),
+                            labelText: 'Email',
+                            hintText: 'Enter Your Email Address',
+                          ),
+                          validator: (value) =>
+                              Validators.emailAddressValidator(
+                                  value!.trim(), "email"),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            left: 40, right: 40, top: 20, bottom: 20.0),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            registration();
+                          },
+                          child: Ink(
+                            decoration: BoxDecoration(
+                                color: Colors.blue,
+                                borderRadius: BorderRadius.circular(30.0)),
+                            child: Container(
+                              constraints: BoxConstraints(
+                                  maxWidth: 250.0, minHeight: 50.0),
+                              alignment: Alignment.center,
+                              child: Text(
+                                "Sign Up",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 20),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          GestureDetector(
+                            onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Login())),
                             child: Text(
-                              "Sign Up",
+                              "Already have an account?Sign in",
                               textAlign: TextAlign.center,
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 20),
+                              style: TextStyle(
+                                  decoration: TextDecoration.underline),
+                            ),
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: new Container(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Divider(
+                              color: Colors.black,
+                              height: 10,
                             ),
                           ),
                         ),
                       ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        GestureDetector(
-                          onTap: () => Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => Login())),
-                          child: Text(
-                            "Already have an account?Sign in",
-                            textAlign: TextAlign.center,
-                            style:
-                                TextStyle(decoration: TextDecoration.underline),
+                      Text('OR',
+                          style: TextStyle(color: Colors.black, fontSize: 10)),
+                      Expanded(
+                        child: new Container(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Divider(color: Colors.black, height: 10),
                           ),
-                        )
-                      ],
-                    )
-                  ]),
-                ]))
+                        ),
+                      )
+                    ],
+                  ),
+                  ElevatedButton.icon(
+                      onPressed: () => print(''),
+                      icon: Icon(Icons.g_mobiledata, size: 24.5),
+                      label: Text('Sign Up ith Google',
+                          style: TextStyle(color: Colors.black)))
+                ],
+              ),
+            ),
           ]),
         ),
       ),
