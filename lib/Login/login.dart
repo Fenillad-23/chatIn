@@ -1,4 +1,5 @@
 import 'package:chattin/Network/network_dio.dart';
+//import 'package:chattin/Registration/otp.dart';
 import 'package:chattin/Registration/registration.dart';
 import 'package:chattin/Registration/otp_success.dart';
 import 'package:chattin/Login/Forget_Password/forget_password.dart';
@@ -123,7 +124,7 @@ class _LoginState extends State<Login> {
                     child: TextFormField(
                         obscureText: _isObscure,
                         decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.security_sharp),
+                          prefixIcon: Icon(Icons.lock),
                           suffixIcon: IconButton(
                             icon: Icon(
                               _isObscure
@@ -165,6 +166,7 @@ class _LoginState extends State<Login> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => ForgetPassword())),
+                          // builder: (context) => otpScreen())),
                           child: Text(
                             "Forgot Password",
                             style:

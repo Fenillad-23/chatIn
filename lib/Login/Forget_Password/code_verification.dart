@@ -1,8 +1,11 @@
+import 'package:chattin/Login/Forget_Password/change_password.dart';
+import 'package:chattin/Network/network_dio.dart';
 import 'package:flutter/material.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/otp_text_field.dart';
 import 'package:otp_text_field/style.dart';
 import 'package:chattin/Login/Forget_Password/forget_password.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class codeVerification extends StatefulWidget {
   const codeVerification({Key? key}) : super(key: key);
@@ -12,6 +15,36 @@ class codeVerification extends StatefulWidget {
 }
 
 class _codeVerificationState extends State<codeVerification> {
+  NetworkRepository nw = NetworkRepository();
+  String get_email = '';
+  String get_otp = '';
+  verify_otp() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    get_email = sharedPreferences.getString("VerifyEmail").toString();
+    //print(get_otp);
+    dynamic response = await nw.httpPost(
+      'User/verifyOTP',
+      {
+        'email': get_email,
+        'code': get_otp,
+      },
+    );
+    Map VerifyData = {
+      'email': get_email,
+      'code': get_otp,
+    };
+    print(VerifyData);
+    if (response != null &&
+        (response['statusCode'] == 200 || response['statusCode'] == '200')) {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => change_password()));
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(response['message'].toString()),
+      ));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,16 +69,14 @@ class _codeVerificationState extends State<codeVerification> {
       ),
       resizeToAvoidBottomInset: true,
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.only(bottom: 100),
-          child: Container(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
+      body: Center(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 100),
             child: Form(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
+                // crossAxisAlignment: CrossAxisAlignment.center,
+                // mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(100),
@@ -66,7 +97,7 @@ class _codeVerificationState extends State<codeVerification> {
                       "Please check your eamil for password reset code.",
                       style: TextStyle(
                         color: Colors.black,
-                        fontSize: 20.0,
+                        fontSize: 18.0,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -87,6 +118,7 @@ class _codeVerificationState extends State<codeVerification> {
                     },
                     onCompleted: (pin) {
                       print("Completed: " + pin);
+                      get_otp = pin;
                     },
                   ),
                   SizedBox(
@@ -96,7 +128,9 @@ class _codeVerificationState extends State<codeVerification> {
                     padding: const EdgeInsets.only(
                         left: 20, right: 20, top: 0, bottom: 80),
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        verify_otp();
+                      },
                       child: Ink(
                         decoration: BoxDecoration(
                             color: Colors.blue,

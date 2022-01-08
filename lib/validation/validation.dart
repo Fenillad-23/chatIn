@@ -18,7 +18,7 @@ class Validators {
     if (value.isEmpty) {
       return "$type is required";
     } else if (value.length <= length) {
-      return "$type less then $length character";
+      return "$type must be greater than $length character";
     } else if (!regExp.hasMatch(value)) {
       return "Invalid - please follow this formate UserName@47";
     }

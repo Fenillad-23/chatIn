@@ -1,13 +1,9 @@
 import 'dart:async';
 import 'package:chattin/Registration/otp_success.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:async';
-import '../main.dart';
 import '../Login/login.dart';
 import 'package:lottie/lottie.dart';
-import 'package:chattin/Login/Forget_Password/forget_password.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -81,7 +77,7 @@ class _SplashScreenState extends State<SplashScreen> {
             Spacer(),
             Lottie.asset(
               'assets/json/loader.json',
-              width: 150,
+              width: 250,
             ),
             Image.asset(
               'assets/images/Semicolon_logo.jpg',

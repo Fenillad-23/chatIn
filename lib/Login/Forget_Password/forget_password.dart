@@ -1,7 +1,9 @@
+import 'package:chattin/Network/network_dio.dart';
 import 'package:flutter/material.dart';
 import 'package:chattin/validation/validation.dart';
 import 'package:chattin/Login/login.dart';
 import 'package:chattin/Login/Forget_Password/code_verification.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ForgetPassword extends StatefulWidget {
   const ForgetPassword({Key? key}) : super(key: key);
@@ -13,13 +15,54 @@ class ForgetPassword extends StatefulWidget {
 class _ForgetPasswordState extends State<ForgetPassword> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
+
+  NetworkRepository nw = NetworkRepository();
   forget_password() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    sharedPreferences.setString('VerifyEmail', emailController.text.toString());
     if (_formKey.currentState!.validate()) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('valid'),
+      dynamic verify_mail = await nw.httpPost(
+          'User/checkemail', {'email': emailController.text.toString()});
+      Map Email = {
+        'email': emailController.text.toString(),
+      };
+      print('VerifyEmail:$Email');
+      if (verify_mail != null &&
+          (verify_mail['statusCode'] == 500 ||
+              verify_mail['statusCode'] == '500')) {
+        reSendOTP();
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(
+            verify_mail['message'].toString(),
+          ),
+        ));
+      }
+    }
+  }
+
+  reSendOTP() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    dynamic resendOTP = await nw.httpPost(
+      'User/sendotp',
+      {
+        'email': sharedPreferences.getString("VerifyEmail").toString(),
+      },
+    );
+    Map data = {
+      'email': sharedPreferences.getString("VerifyEmail").toString(),
+    };
+    print('\x1b[95m ----$resendOTP');
+    if (resendOTP != null &&
+        (resendOTP['statusCode'] == 200 || resendOTP['statusCode'] == '200')) {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => codeVerification()));
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(
+          resendOTP['message'].toString(),
         ),
-      );
+      ));
     }
   }
 
@@ -47,17 +90,13 @@ class _ForgetPasswordState extends State<ForgetPassword> {
       ),
       resizeToAvoidBottomInset: true,
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.only(bottom: 100),
-          child: Container(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
+      body: Center(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 100),
             child: Form(
               key: _formKey,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(100),
@@ -79,7 +118,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                         "Enter your email,you will receive a verification code on it.",
                         style: TextStyle(
                             color: Colors.black,
-                            fontSize: 15.0,
+                            fontSize: 18.0,
                             fontWeight: FontWeight.bold),
                       ),
                     ),
@@ -116,11 +155,6 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                     child: ElevatedButton(
                       onPressed: () {
                         forget_password();
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => codeVerification()),
-                        );
                       },
                       child: Ink(
                         decoration: BoxDecoration(
