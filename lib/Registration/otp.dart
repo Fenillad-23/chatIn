@@ -40,9 +40,17 @@ class _otpScreenState extends State<otpScreen> {
           context, MaterialPageRoute(builder: (context) => otpScreen()));
     } else {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text(
-          resendOTP['message'].toString(),
+        content: Text(resendOTP['message'].toString()),
+        action: SnackBarAction(
+          label: '',
+          textColor: Colors.white,
+          onPressed: () {},
         ),
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(24),
+        ),
+        backgroundColor: Colors.blue,
       ));
     }
   }
@@ -91,9 +99,17 @@ class _otpScreenState extends State<otpScreen> {
             context, MaterialPageRoute(builder: (context) => otpSucceed()));
       } else {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(
-            do_register['message'].toString(),
+          content: Text(do_register['message'].toString()),
+          action: SnackBarAction(
+            label: '',
+            textColor: Colors.white,
+            onPressed: () {},
           ),
+          behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(24),
+          ),
+          backgroundColor: Colors.blue,
         ));
       }
     } else {}
@@ -134,7 +150,9 @@ class _otpScreenState extends State<otpScreen> {
               SizedBox(
                 height: 20,
               ),
-              Text("This code will expired in "),
+              Text(
+                "This code will expired in ",
+              ),
               TweenAnimationBuilder(
                 tween: Tween(begin: 60.0, end: 0.0),
                 duration: Duration(seconds: 60),

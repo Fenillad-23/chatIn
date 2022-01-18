@@ -41,6 +41,16 @@ class _codeVerificationState extends State<codeVerification> {
     } else {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text(response['message'].toString()),
+        action: SnackBarAction(
+          label: '',
+          textColor: Colors.white,
+          onPressed: () {},
+        ),
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(24),
+        ),
+        backgroundColor: Colors.blue,
       ));
     }
   }

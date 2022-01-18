@@ -33,9 +33,17 @@ class _ForgetPasswordState extends State<ForgetPassword> {
         reSendOTP();
       } else {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(
-            verify_mail['message'].toString(),
+          content: Text(verify_mail['statusCodemessage'].toString()),
+          action: SnackBarAction(
+            label: '',
+            textColor: Colors.white,
+            onPressed: () {},
           ),
+          behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(24),
+          ),
+          backgroundColor: Colors.blue,
         ));
       }
     }
@@ -59,9 +67,17 @@ class _ForgetPasswordState extends State<ForgetPassword> {
           context, MaterialPageRoute(builder: (context) => codeVerification()));
     } else {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text(
-          resendOTP['message'].toString(),
+        content: Text(resendOTP['message'].toString()),
+        action: SnackBarAction(
+          label: '',
+          textColor: Colors.white,
+          onPressed: () {},
         ),
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(24),
+        ),
+        backgroundColor: Colors.blue,
       ));
     }
   }

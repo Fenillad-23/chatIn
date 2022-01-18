@@ -44,14 +44,32 @@ class _change_passwordState extends State<change_password> {
           // reSendOTP();
         } else {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text(
-              reset_password['message'].toString(),
+            content: Text(reset_password['message'].toString()),
+            action: SnackBarAction(
+              label: '',
+              textColor: Colors.white,
+              onPressed: () {},
             ),
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(24),
+            ),
+            backgroundColor: Colors.blue,
           ));
         }
       } else {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text(reset_password['message'].toString()),
+          action: SnackBarAction(
+            label: '',
+            textColor: Colors.white,
+            onPressed: () {},
+          ),
+          behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(24),
+          ),
+          backgroundColor: Colors.blue,
         ));
       }
     }

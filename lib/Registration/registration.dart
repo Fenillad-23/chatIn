@@ -38,9 +38,17 @@ class _RegistrationState extends State<Registration> {
       sendOTP();
     } else {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text(
-          verifyEmail['message'].toString(),
+        content: Text(verifyEmail['message'].toString()),
+        action: SnackBarAction(
+          label: '',
+          textColor: Colors.white,
+          onPressed: () {},
         ),
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(24),
+        ),
+        backgroundColor: Colors.blue,
       ));
     }
   }
@@ -59,9 +67,17 @@ class _RegistrationState extends State<Registration> {
       verifyEmail();
     } else {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text(
-          verifyUser['message'].toString(),
+        content: Text(verifyUser['message'].toString()),
+        action: SnackBarAction(
+          label: '',
+          textColor: Colors.white,
+          onPressed: () {},
         ),
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(24),
+        ),
+        backgroundColor: Colors.blue,
       ));
     }
   }
@@ -92,9 +108,17 @@ class _RegistrationState extends State<Registration> {
           context, MaterialPageRoute(builder: (context) => otpScreen()));
     } else {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text(
-          response['message'].toString(),
+        content: Text(response['message'].toString()),
+        action: SnackBarAction(
+          label: '',
+          textColor: Colors.white,
+          onPressed: () {},
         ),
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(24),
+        ),
+        backgroundColor: Colors.blue,
       ));
     }
   }
@@ -105,9 +129,17 @@ class _RegistrationState extends State<Registration> {
         verifyUser();
       } else {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(
-            'Password & ConfirmPassword Not Matched!'.toString(),
+          content: Text("Password and confirm password are not match."),
+          action: SnackBarAction(
+            label: '',
+            textColor: Colors.white,
+            onPressed: () {},
           ),
+          behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(24),
+          ),
+          backgroundColor: Colors.blue,
         ));
       }
     }
@@ -309,10 +341,11 @@ class _RegistrationState extends State<Registration> {
                                 MaterialPageRoute(
                                     builder: (context) => Login())),
                             child: Text(
-                              "Already have an account?Sign in",
+                              "Already have an account? Sign in",
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                  decoration: TextDecoration.underline),
+                                  decoration: TextDecoration.underline,
+                                  fontSize: 16),
                             ),
                           )
                         ],

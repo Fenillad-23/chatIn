@@ -4,6 +4,7 @@ import 'package:chattin/Registration/registration.dart';
 import 'package:chattin/Registration/otp_success.dart';
 import 'package:chattin/Login/Forget_Password/forget_password.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Login extends StatefulWidget {
@@ -46,13 +47,37 @@ class _LoginState extends State<Login> {
           ),
         );
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              response['message'].toString(),
-            ),
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(response['message'].toString()),
+          action: SnackBarAction(
+            label: '',
+            textColor: Colors.white,
+            onPressed: () {},
           ),
-        );
+          behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(24),
+          ),
+          backgroundColor: Colors.blue,
+        ));
+        // showDialog<String>(
+        //   context: context,
+        //   builder: (BuildContext context) => AlertDialog(
+        //     title: const Text('Something Went Wrong'),
+        //     content: Text(response['message'].toString()),
+
+        //     actions: <Widget>[
+        //       TextButton(
+        //         onPressed: () => Navigator.pop(context, 'Cancel'),
+        //         child: const Text('Cancel'),
+        //       ),
+        //       TextButton(
+        //         onPressed: () => Navigator.pop(context, 'OK'),
+        //         child: const Text('OK'),
+        //       ),
+        //     ],
+        //   ),
+        // );
       }
       print('\x1b[93m --- $response');
     }
@@ -211,9 +236,10 @@ class _LoginState extends State<Login> {
                               MaterialPageRoute(
                                   builder: (context) => Registration())),
                           child: Text(
-                            "Don't have an account,sign up",
-                            style:
-                                TextStyle(decoration: TextDecoration.underline),
+                            "Don't have an account? sign up",
+                            style: TextStyle(
+                                decoration: TextDecoration.underline,
+                                fontSize: 16),
                           ),
                         )
                       ],
