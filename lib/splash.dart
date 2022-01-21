@@ -5,6 +5,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../Login/login.dart';
 import 'package:lottie/lottie.dart';
 
+import 'HomeScreen/DashBoard.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
@@ -34,7 +36,7 @@ class _SplashScreenState extends State<SplashScreen> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => Login(),
+          builder: (context) => Dashboard(),
         ),
       );
     }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:chattin/Splash_Screen/splash.dart';
 
+import 'HomeScreen/Storybar/storyBar.dart';
+
 void main() {
   runApp(const Chattin());
 }

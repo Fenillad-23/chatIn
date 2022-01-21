@@ -64,6 +64,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.4"
+  curved_navigation_bar:
+    dependency: "direct main"
+    description:
+      name: curved_navigation_bar
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.1"
   fake_async:
     dependency: transitive
     description:
@@ -287,6 +294,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.10.0"
+  stories_for_flutter:
+    dependency: "direct main"
+    description:
+      name: stories_for_flutter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.1"
   stream_channel:
     dependency: transitive
     description:

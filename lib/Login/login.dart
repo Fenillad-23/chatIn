@@ -1,3 +1,4 @@
+import 'package:chattin/HomeScreen/DashBoard.dart';
 import 'package:chattin/Network/network_dio.dart';
 //import 'package:chattin/Registration/otp.dart';
 import 'package:chattin/Registration/registration.dart';
@@ -43,7 +44,7 @@ class _LoginState extends State<Login> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => otpSucceed(),
+            builder: (context) => Dashboard(),
           ),
         );
       } else {
@@ -187,7 +188,7 @@ class _LoginState extends State<Login> {
                       Padding(
                         padding: EdgeInsets.only(right: 15),
                         child: GestureDetector(
-                          onTap: () => Navigator.push(
+                          onTap: () => Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => ForgetPassword())),
@@ -231,7 +232,7 @@ class _LoginState extends State<Login> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         GestureDetector(
-                          onTap: () => Navigator.push(
+                          onTap: () => Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => Registration())),

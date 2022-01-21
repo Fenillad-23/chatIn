@@ -286,7 +286,7 @@ class _RegistrationState extends State<Registration> {
                             prefixIcon: Icon(Icons.lock),
                             suffixIcon: IconButton(
                               icon: Icon(
-                                _isObscure
+                                obscure
                                     ? Icons.visibility
                                     : Icons.visibility_off,
                               ),
@@ -336,7 +336,7 @@ class _RegistrationState extends State<Registration> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           GestureDetector(
-                            onTap: () => Navigator.push(
+                            onTap: () => Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => Login())),

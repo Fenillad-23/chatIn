@@ -95,7 +95,7 @@ class _otpScreenState extends State<otpScreen> {
       if (do_register != null &&
           (do_register['statusCode'] == 200 ||
               do_register['statusCode'] == '200')) {
-        Navigator.push(
+        Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => otpSucceed()));
       } else {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(

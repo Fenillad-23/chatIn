@@ -35,6 +35,9 @@ dependencies:
   otp_text_field: ^1.1.1
   shared_preferences: ^2.0.11
   flutter_signin_button: ^2.0.0
+  stories_for_flutter: ^1.1.1
+  curved_navigation_bar: ^1.0.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
