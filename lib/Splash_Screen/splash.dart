@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:chattin/HomeScreen/DashBoard.dart';
 import 'package:chattin/Registration/otp_success.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -28,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => otpSucceed(),
+          builder: (context) => Dashboard(),
         ),
       );
     } else {
