@@ -1,4 +1,4 @@
-import 'package:chattin/HomeScreen/BottomNavigationBar/BottomNav.dart';
+import 'package:chattin/HomeScreen/User/UserPrefrences.dart';
 import 'package:flutter/material.dart';
 
 class UserProfile extends StatefulWidget {
@@ -9,127 +9,136 @@ class UserProfile extends StatefulWidget {
 }
 
 class _UserProfileState extends State<UserProfile> {
+  final user = UserPreferences.myuser;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: Text(
-          'Profile',
-          style: TextStyle(color: Colors.black),
-        ),
-        leading: IconButton(
-          onPressed: () {},
-          icon: Icon(
+        title: Text("Profile"),
+        backgroundColor: Colors.transparent,
+        leading: new IconButton(
+          icon: new Icon(
             Icons.arrow_back,
-            color: Colors.black,
+            color: Colors.white,
           ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
       ),
-<<<<<<< HEAD
       body: Container(
+        height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
-        child: Padding(
-          padding: const EdgeInsets.only(left: 20, top: 20),
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(100),
-                    child: Image.asset(
-                      'assets/images/user.jpeg',
-                      width: 100,
-                      height: 100,
-                      fit: BoxFit.contain,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Column(children: <Widget>[
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 10),
-                          child: Text(
-                            "Fenil.23",
-                            style: TextStyle(fontSize: 20),
+        child: ListView(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 20.0),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(100),
+                child: Image.asset(
+                  'assets/images/user.jpeg',
+                  width: 100,
+                  height: 100,
+                  fit: BoxFit.contain,
+                ),
+              ),
+            ),
+            const SizedBox(height: 24),
+            Column(
+              children: [
+                Text(
+                  "fenil.23",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  "fenil lad",
+                  style: TextStyle(color: Colors.grey),
+                ),
+                Container(
+                  height: 130,
+                  width: MediaQuery.of(context).size.width,
+                  child: Card(
+                    elevation: 8,
+                    shape: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(color: Colors.white)),
+                    shadowColor: Colors.blue,
+                    margin: EdgeInsets.all(20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.only(top: 20.0),
+                          child: Column(
+                            children: [
+                              Text(
+                                "1.5",
+                                style: TextStyle(fontSize: 15),
+                              ),
+                              SizedBox(
+                                height: 6,
+                              ),
+                              Text(
+                                'Posts',
+                                style:
+                                    TextStyle(fontSize: 15, letterSpacing: 0.4),
+                              ),
+                            ],
                           ),
                         ),
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 10),
-                          child: Text(
-                            "Fenil.23",
-                            style: TextStyle(fontSize: 20),
+                        SizedBox(width: 25),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 20.0),
+                          child: Column(
+                            children: [
+                              Text(
+                                "1.5 k",
+                                style: TextStyle(fontSize: 15),
+                              ),
+                              SizedBox(
+                                height: 6,
+                              ),
+                              Text(
+                                'Followers',
+                                style: TextStyle(fontSize: 15),
+                              ),
+                            ],
                           ),
                         ),
-                      )
-                    ]),
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(left: 50),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.white, // background
-                        onPrimary: Colors.white, // foreground
-                      ),
-                      onPressed: () {},
-                      child: Container(
-                        constraints: BoxConstraints(maxWidth: 150),
-                        alignment: Alignment.center,
-                        child: Text(
-                          "Message",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.black, fontSize: 13),
+                        SizedBox(
+                          width: 25,
                         ),
-                      ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 20.0),
+                          child: Column(
+                            children: [
+                              Text(
+                                "1.5 m",
+                                style:
+                                    TextStyle(fontSize: 15, letterSpacing: 0.4),
+                              ),
+                              SizedBox(
+                                height: 6,
+                              ),
+                              Text(
+                                'Following',
+                                style:
+                                    TextStyle(fontSize: 15, letterSpacing: 0.4),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  Container(
-                    margin: EdgeInsets.only(left: 50),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.blue, // background
-                        onPrimary: Colors.blue, // foreground
-                      ),
-                      onPressed: () {},
-                      child: Container(
-                        constraints: BoxConstraints(maxWidth: 150),
-                        alignment: Alignment.center,
-                        child: Text(
-                          "Follow",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.white, fontSize: 13),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                  // new Card(),
-                  )
-            ],
-          ),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
-      // bottomNavigationBar: BottomNavigation(),
-=======
-      body: Center(
-         child: Text("Hello",style: TextStyle(fontSize: 40),),
-      ),
->>>>>>> 57019e2b2be745c333ccbcdde0478441d333aa2c
     );
   }
 }

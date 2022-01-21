@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
+import '../splash.dart';
 import 'DashBoard.dart';
 import 'UserProfile/UserProfile.dart';
 import 'UserProfileMain/UserProfileMain.dart';
 
 class Home extends StatefulWidget {
-  const Home({ Key? key }) : super(key: key);
+  const Home({Key? key}) : super(key: key);
 
   @override
   _HomeState createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
-  
   int currentTab = 0;
   final List<Widget> screens = [
     Dashboard(),
@@ -25,7 +25,6 @@ class _HomeState extends State<Home> {
   final PageStorageBucket bucket = PageStorageBucket();
   Widget currentScreen = Dashboard();
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,8 +32,9 @@ class _HomeState extends State<Home> {
         child: currentScreen,
         bucket: bucket,
       ),
-      floatingActionButton: FloatingActionButton(child: Icon(Icons.add),
-      onPressed: (){},
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {},
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
@@ -50,39 +50,39 @@ class _HomeState extends State<Home> {
                 children: [
                   MaterialButton(
                     minWidth: 90,
-                    onPressed: (){
-                    setState(() {
-                      currentScreen = Dashboard();
-                      currentTab = 0;
-                    });
-                  },
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.home,
-                        color: currentTab == 0 ? Colors.blue : Colors.grey,
-                      ),
-                    ],
-                  ),
+                    onPressed: () {
+                      setState(() {
+                        currentScreen = Dashboard();
+                        currentTab = 0;
+                      });
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.home,
+                          color: currentTab == 0 ? Colors.blue : Colors.grey,
+                        ),
+                      ],
+                    ),
                   ),
                   MaterialButton(
                     minWidth: 30,
-                    onPressed: (){
-                    setState(() {
-                      currentScreen = UserProfile();
-                      currentTab = 1;
-                    });
-                  },
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.search,
-                        color: currentTab == 1 ? Colors.blue : Colors.grey,
-                      ),
-                    ],
-                  ),
+                    onPressed: () {
+                      setState(() {
+                        currentScreen = UserProfile();
+                        currentTab = 1;
+                      });
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.search,
+                          color: currentTab == 1 ? Colors.blue : Colors.grey,
+                        ),
+                      ],
+                    ),
                   )
                 ],
               ),
@@ -91,39 +91,39 @@ class _HomeState extends State<Home> {
                 children: [
                   MaterialButton(
                     minWidth: 30,
-                    onPressed: (){
-                    setState(() {
-                      currentScreen = Dashboard();
-                      currentTab = 2;
-                    });
-                  },
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.notifications,
-                        color: currentTab == 2 ? Colors.blue : Colors.grey,
-                      ),
-                    ],
-                  ),
+                    onPressed: () {
+                      setState(() {
+                        currentScreen = Dashboard();
+                        currentTab = 2;
+                      });
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.notifications,
+                          color: currentTab == 2 ? Colors.blue : Colors.grey,
+                        ),
+                      ],
+                    ),
                   ),
                   MaterialButton(
                     minWidth: 90,
-                    onPressed: (){
-                    setState(() {
-                      currentScreen = UserProfileMain();
-                      currentTab = 3;
-                    });
-                  },
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.perm_identity,
-                        color: currentTab == 3 ? Colors.blue : Colors.grey,
-                      ),
-                    ],
-                  ),
+                    onPressed: () {
+                      setState(() {
+                        currentScreen = UserProfileMain();
+                        currentTab = 3;
+                      });
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.perm_identity,
+                          color: currentTab == 3 ? Colors.blue : Colors.grey,
+                        ),
+                      ],
+                    ),
                   )
                 ],
               )
