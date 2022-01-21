@@ -25,6 +25,9 @@ class _UserProfileState extends State<UserProfile> {
           ),
         ),
       ),
+      body: Center(
+         child: Text("Hello",style: TextStyle(fontSize: 40),),
+      ),
     );
   }
 }

@@ -12,8 +12,25 @@ class _UserProfileMainState extends State<UserProfileMain> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       body: Container(),
-       bottomNavigationBar: BottomNavigation(),
+      appBar: AppBar(
+        backgroundColor: Colors.blue,
+        title: Text("Profile",
+            style: TextStyle(
+              color: Colors.white,
+            )),
+        leading: new IconButton(
+          icon: new Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
+       body: Center(
+         child: Text('User Profile',style: TextStyle(fontSize: 40)),
+       ),
     );
   }
 }

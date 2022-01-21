@@ -1,7 +1,5 @@
 import 'dart:async';
-
-import 'package:chattin/HomeScreen/DashBoard.dart';
-import 'package:chattin/Registration/otp_success.dart';
+import 'package:chattin/HomeScreen/Home.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../Login/login.dart';
@@ -29,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => Dashboard(),
+          builder: (context) => Home(),
         ),
       );
     } else {
