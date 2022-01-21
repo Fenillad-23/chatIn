@@ -1,8 +1,12 @@
 import 'dart:async';
+<<<<<<< HEAD
 
 import 'package:chattin/HomeScreen/DashBoard.dart';
 import 'package:chattin/HomeScreen/UserProfile/UserProfile.dart';
 import 'package:chattin/Registration/otp_success.dart';
+=======
+import 'package:chattin/HomeScreen/Home.dart';
+>>>>>>> 57019e2b2be745c333ccbcdde0478441d333aa2c
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../Login/login.dart';
@@ -30,7 +34,11 @@ class _SplashScreenState extends State<SplashScreen> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
+<<<<<<< HEAD
           builder: (context) => UserProfile(),
+=======
+          builder: (context) => Home(),
+>>>>>>> 57019e2b2be745c333ccbcdde0478441d333aa2c
         ),
       );
     } else {

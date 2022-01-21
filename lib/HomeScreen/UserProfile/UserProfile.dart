@@ -26,6 +26,7 @@ class _UserProfileState extends State<UserProfile> {
           ),
         ),
       ),
+<<<<<<< HEAD
       body: Container(
         width: MediaQuery.of(context).size.width,
         child: Padding(
@@ -124,6 +125,11 @@ class _UserProfileState extends State<UserProfile> {
         ),
       ),
       // bottomNavigationBar: BottomNavigation(),
+=======
+      body: Center(
+         child: Text("Hello",style: TextStyle(fontSize: 40),),
+      ),
+>>>>>>> 57019e2b2be745c333ccbcdde0478441d333aa2c
     );
   }
 }
