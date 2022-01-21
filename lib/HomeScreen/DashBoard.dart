@@ -14,7 +14,7 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(),
-      bottomNavigationBar: BottomNavigation(),
+      //  bottomNavigationBar: BottomNavigation(),
     );
   }
 }
