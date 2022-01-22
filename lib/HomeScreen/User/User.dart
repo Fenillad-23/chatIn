@@ -1,5 +1,5 @@
 class User {
-  late String imagePath;
+  String imagePath;
   late String name;
   late String Bio;
   late int Followers;

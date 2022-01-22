@@ -9,12 +9,11 @@ class UserProfile extends StatefulWidget {
 }
 
 class _UserProfileState extends State<UserProfile> {
-  final user = UserPreferences.myuser;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Profile"),
+        title: Text("user id"),
         backgroundColor: Colors.transparent,
         leading: new IconButton(
           icon: new Icon(
@@ -26,115 +25,140 @@ class _UserProfileState extends State<UserProfile> {
           },
         ),
       ),
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
+      body: Center(
         child: ListView(
           children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 20.0),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(100),
-                child: Image.asset(
-                  'assets/images/user.jpeg',
-                  width: 100,
-                  height: 100,
-                  fit: BoxFit.contain,
+            Container(
+              height: 165,
+              width: MediaQuery.of(context).size.width,
+              child: Card(
+                elevation: 8,
+                shape: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(color: Colors.white),
                 ),
-              ),
-            ),
-            const SizedBox(height: 24),
-            Column(
-              children: [
-                Text(
-                  "fenil.23",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  "fenil lad",
-                  style: TextStyle(color: Colors.grey),
-                ),
-                Container(
-                  height: 130,
-                  width: MediaQuery.of(context).size.width,
-                  child: Card(
-                    elevation: 8,
-                    shape: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(color: Colors.white)),
-                    shadowColor: Colors.blue,
-                    margin: EdgeInsets.all(20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                shadowColor: Colors.blue,
+                child: Row(
+                  children: <Widget>[
+                    Column(
                       children: <Widget>[
                         Padding(
-                          padding: const EdgeInsets.only(top: 20.0),
-                          child: Column(
-                            children: [
-                              Text(
-                                "1.5",
-                                style: TextStyle(fontSize: 15),
-                              ),
-                              SizedBox(
-                                height: 6,
-                              ),
-                              Text(
-                                'Posts',
-                                style:
-                                    TextStyle(fontSize: 15, letterSpacing: 0.4),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(width: 25),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 20.0),
-                          child: Column(
-                            children: [
-                              Text(
-                                "1.5 k",
-                                style: TextStyle(fontSize: 15),
-                              ),
-                              SizedBox(
-                                height: 6,
-                              ),
-                              Text(
-                                'Followers',
-                                style: TextStyle(fontSize: 15),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          width: 25,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 20.0),
-                          child: Column(
-                            children: [
-                              Text(
-                                "1.5 m",
-                                style:
-                                    TextStyle(fontSize: 15, letterSpacing: 0.4),
-                              ),
-                              SizedBox(
-                                height: 6,
-                              ),
-                              Text(
-                                'Following',
-                                style:
-                                    TextStyle(fontSize: 15, letterSpacing: 0.4),
-                              ),
-                            ],
+                          padding: const EdgeInsets.all(10.0),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(100),
+                            child: Image.asset(
+                              'assets/images/user.jpeg',
+                              width: 125,
+                              height: 125,
+                              fit: BoxFit.contain,
+                            ),
                           ),
                         ),
                       ],
                     ),
-                  ),
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Column(
+                        children: <Widget>[
+                          Text(
+                            "full name",
+                            style: TextStyle(fontSize: 18, letterSpacing: 0.4),
+                          ),
+                          Text(
+                            "Bio",
+                            style: TextStyle(fontSize: 16, letterSpacing: 0.4),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
+            ),
+            Container(
+              height: 165,
+              width: MediaQuery.of(context).size.width,
+              child: Card(
+                elevation: 8,
+                shape: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(color: Colors.white)),
+                shadowColor: Colors.blue,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20.0),
+                      child: Column(
+                        children: [
+                          Text(
+                            "1.5",
+                            style: TextStyle(fontSize: 15),
+                          ),
+                          SizedBox(
+                            height: 6,
+                          ),
+                          Text(
+                            'Posts',
+                            style: TextStyle(
+                                fontSize: 15,
+                                letterSpacing: 0.4,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(width: 25),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20.0),
+                      child: Column(
+                        children: [
+                          Text(
+                            "1.5 k",
+                            style: TextStyle(fontSize: 15),
+                          ),
+                          SizedBox(
+                            height: 6,
+                          ),
+                          Text(
+                            'Followers',
+                            style: TextStyle(
+                                fontSize: 15,
+                                letterSpacing: 0.4,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      width: 25,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20.0),
+                      child: Column(
+                        children: [
+                          Text(
+                            "1.5 m",
+                            style: TextStyle(fontSize: 15, letterSpacing: 0.4),
+                          ),
+                          SizedBox(
+                            height: 6,
+                          ),
+                          Text(
+                            'Following',
+                            style: TextStyle(
+                                fontSize: 15,
+                                letterSpacing: 0.4,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Row()
+                  ],
+                ),
+              ),
             ),
           ],
         ),
