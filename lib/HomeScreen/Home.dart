@@ -5,14 +5,13 @@ import 'UserProfile/UserProfile.dart';
 import 'UserProfileMain/UserProfileMain.dart';
 
 class Home extends StatefulWidget {
-  const Home({ Key? key }) : super(key: key);
+  const Home({Key? key}) : super(key: key);
 
   @override
   _HomeState createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
-  
   int currentTab = 0;
   final List<Widget> screens = [
     Dashboard(),
@@ -25,7 +24,6 @@ class _HomeState extends State<Home> {
   final PageStorageBucket bucket = PageStorageBucket();
   Widget currentScreen = Dashboard();
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,8 +31,9 @@ class _HomeState extends State<Home> {
         child: currentScreen,
         bucket: bucket,
       ),
-      floatingActionButton: FloatingActionButton(child: Icon(Icons.add),
-      onPressed: (){},
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {},
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(

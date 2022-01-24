@@ -11,6 +11,8 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: Container(),
+      //  bottomNavigationBar: BottomNavigation(),
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: Text(
@@ -24,9 +26,6 @@ class _DashboardState extends State<Dashboard> {
             color: Colors.black,
           ),
         ),
-      ),
-      body: Center(
-         child: Text("Hello",style: TextStyle(fontSize: 40),),
       ),
     );
   }
