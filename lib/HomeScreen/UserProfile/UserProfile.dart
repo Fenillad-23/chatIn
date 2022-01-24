@@ -26,18 +26,13 @@ class _UserProfileState extends State<UserProfile> {
         ),
       ),
       body: Center(
-        child: ListView(
-          children: [
-            Container(
-              height: 165,
-              width: MediaQuery.of(context).size.width,
-              child: Card(
-                elevation: 8,
-                shape: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: BorderSide(color: Colors.white),
-                ),
-                shadowColor: Colors.blue,
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: ListView(
+            children: [
+              Container(
+                height: 155,
+                width: MediaQuery.of(context).size.width,
                 child: Row(
                   children: <Widget>[
                     Column(
@@ -74,93 +69,97 @@ class _UserProfileState extends State<UserProfile> {
                   ],
                 ),
               ),
-            ),
-            Container(
-              height: 165,
-              width: MediaQuery.of(context).size.width,
-              child: Card(
-                elevation: 8,
-                shape: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(color: Colors.white)),
-                shadowColor: Colors.blue,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(top: 20.0),
-                      child: Column(
-                        children: [
-                          Text(
-                            "1.5",
-                            style: TextStyle(fontSize: 15),
+              Container(
+                height: 120,
+                width: MediaQuery.of(context).size.width,
+                child: Card(
+                  elevation: 8,
+                  shape: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(color: Colors.white)),
+                  shadowColor: Colors.blue,
+                  child: Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.only(top: 20.0),
+                          child: Column(
+                            children: [
+                              Text(
+                                "1.5 k",
+                                style: TextStyle(fontSize: 15),
+                              ),
+                              SizedBox(
+                                height: 6,
+                              ),
+                              Text(
+                                'Posts',
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    letterSpacing: 0.4,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ],
                           ),
-                          SizedBox(
-                            height: 6,
+                        ),
+                        SizedBox(width: 25),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 20.0),
+                          child: Column(
+                            children: [
+                              Text(
+                                "1.5 k",
+                                style: TextStyle(fontSize: 15),
+                              ),
+                              SizedBox(
+                                height: 6,
+                              ),
+                              Text(
+                                'Followers',
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    letterSpacing: 0.4,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ],
                           ),
-                          Text(
-                            'Posts',
-                            style: TextStyle(
-                                fontSize: 15,
-                                letterSpacing: 0.4,
-                                fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(
+                          width: 25,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 20.0),
+                          child: Column(
+                            children: [
+                              Text(
+                                "1.5 m",
+                                style:
+                                    TextStyle(fontSize: 15, letterSpacing: 0.4),
+                              ),
+                              SizedBox(
+                                height: 6,
+                              ),
+                              Text(
+                                'Following',
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    letterSpacing: 0.4,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                        Row(),
+                      ],
                     ),
-                    SizedBox(width: 25),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 20.0),
-                      child: Column(
-                        children: [
-                          Text(
-                            "1.5 k",
-                            style: TextStyle(fontSize: 15),
-                          ),
-                          SizedBox(
-                            height: 6,
-                          ),
-                          Text(
-                            'Followers',
-                            style: TextStyle(
-                                fontSize: 15,
-                                letterSpacing: 0.4,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      width: 25,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 20.0),
-                      child: Column(
-                        children: [
-                          Text(
-                            "1.5 m",
-                            style: TextStyle(fontSize: 15, letterSpacing: 0.4),
-                          ),
-                          SizedBox(
-                            height: 6,
-                          ),
-                          Text(
-                            'Following',
-                            style: TextStyle(
-                                fontSize: 15,
-                                letterSpacing: 0.4,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Row()
-                  ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
