@@ -1,11 +1,8 @@
 import 'package:chattin/HomeScreen/DashBoard.dart';
 import 'package:chattin/Network/network_dio.dart';
-//import 'package:chattin/Registration/otp.dart';
 import 'package:chattin/Registration/registration.dart';
-import 'package:chattin/Registration/otp_success.dart';
 import 'package:chattin/Login/Forget_Password/forget_password.dart';
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Login extends StatefulWidget {

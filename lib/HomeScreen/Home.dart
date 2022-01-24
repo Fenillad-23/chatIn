@@ -1,5 +1,5 @@
+import 'package:chattin/HomeScreen/Demo.dart';
 import 'package:flutter/material.dart';
-
 import 'DashBoard.dart';
 import 'UserProfile/UserProfile.dart';
 import 'UserProfileMain/UserProfileMain.dart';
@@ -18,7 +18,7 @@ class _HomeState extends State<Home> {
     Dashboard(),
     UserProfile(),
     Dashboard(),
-    Dashboard(),
+    Demo(),
     UserProfileMain()
   ];
 
@@ -49,7 +49,7 @@ class _HomeState extends State<Home> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   MaterialButton(
-                    minWidth: 90,
+                    //minWidth: 90,
                     onPressed: (){
                     setState(() {
                       currentScreen = Dashboard();
@@ -67,7 +67,7 @@ class _HomeState extends State<Home> {
                   ),
                   ),
                   MaterialButton(
-                    minWidth: 30,
+                    //minWidth: 30,
                     onPressed: (){
                     setState(() {
                       currentScreen = UserProfile();
@@ -90,7 +90,7 @@ class _HomeState extends State<Home> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   MaterialButton(
-                    minWidth: 30,
+                    //minWidth: 30,
                     onPressed: (){
                     setState(() {
                       currentScreen = Dashboard();
@@ -108,10 +108,10 @@ class _HomeState extends State<Home> {
                   ),
                   ),
                   MaterialButton(
-                    minWidth: 90,
+                    //minWidth: 90,
                     onPressed: (){
                     setState(() {
-                      currentScreen = UserProfileMain();
+                      currentScreen = Demo();
                       currentTab = 3;
                     });
                   },

@@ -1,4 +1,3 @@
-import 'package:chattin/HomeScreen/BottomNavigationBar/BottomNav.dart';
 import 'package:flutter/material.dart';
 
 class UserProfileMain extends StatefulWidget {
