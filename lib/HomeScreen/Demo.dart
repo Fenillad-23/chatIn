@@ -8,6 +8,8 @@ class Demo extends StatefulWidget {
 }
 
 class _DemoState extends State<Demo> {
+  int index = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -91,16 +93,29 @@ class _DemoState extends State<Demo> {
                   //color: Colors.deepPurple,
                   child: ElevatedButton(
                     onPressed: () {
-                      // Respond to button press
+                      setState(() {
+                        if(index == 0){
+                          index = 1;
+                        }else if(index == 1){
+                          index = 0;
+                        }
+                      });
                     },
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(28.5),
                       ),
+                      side: BorderSide(
+                        width: 2.0,
+                        color: Colors.blue,
+                      ),
+                      primary: index == 1 ? new Color(0xFFECEFF1) : Colors.blue,
                     ),
-                    child: Text(
-                      'Follow',
-                      style: TextStyle(fontSize: 18),
+                    child: Text(index == 1 ?
+                      'Following' : 'Follow',
+                      style: TextStyle(
+                          fontSize: 18,
+                          color: index == 1 ? Colors.black : Colors.white),
                     ),
                   ),
                 )
@@ -109,45 +124,45 @@ class _DemoState extends State<Demo> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    padding: EdgeInsets.fromLTRB(0, 35, 0, 0),
-                    color: Colors.white,
-                    height:200,
-                    width: 200,
+                    // padding: EdgeInsets.fromLTRB(0, 35, 0, 0),
+                    // color: Colors.white,
+                    // height:200,
+                    // width: 200,
                     child: Row(
                       children: [
-                        Container(
-                          //color: Colors.blue,
-                          child: Column(
-                            children: [
-                              Text(
-                                "Column1",
-                                style: TextStyle(fontSize: 10),
-                              )
-                            ],
-                          ),
-                        ),
-                        Container(
-                          //color: Colors.yellow,
-                          child: Column(
-                            children: [
-                              Text(
-                                "Column2",
-                                style: TextStyle(fontSize: 10),
-                              )
-                            ],
-                          ),
-                        ),
-                        Container(
-                          //color: Colors.green,
-                          child: Column(
-                            children: [
-                              Text(
-                                "Column3",
-                                style: TextStyle(fontSize: 10),
-                              )
-                            ],
-                          ),
-                        ),
+                        // Container(
+                        //   //color: Colors.blue,
+                        //   child: Column(
+                        //     children: [
+                        //       Text(
+                        //         "Column1",
+                        //         style: TextStyle(fontSize: 10),
+                        //       )
+                        //     ],
+                        //   ),
+                        // ),
+                        // Container(
+                        //   //color: Colors.yellow,
+                        //   child: Column(
+                        //     children: [
+                        //       Text(
+                        //         "Column2",
+                        //         style: TextStyle(fontSize: 10),
+                        //       )
+                        //     ],
+                        //   ),
+                        // ),
+                        // Container(
+                        //   //color: Colors.green,
+                        //   child: Column(
+                        //     children: [
+                        //       Text(
+                        //         "Column3",
+                        //         style: TextStyle(fontSize: 10),
+                        //       )
+                        //     ],
+                        //   ),
+                        // ),
                       ],
                     ),
                   ),

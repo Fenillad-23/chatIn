@@ -1,4 +1,5 @@
 import 'package:chattin/HomeScreen/DashBoard.dart';
+import 'package:chattin/HomeScreen/Home.dart';
 import 'package:chattin/Network/network_dio.dart';
 import 'package:chattin/Registration/registration.dart';
 import 'package:chattin/Login/Forget_Password/forget_password.dart';
@@ -41,7 +42,7 @@ class _LoginState extends State<Login> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => Dashboard(),
+            builder: (context) => Home(),
           ),
         );
       } else {

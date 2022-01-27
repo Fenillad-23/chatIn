@@ -1,50 +1,35 @@
 import 'dart:async';
-import 'package:chattin/HomeScreen/Home.dart';
-import 'package:chattin/Splash_Screen/onBoarding.dart';
-import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:lottie/lottie.dart';
 
-class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+import 'package:chattin/Splash_Screen/splash.dart';
+import 'package:flutter/material.dart';
+
+class splashStart extends StatefulWidget {
+  const splashStart({ Key? key }) : super(key: key);
 
   @override
-  _SplashScreenState createState() => _SplashScreenState();
+  _splashStartState createState() => _splashStartState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _splashStartState extends State<splashStart> {
+
   @override
   void initState() {
     super.initState();
     Timer(const Duration(seconds: 3), () {
-      navigator();
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => SplashScreen(),
+        ),
+      );
     });
-  }
-
-  navigator() async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    if (sharedPreferences.getBool('isRememberMe') == true) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => Home(),
-        ),
-      );
-    } else {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => onBoarding(),
-        ),
-      );
-    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.blue,
       body: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
@@ -58,7 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
             ClipRRect(
               borderRadius: BorderRadius.circular(100),
               child: Image.asset(
-                'assets/images/logo_blue.png',
+                'assets/images/logo_white.png',
                 width: 120,
                 height: 120,
                 fit: BoxFit.contain,
@@ -69,7 +54,7 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
             Spacer(),
             CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
+                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                       strokeWidth: 4,
                     ),
             SizedBox(

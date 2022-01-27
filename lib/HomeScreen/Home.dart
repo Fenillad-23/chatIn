@@ -1,4 +1,5 @@
 import 'package:chattin/HomeScreen/Demo.dart';
+import 'package:chattin/Splash_Screen/onBoarding.dart';
 import 'package:flutter/material.dart';
 import 'DashBoard.dart';
 import 'UserProfile/UserProfile.dart';
@@ -16,7 +17,7 @@ class _HomeState extends State<Home> {
   final List<Widget> screens = [
     Dashboard(),
     UserProfile(),
-    Dashboard(),
+    onBoarding(),
     Demo(),
     UserProfileMain()
   ];
@@ -92,7 +93,7 @@ class _HomeState extends State<Home> {
                     //minWidth: 30,
                     onPressed: (){
                     setState(() {
-                      currentScreen = Dashboard();
+                      currentScreen = onBoarding();
                       currentTab = 2;
                     });
                   },
@@ -109,7 +110,7 @@ class _HomeState extends State<Home> {
                   MaterialButton(
                     //minWidth: 90,
                     onPressed: (){
-                    setState(() {
+                      setState(() {
                       currentScreen = Demo();
                       currentTab = 3;
                     });

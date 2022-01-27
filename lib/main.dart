@@ -1,3 +1,4 @@
+import 'package:chattin/Splash_Screen/splashstart.dart';
 import 'package:flutter/material.dart';
 import 'package:chattin/Splash_Screen/splash.dart';
 
@@ -23,7 +24,7 @@ class _ChattinState extends State<Chattin> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: SplashScreen(),
+      home: splashStart(),
     );
   }
 }
