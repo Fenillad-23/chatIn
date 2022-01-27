@@ -1,7 +1,5 @@
 import 'package:chattin/HomeScreen/User/UserPrefrences.dart';
 import 'package:flutter/material.dart';
-import 'package:transparent_image/transparent_image.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class UserProfile extends StatefulWidget {
   const UserProfile({Key? key}) : super(key: key);
@@ -11,6 +9,8 @@ class UserProfile extends StatefulWidget {
 }
 
 class _UserProfileState extends State<UserProfile> {
+  int index = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,8 +29,9 @@ class _UserProfileState extends State<UserProfile> {
       ),
       body: SingleChildScrollView(
         child: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(15.0),
+          child: Container(
+            padding: EdgeInsets.all(10.0),
+            color: new Color(0xFFECEFF1),
             child: Column(
               children: [
                 Container(
@@ -41,7 +42,7 @@ class _UserProfileState extends State<UserProfile> {
                       Column(
                         children: <Widget>[
                           Padding(
-                            padding: const EdgeInsets.all(10.0),
+                            padding: const EdgeInsets.all(5.0),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(100),
                               child: Image.asset(
@@ -73,6 +74,69 @@ class _UserProfileState extends State<UserProfile> {
                       ),
                     ],
                   ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 30, right: 10, left: 7),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          height: 57,
+                          width: 140,
+                          // color: Colors.deepOrange,
+                          child: OutlinedButton.icon(
+                              onPressed: () {},
+                              style: OutlinedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(28.5),
+                                  ),
+                                  side: BorderSide(
+                                    width: 2.0,
+                                    color: Colors.blue,
+                                    style: BorderStyle.solid,
+                                  )),
+                              icon: Container(
+                                  padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                  child: Icon(Icons.chat_bubble_outline,
+                                      size: 28, color: Colors.black87)),
+                              label: Text("")),
+                        ),
+                        Container(
+                          height: 57,
+                          width: 200,
+                          //color: Colors.deepPurple,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              setState(() {
+                                if (index == 0) {
+                                  index = 1;
+                                } else if (index == 1) {
+                                  index = 0;
+                                }
+                              });
+                            },
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(28.5),
+                              ),
+                              side: BorderSide(
+                                width: 2.0,
+                                color: Colors.blue,
+                              ),
+                              primary: index == 1
+                                  ? new Color(0xFFECEFF1)
+                                  : Colors.blue,
+                            ),
+                            child: Text(
+                              index == 1 ? 'Following' : 'Follow',
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  color:
+                                      index == 1 ? Colors.black : Colors.white),
+                            ),
+                          ),
+                        )
+                      ]),
                 ),
                 Container(
                   height: 120,

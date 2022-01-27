@@ -94,9 +94,9 @@ class _DemoState extends State<Demo> {
                   child: ElevatedButton(
                     onPressed: () {
                       setState(() {
-                        if(index == 0){
+                        if (index == 0) {
                           index = 1;
-                        }else if(index == 1){
+                        } else if (index == 1) {
                           index = 0;
                         }
                       });
@@ -111,8 +111,8 @@ class _DemoState extends State<Demo> {
                       ),
                       primary: index == 1 ? new Color(0xFFECEFF1) : Colors.blue,
                     ),
-                    child: Text(index == 1 ?
-                      'Following' : 'Follow',
+                    child: Text(
+                      index == 1 ? 'Following' : 'Follow',
                       style: TextStyle(
                           fontSize: 18,
                           color: index == 1 ? Colors.black : Colors.white),
@@ -124,46 +124,8 @@ class _DemoState extends State<Demo> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    // padding: EdgeInsets.fromLTRB(0, 35, 0, 0),
-                    // color: Colors.white,
-                    // height:200,
-                    // width: 200,
                     child: Row(
-                      children: [
-                        // Container(
-                        //   //color: Colors.blue,
-                        //   child: Column(
-                        //     children: [
-                        //       Text(
-                        //         "Column1",
-                        //         style: TextStyle(fontSize: 10),
-                        //       )
-                        //     ],
-                        //   ),
-                        // ),
-                        // Container(
-                        //   //color: Colors.yellow,
-                        //   child: Column(
-                        //     children: [
-                        //       Text(
-                        //         "Column2",
-                        //         style: TextStyle(fontSize: 10),
-                        //       )
-                        //     ],
-                        //   ),
-                        // ),
-                        // Container(
-                        //   //color: Colors.green,
-                        //   child: Column(
-                        //     children: [
-                        //       Text(
-                        //         "Column3",
-                        //         style: TextStyle(fontSize: 10),
-                        //       )
-                        //     ],
-                        //   ),
-                        // ),
-                      ],
+                      children: [],
                     ),
                   ),
                 ],

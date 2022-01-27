@@ -2,6 +2,7 @@ import 'package:chattin/HomeScreen/Demo.dart';
 import 'package:chattin/Splash_Screen/onBoarding.dart';
 import 'package:flutter/material.dart';
 import 'DashBoard.dart';
+import 'User/SearchUser.dart';
 import 'UserProfile/UserProfile.dart';
 import 'UserProfileMain/UserProfileMain.dart';
 
@@ -50,39 +51,39 @@ class _HomeState extends State<Home> {
                 children: [
                   MaterialButton(
                     //minWidth: 90,
-                    onPressed: (){
-                    setState(() {
-                      currentScreen = Dashboard();
-                      currentTab = 0;
-                    });
-                  },
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.home,
-                        color: currentTab == 0 ? Colors.blue : Colors.grey,
-                      ),
-                    ],
-                  ),
+                    onPressed: () {
+                      setState(() {
+                        currentScreen = Dashboard();
+                        currentTab = 0;
+                      });
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.home,
+                          color: currentTab == 0 ? Colors.blue : Colors.grey,
+                        ),
+                      ],
+                    ),
                   ),
                   MaterialButton(
                     //minWidth: 30,
-                    onPressed: (){
-                    setState(() {
-                      currentScreen = UserProfile();
-                      currentTab = 1;
-                    });
-                  },
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.search,
-                        color: currentTab == 1 ? Colors.blue : Colors.grey,
-                      ),
-                    ],
-                  ),
+                    onPressed: () {
+                      setState(() {
+                        currentScreen = UserProfile();
+                        currentTab = 1;
+                      });
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.search,
+                          color: currentTab == 1 ? Colors.blue : Colors.grey,
+                        ),
+                      ],
+                    ),
                   )
                 ],
               ),
@@ -91,39 +92,39 @@ class _HomeState extends State<Home> {
                 children: [
                   MaterialButton(
                     //minWidth: 30,
-                    onPressed: (){
-                    setState(() {
-                      currentScreen = onBoarding();
-                      currentTab = 2;
-                    });
-                  },
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.notifications,
-                        color: currentTab == 2 ? Colors.blue : Colors.grey,
-                      ),
-                    ],
-                  ),
+                    onPressed: () {
+                      setState(() {
+                        currentScreen = SearchUser();
+                        currentTab = 2;
+                      });
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.notifications,
+                          color: currentTab == 2 ? Colors.blue : Colors.grey,
+                        ),
+                      ],
+                    ),
                   ),
                   MaterialButton(
                     //minWidth: 90,
-                    onPressed: (){
+                    onPressed: () {
                       setState(() {
-                      currentScreen = Demo();
-                      currentTab = 3;
-                    });
-                  },
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.perm_identity,
-                        color: currentTab == 3 ? Colors.blue : Colors.grey,
-                      ),
-                    ],
-                  ),
+                        currentScreen = Demo();
+                        currentTab = 3;
+                      });
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.perm_identity,
+                          color: currentTab == 3 ? Colors.blue : Colors.grey,
+                        ),
+                      ],
+                    ),
                   )
                 ],
               )
