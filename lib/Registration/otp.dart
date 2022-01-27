@@ -16,18 +16,31 @@ class otpScreen extends StatefulWidget {
 
 class _otpScreenState extends State<otpScreen> {    
   NetworkRepository nw = NetworkRepository();
-  String get_email = '';
+  String? get_email;
   String get_otp = '';
   String get_username = '';
   String get_password = '';
   String get_contactNo = '';
+  bool _isEnable = false;
+  
+  @override
+  void initState() {
+    get();
+    super.initState();
+  }
+
+  get()async{
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    get_email = sharedPreferences.getString("email").toString();
+  }
 
   reSendOTP() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    
     dynamic resendOTP = await nw.httpPost(
       'User/sendotp',
       {
-        'email': sharedPreferences.getString("email").toString(),
+        'email': get_email,
       },
     );
     Map data = {
@@ -57,7 +70,6 @@ class _otpScreenState extends State<otpScreen> {
 
   verify_otp() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    get_email = sharedPreferences.getString("email").toString();
     get_username = sharedPreferences.getString("userName").toString();
     get_contactNo = sharedPreferences.getString("contactNo").toString();
     get_password = sharedPreferences.getString("password").toString();
@@ -150,6 +162,13 @@ class _otpScreenState extends State<otpScreen> {
               SizedBox(
                 height: 20,
               ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  "We sent code $get_email to kindly check your mail.",
+                  textAlign: TextAlign.center,
+                ),
+              ),
               Text(
                 "This code will expired in ",
               ),
@@ -160,6 +179,11 @@ class _otpScreenState extends State<otpScreen> {
                   "00:${value.toInt()}",
                   style: TextStyle(color: Colors.blue),
                 ),
+                onEnd: (){
+                  setState(() {
+                    _isEnable = true;
+                  });
+                },
               ),
               SizedBox(
                 height: 35,
@@ -207,18 +231,23 @@ class _otpScreenState extends State<otpScreen> {
                   ),
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(right: 15),
-                child: GestureDetector(
-                  onTap: () {
-                    reSendOTP();
-                  },
-                  child: new Ink(
-                    child: Text(
-                      "Resend OTP",
-                      style: TextStyle(
-                          decoration: TextDecoration.underline,
-                          color: Colors.blue),
+              SizedBox(
+                height: 40,
+              ),
+              Visibility(
+                visible: _isEnable,
+                child: Padding(
+                  padding: EdgeInsets.only(right: 15),
+                  child: GestureDetector(
+                    onTap: () {
+                      reSendOTP();
+                    },
+                    child: new Ink(
+                      child: Text(
+                        "Resend OTP",
+                        style: TextStyle(
+                            color: Color(0xFF42A5F5)),
+                      ),
                     ),
                   ),
                 ),
