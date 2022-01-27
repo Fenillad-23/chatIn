@@ -14,7 +14,7 @@ class otpScreen extends StatefulWidget {
   _otpScreenState createState() => _otpScreenState();
 }
 
-class _otpScreenState extends State<otpScreen> {
+class _otpScreenState extends State<otpScreen> {    
   NetworkRepository nw = NetworkRepository();
   String get_email = '';
   String get_otp = '';

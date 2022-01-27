@@ -233,6 +233,7 @@ class _RegistrationState extends State<Registration> {
                         padding: EdgeInsets.all(15),
                         child: TextFormField(
                           controller: contactNoController,
+                          keyboardType: TextInputType.number,
                           decoration: InputDecoration(
                             prefixIcon: Icon(Icons.phone),
                             alignLabelWithHint: true,
