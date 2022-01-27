@@ -27,7 +27,7 @@ class _UserProfileState extends State<UserProfile> {
       ),
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(15.0),
           child: ListView(
             children: [
               Container(
@@ -68,6 +68,54 @@ class _UserProfileState extends State<UserProfile> {
                     ),
                   ],
                 ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                    bottom: 14.0, right: 10.0, top: 10.0, left: 10.0),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        height: 57,
+                        width: 92,
+                        //color: Colors.deepOrange,
+                        child: OutlinedButton.icon(
+                            onPressed: () {},
+                            style: OutlinedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(28.5),
+                                ),
+                                side: BorderSide(
+                                  width: 2.0,
+                                  color: Colors.blue,
+                                  style: BorderStyle.solid,
+                                )),
+                            icon: Container(
+                                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                child: Icon(Icons.chat_bubble_outline,
+                                    size: 28, color: Colors.black87)),
+                            label: Text("")),
+                      ),
+                      Container(
+                        height: 57,
+                        width: 208,
+                        //color: Colors.deepPurple,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            // Respond to button press
+                          },
+                          style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(28.5),
+                            ),
+                          ),
+                          child: Text(
+                            'Follow',
+                            style: TextStyle(fontSize: 18),
+                          ),
+                        ),
+                      )
+                    ]),
               ),
               Container(
                 height: 120,
