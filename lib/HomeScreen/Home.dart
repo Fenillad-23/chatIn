@@ -39,6 +39,7 @@ class _HomeState extends State<Home> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
+        //color: Colors.blue,
         shape: CircularNotchedRectangle(),
         notchMargin: 10,
         child: Container(
