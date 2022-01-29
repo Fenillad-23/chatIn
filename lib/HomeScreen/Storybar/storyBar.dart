@@ -16,7 +16,7 @@ class _storyBarState extends State<storyBar> {
     return Scaffold(
       appBar: AppBar(
         title: Text("ChatIn",
-            style: TextStyle(fontSize: 30, fontFamily: 'sans-serif')),
+            style: TextStyle(fontFamily: 'DancingScript', fontSize: 30)),
       ),
       body: StoryList(),
     );

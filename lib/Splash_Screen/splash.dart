@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:chattin/HomeScreen/Home.dart';
+import 'package:chattin/HomeScreen/UserProfile/UserProfile.dart';
 import 'package:chattin/Splash_Screen/onBoarding.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -34,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => onBoarding(),
+          builder: (context) => UserProfile(),
         ),
       );
     }
@@ -69,9 +70,9 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
             Spacer(),
             CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
-                      strokeWidth: 4,
-                    ),
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
+              strokeWidth: 4,
+            ),
             SizedBox(
               height: 120,
             ),
