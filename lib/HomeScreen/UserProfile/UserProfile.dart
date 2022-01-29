@@ -261,8 +261,8 @@ List imageList = [
 Widget __contentGridView() {
   return GridView.builder(
       itemCount: imageList.length,
-      gridDelegate:
-          SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2, crossAxisSpacing: 16, mainAxisSpacing: 16),
       physics: BouncingScrollPhysics(),
       shrinkWrap: true,
       itemBuilder: (context, index) => Card(
