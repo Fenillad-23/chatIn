@@ -247,8 +247,6 @@ class _UserProfileState extends State<UserProfile> {
   }
 }
 
-
-
 List imageList = [
   'https://cdn.pixabay.com/photo/2019/03/15/09/49/girl-4056684_960_720.jpg',
   'https://cdn.pixabay.com/photo/2020/12/15/16/25/clock-5834193__340.jpg',
