@@ -17,6 +17,7 @@ class StoryApiData {
 }
 
 class _StoryListState extends State<StoryList> {
+  // ignore: must_call_super
   void initState() {
     getdata();
   }

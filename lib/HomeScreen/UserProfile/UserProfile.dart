@@ -1,4 +1,3 @@
-import 'package:chattin/HomeScreen/User/UserPrefrences.dart';
 import 'package:flutter/material.dart';
 
 class UserProfile extends StatefulWidget {
