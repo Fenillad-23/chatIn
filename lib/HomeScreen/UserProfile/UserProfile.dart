@@ -18,7 +18,7 @@ class _UserProfileState extends State<UserProfile> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "user id",
+          "vadu.047",
           style: TextStyle(color: Colors.black),
         ),
         actions: <Widget>[
@@ -59,8 +59,11 @@ class _UserProfileState extends State<UserProfile> {
                       children: [
                         ClipRRect(
                           borderRadius: BorderRadius.circular(100),
-                          child: Image.asset('assets/images/user.jpeg',
-                              width: 86, height: 86, fit: BoxFit.contain),
+                          child: Image.network(
+                              "https://images.unsplash.com/photo-1562174949-4591859cae0a?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max",
+                              width: 86,
+                              height: 86,
+                              fit: BoxFit.cover),
                         ),
                       ],
                     ),
@@ -236,8 +239,8 @@ class _UserProfileState extends State<UserProfile> {
               ),
               SizedBox(height: 30),
               Column(
-                  children: [__contentGridView()],
-                )
+                children: [__contentGridView()],
+              )
             ])),
       ),
     );
@@ -271,7 +274,7 @@ Widget __contentGridView() {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(15.0),
               child: Image.network(imageList[index],
-                  width: 300, height: 150, fit: BoxFit.fill),
+                  width: 300, height: 150, fit: BoxFit.cover),
             ),
             // child: Image.network(imageList[index]),
           ));
