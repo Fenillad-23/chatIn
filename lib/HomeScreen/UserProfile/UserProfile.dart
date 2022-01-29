@@ -1,8 +1,5 @@
 import 'package:chattin/HomeScreen/User/UserPrefrences.dart';
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:transparent_image/transparent_image.dart';
 
 class UserProfile extends StatefulWidget {
   String? userName;
