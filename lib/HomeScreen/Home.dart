@@ -17,9 +17,8 @@ class _HomeState extends State<Home> {
   int currentTab = 0;
   final List<Widget> screens = [
     Dashboard(),
-    UserProfile(),
-    onBoarding(),
-    Demo(),
+    SearchUser(),
+    Dashboard(),
     UserProfileMain()
   ];
 
@@ -76,7 +75,7 @@ class _HomeState extends State<Home> {
                     //minWidth: 30,
                     onPressed: () {
                       setState(() {
-                        currentScreen = UserProfile();
+                        currentScreen = SearchUser();
                         currentTab = 1;
                       });
                     },
@@ -99,7 +98,7 @@ class _HomeState extends State<Home> {
                     //minWidth: 30,
                     onPressed: () {
                       setState(() {
-                        currentScreen = SearchUser();
+                        currentScreen = Dashboard();
                         currentTab = 2;
                       });
                     },
@@ -117,7 +116,7 @@ class _HomeState extends State<Home> {
                     //minWidth: 90,
                     onPressed: () {
                       setState(() {
-                        currentScreen = Demo();
+                        currentScreen = UserProfileMain();
                         currentTab = 3;
                       });
                     },

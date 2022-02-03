@@ -1,14 +1,8 @@
 import 'dart:async';
-import 'package:chattin/HomeScreen/DashBoard.dart';
 import 'package:chattin/HomeScreen/Home.dart';
-// ignore: unused_import
-import 'package:chattin/HomeScreen/UserProfile/UserProfile.dart';
-// ignore: unused_import
 import 'package:chattin/Splash_Screen/onBoarding.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-// ignore: unused_import
-import 'package:lottie/lottie.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -39,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => Home(),
+          builder: (context) => onBoarding(),
         ),
       );
     }

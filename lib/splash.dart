@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:chattin/Registration/otp_success.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../Login/login.dart';
 import 'package:lottie/lottie.dart';
 
 import 'HomeScreen/DashBoard.dart';

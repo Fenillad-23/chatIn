@@ -1,4 +1,3 @@
-import 'package:chattin/Network/network_dio.dart';
 import 'package:flutter/material.dart';
 
 class StoryList extends StatefulWidget {
@@ -19,20 +18,20 @@ class StoryApiData {
 class _StoryListState extends State<StoryList> {
   // ignore: must_call_super
   void initState() {
-    getdata();
+    //getdata();
   }
 
-  getdata() async {
-    NetworkRepository nw = NetworkRepository();
-    dynamic getUserData = await nw.httpGet('User/find');
-    List<StoryApiData> storyList = [];
-    for (var s in getUserData) {
-      // StoryApiData data = StoryApiData(
-      //     uname: s['uname'], imageUrl: s['image'], hasStory: s['hasStory']);
-      // storyList.add(s);
-    }
-    return storyList;
-  }
+  // getdata() async {
+  //   NetworkRepository nw = NetworkRepository();
+  //   dynamic getUserData = await nw.httpGet('User/find');
+  //   List<StoryApiData> storyList = [];
+  //   for (var s in getUserData) {
+  //     // StoryApiData data = StoryApiData(
+  //     //     uname: s['uname'], imageUrl: s['image'], hasStory: s['hasStory']);
+  //     // storyList.add(s);
+  //   }
+  //   return storyList;
+  // }
 
   // StoryApiData obj = new StoryApiData("fenil","",true,false);
   _stories() {
