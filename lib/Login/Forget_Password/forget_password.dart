@@ -60,7 +60,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
     Map data = {
       'email': sharedPreferences.getString("VerifyEmail").toString(),
     };
-    print('\x1b[95m ----$resendOTP');
+    print('\x1b[95m ----$data');
     if (resendOTP != null &&
         (resendOTP['statusCode'] == 200 || resendOTP['statusCode'] == '200')) {
       Navigator.pushReplacement(

@@ -17,7 +17,7 @@ class _UserProfileState extends State<UserProfile> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "vadu.047",
+          widget.userName.toString(),
           style: TextStyle(color: Colors.black),
         ),
         actions: <Widget>[
@@ -47,52 +47,65 @@ class _UserProfileState extends State<UserProfile> {
             padding: EdgeInsets.fromLTRB(20, 30, 20, 0),
             color: new Color(0xFFECEFF1),
             child: Column(children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    height: 110,
-                    width: 110,
-                    //color:Colors.green,
-                    child: Column(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(100),
-                          child: Image.network(
-                              "https://images.unsplash.com/photo-1562174949-4591859cae0a?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max",
-                              width: 86,
-                              height: 86,
-                              fit: BoxFit.cover),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
-                    child: Container(
-                      width: 195,
-                      height: 60,
-                      //  color: Colors.yellow,
+              Container(
+                //color: Colors.blue,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      height: 110,
+                      width: MediaQuery.of(context).size.width / 3,
+                      //color:Colors.green,
+                      padding: EdgeInsets.only(right: 20),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(widget.userName.toString(),
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.w500)),
                           Container(
-                              padding: EdgeInsets.fromLTRB(2, 5, 0, 0),
-                              child: Text("Vaidehi Kheni",
-                                  style: TextStyle(
-                                      color: Colors.black.withOpacity(0.6),
-                                      fontSize: 12))),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(100),
+                              border: Border.all(
+                                color: Colors.blue,
+                                width: 2,
+                              ),
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(100),
+                              child: Image.network(
+                                  "https://images.unsplash.com/photo-1562174949-4591859cae0a?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max",
+                                  width: 90,
+                                  height: 90,
+                                  fit: BoxFit.cover),
+                            ),
+                          ),
                         ],
                       ),
                     ),
-                  ),
-                ],
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(0, 0, 20, 20),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width / 2,
+                        height: 60,
+                        //color: Colors.yellow,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(widget.userName.toString(),
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.w500)),
+                            Container(
+                                padding: EdgeInsets.fromLTRB(2, 5, 0, 0),
+                                child: Text("Vaidehi Kheni",
+                                    style: TextStyle(
+                                        color: Colors.black.withOpacity(0.6),
+                                        fontSize: 12))),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
               Padding(
-                padding: EdgeInsets.only(bottom: 30, right: 0, left: 7),
+                padding: EdgeInsets.only(bottom: 15, right: 0, left: 7),
                 child: Row(
                     //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -118,7 +131,7 @@ class _UserProfileState extends State<UserProfile> {
                             label: Text("")),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(left: 20),
+                        padding: EdgeInsets.only(left: 23),
                         child: Container(
                           height: 57,
                           width: MediaQuery.of(context).size.width / 2,
@@ -166,77 +179,93 @@ class _UserProfileState extends State<UserProfile> {
                     borderRadius: BorderRadius.circular(10),
                     borderSide: BorderSide(color: Colors.white),
                   ),
-                  shadowColor: Colors.blue,
+                  shadowColor: Colors.grey[800],
                   child: Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.only(top: 10.0, right: 20),
-                          child: Column(
-                            children: [
-                              Text("1.5 k",
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w500)),
-                              SizedBox(
-                                height: 6,
-                              ),
-                              Text("Posts",
-                                  style: TextStyle(
-                                      color: Colors.black.withOpacity(0.6),
-                                      fontSize: 12))
-                            ],
+                        SizedBox(
+                          width: 0,
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            // Respond to button press
+                          },
+                          child: Padding(
+                            padding: EdgeInsets.only(right: 10.0,left: 10.0),
+                            child: Column(
+                              children: [
+                                Text("1.5 k",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w500)),
+                                SizedBox(
+                                  height: 6,
+                                ),
+                                Text("Post",
+                                    style: TextStyle(
+                                        color: Colors.black.withOpacity(0.6),
+                                        fontSize: 12))
+                              ],
+                            ),
                           ),
                         ),
-                        SizedBox(width: 25),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 10.0, right: 20),
-                          child: Column(
-                            children: [
-                              Text("1.5 k",
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w500)),
-                              SizedBox(
-                                height: 6,
-                              ),
-                              Text("Followers",
-                                  style: TextStyle(
-                                      color: Colors.black.withOpacity(0.6),
-                                      fontSize: 12))
-                            ],
+                        TextButton(
+                          onPressed: () {},
+                          child: Padding(
+                            padding: EdgeInsets.only(right: 10.0,left: 10.0),
+                            child: Column(
+                              children: [
+                                Text("1.5 k",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w500)),
+                                SizedBox(
+                                  height: 6,
+                                ),
+                                Text("Followers",
+                                    style: TextStyle(
+                                        color: Colors.black.withOpacity(0.6),
+                                        fontSize: 12))
+                              ],
+                            ),
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {},
+                          child: Padding(
+                            padding: EdgeInsets.only(right: 10.0,left: 10.0),
+                            child: Column(
+                              children: [
+                                Text("1.5 m",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w500)),
+                                SizedBox(
+                                  height: 6,
+                                ),
+                                Text("Following",
+                                    style: TextStyle(
+                                        color: Colors.black.withOpacity(0.6),
+                                        fontSize: 12))
+                              ],
+                            ),
                           ),
                         ),
                         SizedBox(
-                          width: 25,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 10.0),
-                          child: Column(
-                            children: [
-                              Text("1.5 m",
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w500)),
-                              SizedBox(
-                                height: 6,
-                              ),
-                              Text("Following",
-                                  style: TextStyle(
-                                      color: Colors.black.withOpacity(0.6),
-                                      fontSize: 12))
-                            ],
-                          ),
+                          width: 5,
                         ),
                       ],
                     ),
                   ),
                 ),
               ),
-              SizedBox(height: 30),
+              SizedBox(height: 20),
               Column(
                 children: [__contentGridView()],
               )
@@ -260,21 +289,26 @@ List imageList = [
   'https://cdn.pixabay.com/photo/2020/12/09/09/27/women-5816861_960_720.jpg',
 ];
 Widget __contentGridView() {
-  return GridView.builder(
-      itemCount: imageList.length,
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        crossAxisSpacing: 25,
-        mainAxisSpacing: 25,
-      ),
-      physics: BouncingScrollPhysics(),
-      shrinkWrap: true,
-      itemBuilder: (context, index) => GridTile(
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(15.0),
-              child: Image.network(imageList[index],
-                  width: 300, height: 150, fit: BoxFit.cover),
-            ),
-            // child: Image.network(imageList[index]),
-          ));
+  return LayoutBuilder(
+    builder: (context, constraints) {
+      return GridView.builder(
+        itemCount: imageList.length,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: constraints.maxWidth > 700 ? 4 : 2,
+          crossAxisSpacing: 16,
+          mainAxisSpacing: 16,
+        ),
+        physics: BouncingScrollPhysics(),
+        shrinkWrap: true,
+        itemBuilder: (context, index) => GridTile(
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(15.0),
+            child: Image.network(imageList[index],
+                width: 300, height: 150, fit: BoxFit.cover),
+          ),
+          // child: Image.network(imageList[index]),
+        ),
+      );
+    },
+  );
 }
