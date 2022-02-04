@@ -1,3 +1,4 @@
+import 'package:chattin/HomeScreen/UserProfileMain/Setting.dart';
 import 'package:flutter/material.dart';
 
 class UserProfileMain extends StatefulWidget {
@@ -9,7 +10,7 @@ class UserProfileMain extends StatefulWidget {
 
 class _UserProfileMainState extends State<UserProfileMain> {
   int index = 0;
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +29,8 @@ class _UserProfileMainState extends State<UserProfileMain> {
                 color: Colors.black,
               ),
               onPressed: () {
-                // do something
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Setting()));
               },
             ),
           )
@@ -96,6 +98,30 @@ class _UserProfileMainState extends State<UserProfileMain> {
                   ],
                 ),
               ),
+              Card(
+                  elevation: 8,
+                  shape: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(color: Colors.white),
+                  ),
+                  // shadowColor: Colors.grey[800],
+                  child: Container(
+                    height: 35,
+                    width: MediaQuery.of(context).size.width,
+                    child: OutlinedButton(
+                      child: Text('Edit profile'),
+                      style: OutlinedButton.styleFrom(
+                        primary: Colors.black,
+                      ),
+                      onPressed: () {
+                        print('Pressed');
+                      },
+                    ),
+                  )
+                ),
+                SizedBox(
+                  height: 7,
+                ),  
               Container(
                 height: 100,
                 width: MediaQuery.of(context).size.width,
@@ -238,4 +264,3 @@ Widget __contentGridView() {
     },
   );
 }
-

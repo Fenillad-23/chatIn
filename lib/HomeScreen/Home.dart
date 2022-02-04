@@ -1,4 +1,3 @@
-import 'package:chattin/HomeScreen/Demo.dart';
 import 'package:chattin/Post/UploadPost.dart';
 import 'package:chattin/Splash_Screen/onBoarding.dart';
 import 'package:flutter/material.dart';
