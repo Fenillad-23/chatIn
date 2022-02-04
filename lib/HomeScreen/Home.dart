@@ -40,8 +40,8 @@ class _HomeState extends State<Home> {
               child: showFab ? Icon(Icons.add) : null,
               onPressed: () {
                 setState(() {
-                  currentScreen = UploadImage();
-                  currentTab = 3;
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => UploadImage()));
                 });
               },
             )

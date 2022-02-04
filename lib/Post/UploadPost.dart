@@ -1,8 +1,9 @@
+import 'dart:convert';
 import 'dart:io';
-
 import 'package:chattin/Network/network_dio.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:http/http.dart' as http;
 
 class UploadImage extends StatefulWidget {
   const UploadImage({Key? key}) : super(key: key);
@@ -22,6 +23,25 @@ class _UploadImageState extends State<UploadImage> {
     }
     print("'\x1b[97m response :image length " + images!.length.toString());
     setState(() {});
+  }
+
+  Future upload(selectedImage) async {
+    var uri = Uri.parse("http://192.168.29.232:3000/shoes/add");
+    var request = http.MultipartRequest(
+      "POST",
+      Uri.parse("$uri"),
+    );
+    request.files.add(
+        await http.MultipartFile.fromPath("image", selectedImage.toString()));
+    var response = await request.send();
+    var responseData = await response.stream.toBytes();
+    var responseString = String.fromCharCodes(responseData);
+    var parsedJson = await json.decode(responseString);
+    if (response.statusCode == 200) {
+      return parsedJson;
+    } else {
+      return '';
+    }
   }
 
   @override
@@ -48,7 +68,9 @@ class _UploadImageState extends State<UploadImage> {
             Padding(
               padding: const EdgeInsets.only(bottom: 28.0),
               child: TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  upload(images);
+                },
                 child: Text("upload"),
               ),
             )
