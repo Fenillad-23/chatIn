@@ -45,37 +45,16 @@ class _UploadImageState extends State<UploadImage> {
                 },
               ),
             ),
-            TextButton(
-              onPressed: () {
-                uploadimage(images);
-              },
-              child: Text("upload"),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 28.0),
+              child: TextButton(
+                onPressed: () {},
+                child: Text("upload"),
+              ),
             )
           ],
         ),
       ),
     );
-  }
-
-  Future uploadimage(images) async {
-    //   var uri = Uri.parse("http://192.168.29.232:3000/shoes/add");
-    //   var request = http.MultipartRequest(
-    //     "POST",
-    //     Uri.parse("$uri"),
-    //   );
-    //   request.files
-    //       .add(await http.MultipartFile.fromPath("image", images.toString()));
-    //   var response = await request.send();
-
-    //   var responseData = await response.stream.toBytes();
-    //   var responseString = String.fromCharCodes(responseData);
-    //   var parsedJson = await json.decode(responseString);
-
-    //   if (response.statusCode == 200) {
-    //     return parsedJson;
-    //   } else {
-    //     return 'something went wrong';
-    //   }
-    // }
   }
 }

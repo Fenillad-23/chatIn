@@ -41,7 +41,7 @@ class _HomeState extends State<Home> {
               onPressed: () {
                 setState(() {
                   currentScreen = UploadImage();
-                  currentTab = 1;
+                  currentTab = 3;
                 });
               },
             )
