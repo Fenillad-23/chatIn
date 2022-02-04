@@ -1,4 +1,5 @@
 import 'package:chattin/HomeScreen/Demo.dart';
+import 'package:chattin/Post/UploadPost.dart';
 import 'package:chattin/Splash_Screen/onBoarding.dart';
 import 'package:flutter/material.dart';
 import 'DashBoard.dart';
@@ -38,7 +39,12 @@ class _HomeState extends State<Home> {
           ? FloatingActionButton(
               // visible:!keyboardIsOpen,
               child: showFab ? Icon(Icons.add) : null,
-              onPressed: () {},
+              onPressed: () {
+                setState(() {
+                  currentScreen = UploadImage();
+                  currentTab = 1;
+                });
+              },
             )
           : null,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
