@@ -43,42 +43,45 @@ class _StoryBarWidgetState extends State<StoryBarWidget> {
   SizedBox _buildStoryListView() {
     return SizedBox(
       height: 90.0,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: loadDetails.length,
-        itemExtent: 90.0,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: EdgeInsets.only(top: 15.0, left: 8.0, right: 8.0),
-            child: Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: NetworkImage(
-                    loadDetails[index],
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: loadDetails.length,
+          itemExtent: 90.0,
+          itemBuilder: (context, index) {
+            return Padding(
+              padding: EdgeInsets.only(top: 15.0, left: 8.0, right: 8.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: NetworkImage(
+                      loadDetails[index],
+                    ),
+                    fit: BoxFit.cover,
                   ),
-                  fit: BoxFit.cover,
+                  borderRadius: BorderRadius.circular(10.0),
+                  color: Colors.grey,
                 ),
-                borderRadius: BorderRadius.circular(10.0),
-                color: Colors.grey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    SizedBox(height: 2),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(name[index],
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          )),
+                    ),
+                  ],
+                ),
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  SizedBox(height: 2),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(name[index],
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        )),
-                  ),
-                ],
-              ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:chattin/HomeScreen/Storybar/StoryBarWidget.dart';
+import 'package:chattin/Post/PostViewWidget.dart';
 import 'package:flutter/material.dart';
 
 class Dashboard extends StatefulWidget {
@@ -12,22 +13,41 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: new Color(0xFFECEFF1),
         appBar: AppBar(
-          backgroundColor: Colors.white,
-          title: Text(
-            'Dashboard',
-            style: TextStyle(color: Colors.black),
-          ),
-          leading: IconButton(
-            onPressed: () {},
-            icon: Icon(
-              Icons.arrow_back,
-              color: Colors.black,
-            ),
-          ),
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          title: Text('Home',
+              style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 22)),
+          actions: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(right: 8.0),
+              child: IconButton(
+                  icon: Icon(Icons.notifications_outlined, color: Colors.black),
+                  onPressed: () {}),
+            )
+          ],
         ),
-        body: Column(
-          children: [Container(child: StoryBarWidget())],
+        body: SafeArea(
+          child: Column(
+            children: <Widget>[
+              Container(
+                child: StoryBarWidget(),
+              ),
+              Expanded(
+                child: SizedBox(
+                  height: MediaQuery.of(context).size.height,
+                  width: MediaQuery.of(context).size.width,
+                  child: Container(
+                    child: PostViewList(),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ));
   }
 }
