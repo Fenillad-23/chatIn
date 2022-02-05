@@ -31,14 +31,16 @@ class _UploadImageState extends State<UploadImage> {
       "POST",
       Uri.parse("$uri"),
     );
-    request.files.add(
-        await http.MultipartFile.fromPath("image", selectedImage.toString()));
+    for (var i = 0; i < selectedImage.length; i++) {
+      request.files.add(
+          await http.MultipartFile.fromPath("image", selectedImage[i].path));
+    }
     var response = await request.send();
     var responseData = await response.stream.toBytes();
     var responseString = String.fromCharCodes(responseData);
-    var parsedJson = await json.decode(responseString);
+    var msg = await json.decode(responseString);
     if (response.statusCode == 200) {
-      return parsedJson;
+      return msg;
     } else {
       return '';
     }
@@ -56,13 +58,25 @@ class _UploadImageState extends State<UploadImage> {
               child: Text("select"),
             ),
             Expanded(
-              child: GridView.builder(
-                itemCount: images!.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3),
-                itemBuilder: (BuildContext context, int index) {
-                  return Image.file(File(images![index].path));
-                },
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: GridView.builder(
+                    itemCount: images!.length,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 25,
+                      mainAxisSpacing: 25,
+                    ),
+                    shrinkWrap: true,
+                    itemBuilder: (BuildContext context, int index) => GridTile(
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(18.0),
+                            child: Image.file(
+                              File(images![index].path),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        )),
               ),
             ),
             Padding(

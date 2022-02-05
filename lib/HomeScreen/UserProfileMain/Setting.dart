@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 
 class Setting extends StatefulWidget {
-  const Setting({ Key? key }) : super(key: key);
+  const Setting({Key? key}) : super(key: key);
 
   @override
   _SettingState createState() => _SettingState();
@@ -11,7 +11,7 @@ class Setting extends StatefulWidget {
 class _SettingState extends State<Setting> {
   bool Notification = false;
   bool Account = false;
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -367,4 +367,4 @@ class _SettingState extends State<Setting> {
       ),
     );
   }
-  }
+}
