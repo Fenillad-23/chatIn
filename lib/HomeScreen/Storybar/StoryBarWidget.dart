@@ -70,11 +70,13 @@ class _StoryBarWidgetState extends State<StoryBarWidget> {
                     SizedBox(height: 2),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text(name[index],
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          )),
+                      child: Text(
+                        name[index],
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
                   ],
                 ),

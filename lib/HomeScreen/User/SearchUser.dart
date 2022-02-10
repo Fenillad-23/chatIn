@@ -12,7 +12,8 @@ class SearchUser extends StatefulWidget {
 class _SearchUserState extends State<SearchUser> {
   NetworkRepository nw = new NetworkRepository();
   late TextEditingController _textController = new TextEditingController();
-  String image = "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMDg4MDd8MHwxfHNlYXJjaHwyM3x8cGVvcGxlfGVufDB8fHx8MTY0Mzg2MTUwOA&ixlib=rb-1.2.1&q=80&w=1080";
+  String image =
+      "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMDg4MDd8MHwxfHNlYXJjaHwyM3x8cGVvcGxlfGVufDB8fHx8MTY0Mzg2MTUwOA&ixlib=rb-1.2.1&q=80&w=1080";
   String fname = "fenil lad";
   List loadUserList = [];
 
@@ -72,7 +73,7 @@ class _SearchUserState extends State<SearchUser> {
     }
 
     loadUserList.forEach((userDetail) {
-      if(userDetail['username'].toLowerCase().contains(text.toLowerCase())){
+      if (userDetail['username'].toLowerCase().contains(text.toLowerCase())) {
         _searchResult.add(userDetail);
       }
       setState(() {});
@@ -153,9 +154,8 @@ class _SearchUserState extends State<SearchUser> {
                           width: MediaQuery.of(context).size.width / 5,
                           height: 70,
                           child: ClipOval(
-                            child: Image.network(image,width: 90,
-                                  height: 90,
-                                  fit: BoxFit.cover),
+                            child: Image.network(image,
+                                width: 80, height: 80, fit: BoxFit.cover),
                           ),
                         )
                       ]),

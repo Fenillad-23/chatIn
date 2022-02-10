@@ -39,51 +39,124 @@ class _PostViewListState extends State<PostViewList> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ListView.builder(
-          itemCount: Posts.length,
-          shrinkWrap: true,
-          scrollDirection: Axis.vertical,
-          itemBuilder: (context, index) {
-            return Container(
-                height: 280,
-                width: MediaQuery.of(context).size.width,
-                child: Card(
-                  child: Padding(
+        itemCount: Posts.length,
+        shrinkWrap: true,
+        scrollDirection: Axis.vertical,
+        itemBuilder: (context, index) {
+          return Container(
+            height: 350,
+            width: MediaQuery.of(context).size.width,
+            child: Card(
+              color: Colors.white,
+              elevation: 8.0,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(18.0),
+              ),
+              child: Column(
+                children: [
+                  Padding(
                     padding: const EdgeInsets.only(left: 8.0, top: 8.0),
-                    child: Align(
-                      alignment: Alignment.topLeft,
-                      child: Row(
-                        children: [
-                          CircleAvatar(
-                              radius: 15.0,
-                              child: ClipOval(
-                                child: Image.network(
-                                  Posts[index],
-                                  height: 40,
-                                  width: 40,
-                                  fit: BoxFit.cover,
+                    child: Container(
+                      child: Align(
+                        alignment: Alignment.topLeft,
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: CircleAvatar(
+                                  radius: 15.0,
+                                  child: ClipOval(
+                                    child: Image.network(
+                                      Posts[index],
+                                      height: 40,
+                                      width: 40,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  )),
+                            ),
+                            SizedBox(
+                              width: 2,
+                            ),
+                            Container(
+                              // color: Colors.black,
+                              width: 290,
+                              child: Padding(
+                                padding: const EdgeInsets.all(3.0),
+                                child: Text(
+                                  name[index],
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18),
                                 ),
-                              )),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text(
-                            name[index],
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 18),
-                          ),
-                          SizedBox(width: 260),
-                          Icon(Icons.more_vert),
-                        ],
+                              ),
+                            ),
+                            Icon(Icons.more_vert)
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                  color: Colors.white,
-                  elevation: 8.0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18.0),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+                    child: Divider(),
                   ),
-                ));
-          }),
+                  SizedBox(
+                    height: 230,
+                    width: 370,
+                    child: Container(
+                      height: double.infinity,
+                      alignment: Alignment.center,
+                      child: Card(
+                        // color: Colors.yellowAccent,
+                        elevation: 10.0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18.0),
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10.0),
+                          child: Image.network(
+                            Posts[index],
+                            width: 370,
+                            height: 210,
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Container(
+                      child: Padding(
+                    padding: const EdgeInsets.only(left: 18.0, top: 2.0),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.favorite_border_outlined,
+                        ),
+                        SizedBox(
+                          width: 6,
+                        ),
+                        const Text("45"),
+                        SizedBox(
+                          width: 8,
+                        ),
+                        Icon(Icons.comment),
+                        SizedBox(
+                          width: 6,
+                        ),
+                        const Text("45"),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 180.0),
+                          child: Expanded(child: const Text("2 hours ago")),
+                        )
+                      ],
+                    ),
+                  ))
+                ],
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 }

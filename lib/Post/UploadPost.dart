@@ -25,15 +25,16 @@ class _UploadImageState extends State<UploadImage> {
     setState(() {});
   }
 
-  Future upload(selectedImage) async {
-    var uri = Uri.parse("http://192.168.29.232:3000/shoes/add");
+  Future upload(selectedImageList) async {
+    var uri = Uri.parse("http://192.168.29.170:3000/post/createpost");
     var request = http.MultipartRequest(
       "POST",
       Uri.parse("$uri"),
     );
-    for (var i = 0; i < selectedImage.length; i++) {
-      request.files.add(
-          await http.MultipartFile.fromPath("image", selectedImage[i].path));
+    for (var i = 0; i < selectedImageList.length; i++) {
+      request.files.add(await http.MultipartFile.fromPath(
+          "image", selectedImageList[i].path));
+      request.fields['username'] = 'fenil.23';
     }
     var response = await request.send();
     var responseData = await response.stream.toBytes();
@@ -59,7 +60,7 @@ class _UploadImageState extends State<UploadImage> {
             ),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(18.0),
                 child: GridView.builder(
                     itemCount: images!.length,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
