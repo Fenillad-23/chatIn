@@ -37,54 +37,154 @@ class _StoryBarWidgetState extends State<StoryBarWidget> {
   ];
   @override
   Widget build(BuildContext context) {
-    return Container(child: _buildStoryListView());
-  }
-
-  SizedBox _buildStoryListView() {
-    return SizedBox(
-      height: 90.0,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: loadDetails.length,
-          itemExtent: 90.0,
-          itemBuilder: (context, index) {
-            return Padding(
-              padding: EdgeInsets.only(top: 15.0, left: 8.0, right: 8.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: NetworkImage(
-                      loadDetails[index],
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.only(right: 5),
+            child: Column(
+              children: <Widget>[
+                Container(
+                  width: 60,
+                  height: 60,
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle, color: Color.fromARGB(255, 174, 175, 179)),
+                  child: Center(
+                    child: Icon(
+                      Icons.add,
+                      size: 33,
                     ),
-                    fit: BoxFit.cover,
                   ),
-                  borderRadius: BorderRadius.circular(10.0),
-                  color: Colors.grey,
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    SizedBox(height: 2),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
+                SizedBox(
+                  height: 10,
+                ),
+                SizedBox(
+                  width: 75,
+                  child: Align(
                       child: Text(
-                        name[index],
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                    'Your Story',
+                    overflow: TextOverflow.ellipsis,
+                  )),
+                )
+              ],
+            ),
+          ),
+          Row(
+              children: List.generate(loadDetails.length, (index) {
+            return Padding(
+              padding: const EdgeInsets.only(right: 5),
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    width: 60,
+                    height: 60,
+                    child: Stack(
+                      children: <Widget>[Container(
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                        color: Colors.blueAccent, width: 3)),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(0.0),
+                                  child: Container(
+                                    width: 75,
+                                    height: 75,
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        image: DecorationImage(
+                                            image: NetworkImage(
+                                                loadDetails[index]),
+                                            fit: BoxFit.cover)),
+                                  ),
+                                ),
+                              )
+                            
+                        // storyList[index]['isOnline']
+                        //     ? Positioned(
+                        //         top: 38,
+                        //         left: 42,
+                        //         child: Container(
+                        //           width: 20,
+                        //           height: 20,
+                        //           decoration: BoxDecoration(
+                        //               color: Color(0xFF66BB6A),
+                        //               shape: BoxShape.circle,
+                        //               border: Border.all(
+                        //                   color: Color(0xFFFFFFFF), width: 3)),
+                        //         ),
+                        //       )
+                        //     : Container()
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  SizedBox(
+                    width: 75,
+                    child: Align(
+                        child: Text(
+                      name[index],
+                      overflow: TextOverflow.ellipsis,
+                    )),
+                  )
+                ],
               ),
             );
-          },
-        ),
+          }))
+        ],
       ),
     );
   }
+
+  // SizedBox _buildStoryListView() {
+    
+  //   return SizedBox(
+  //     height: 90.0,
+  //     child: Padding(
+  //       padding: const EdgeInsets.all(8.0),
+  //       child: ListView.builder(
+  //         scrollDirection: Axis.horizontal,
+  //         itemCount: loadDetails.length,
+  //         itemExtent: 90.0,
+  //         itemBuilder: (context, index) {
+  //           return Padding(
+  //             padding: EdgeInsets.only(top: 15.0, left: 8.0, right: 8.0),
+  //             child: Container(
+  //               decoration: BoxDecoration(
+  //                 image: DecorationImage(
+  //                   image: NetworkImage(
+  //                     loadDetails[index],
+  //                   ),
+  //                   fit: BoxFit.cover,
+  //                 ),
+  //                 borderRadius: BorderRadius.circular(10.0),
+  //                 color: Colors.grey,
+  //               ),
+  //               child: Column(
+  //                 crossAxisAlignment: CrossAxisAlignment.start,
+  //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //                 children: <Widget>[
+  //                   SizedBox(height: 2),
+  //                   Padding(
+  //                     padding: const EdgeInsets.all(8.0),
+  //                     child: Text(
+  //                       name[index],
+  //                       style: TextStyle(
+  //                         color: Colors.white,
+  //                         fontWeight: FontWeight.bold,
+  //                       ),
+  //                     ),
+  //                   ),
+  //                 ],
+  //               ),
+  //             ),
+  //           );
+  //         },
+  //       ),
+  //     ),
+  //   );
+  // }
 }

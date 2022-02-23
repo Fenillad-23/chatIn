@@ -1,3 +1,4 @@
+import 'package:chattin/Post/PostFilter.dart';
 import 'package:chattin/Post/UploadPost.dart';
 import 'package:chattin/Splash_Screen/onBoarding.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,7 @@ class _HomeState extends State<Home> {
   final List<Widget> screens = [
     Dashboard(),
     SearchUser(),
-    Dashboard(),
+    UserProfile(),
     UserProfileMain()
   ];
 
@@ -40,7 +41,7 @@ class _HomeState extends State<Home> {
               onPressed: () {
                 setState(() {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => UploadImage()));
+                      MaterialPageRoute(builder: (context) => PostFilter()));
                 });
               },
             )
@@ -103,7 +104,7 @@ class _HomeState extends State<Home> {
                     //minWidth: 30,
                     onPressed: () {
                       setState(() {
-                        currentScreen = Dashboard();
+                        currentScreen = UserProfile();
                         currentTab = 2;
                       });
                     },

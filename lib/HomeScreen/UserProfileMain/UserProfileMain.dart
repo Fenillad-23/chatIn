@@ -171,7 +171,7 @@ class _UserProfileMainState extends State<UserProfileMain> {
                             padding: EdgeInsets.only(right: 10.0, left: 10.0),
                             child: Column(
                               children: [
-                                Text("1.5 k",
+                                Text("1.5 m",
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 20,
@@ -193,7 +193,7 @@ class _UserProfileMainState extends State<UserProfileMain> {
                             padding: EdgeInsets.only(right: 10.0, left: 10.0),
                             child: Column(
                               children: [
-                                Text("1.5 m",
+                                Text("1.5 k",
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 20,

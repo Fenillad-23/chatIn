@@ -16,6 +16,14 @@ class _UploadImageState extends State<UploadImage> {
   final ImagePicker _picker = ImagePicker();
   List<XFile>? images = [];
   NetworkRepository nw = NetworkRepository();
+
+  @override
+  void initState() {
+    selectedImage();
+    super.initState();
+    setState(() {});
+  }
+
   void selectedImage() async {
     final List<XFile>? selectedImage = await _picker.pickMultiImage();
     if (selectedImage!.isNotEmpty) {
