@@ -1,4 +1,3 @@
-import 'package:chattin/Post/PostFilter.dart';
 import 'package:chattin/Post/UploadPost.dart';
 import 'package:chattin/Splash_Screen/onBoarding.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +40,7 @@ class _HomeState extends State<Home> {
               onPressed: () {
                 setState(() {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => PostFilter()));
+                      MaterialPageRoute(builder: (context) => UploadImage()));
                 });
               },
             )

@@ -39,11 +39,11 @@ class _StoryBarWidgetState extends State<StoryBarWidget> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
-      child: Row(
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.only(right: 5),
-            child: Column(
+      child: Padding(
+        padding: const EdgeInsets.only(left: 10.0),
+        child: Row(
+          children: <Widget>[
+            Column(
               children: <Widget>[
                 Container(
                   width: 60,
@@ -70,12 +70,9 @@ class _StoryBarWidgetState extends State<StoryBarWidget> {
                 )
               ],
             ),
-          ),
-          Row(
-              children: List.generate(loadDetails.length, (index) {
-            return Padding(
-              padding: const EdgeInsets.only(right: 5),
-              child: Column(
+            Row(
+                children: List.generate(loadDetails.length, (index) {
+              return Column(
                 children: <Widget>[
                   Container(
                     width: 60,
@@ -131,10 +128,10 @@ class _StoryBarWidgetState extends State<StoryBarWidget> {
                     )),
                   )
                 ],
-              ),
-            );
-          }))
-        ],
+              );
+            }))
+          ],
+        ),
       ),
     );
   }
