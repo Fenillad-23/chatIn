@@ -47,4 +47,10 @@ class Validators {
       return "please follow the proper format";
     }
   }
+
+  static String? captionValidator(String value, String type) {
+    if (value.isEmpty) {
+      return "$type can't be null";
+    } 
+  }
 }

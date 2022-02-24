@@ -66,7 +66,7 @@ class _DashboardState extends State<Dashboard> {
             borderRadius: BorderRadius.circular(10),
             borderSide: BorderSide(color: Colors.white),
           ),
-          // shadowColor: Colors.grey[800],
+           shadowColor: Colors.white,
           child: Container(
             padding: EdgeInsets.all(15.0),
             child: Column(
