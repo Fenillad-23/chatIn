@@ -1,6 +1,10 @@
+import 'dart:async';
+
 import 'package:chattin/Login/login.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+
+import '../HomeScreen/Home.dart';
 
 class otpSucceed extends StatefulWidget {
   const otpSucceed({Key? key}) : super(key: key);
@@ -10,6 +14,19 @@ class otpSucceed extends StatefulWidget {
 }
 
 class _otpSucceedState extends State<otpSucceed> {
+  @override
+  void initState() {
+    super.initState();
+    redirect_to();
+  }
+
+  redirect_to() async {
+    Timer(Duration(seconds: 2), () {
+      // print("hello");
+      Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,31 +69,31 @@ class _otpSucceedState extends State<otpSucceed> {
                 SizedBox(
                   height: 50,
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                      left: 40, right: 40, top: 20, bottom: 20.0),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (context) => Login()));
-                    },
-                    child: Ink(
-                      decoration: BoxDecoration(
-                          color: Colors.blue,
-                          borderRadius: BorderRadius.circular(30.0)),
-                      child: Container(
-                        constraints:
-                            BoxConstraints(maxWidth: 250.0, minHeight: 50.0),
-                        alignment: Alignment.center,
-                        child: Text(
-                          "Done",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.white, fontSize: 20),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+                // Padding(
+                //   padding: const EdgeInsets.only(
+                //       left: 40, right: 40, top: 20, bottom: 20.0),
+                //   child: ElevatedButton(
+                //     onPressed: () {
+                //       Navigator.pushReplacement(context,
+                //           MaterialPageRoute(builder: (context) => Login()));
+                //     },
+                //     child: Ink(
+                //       decoration: BoxDecoration(
+                //           color: Colors.blue,
+                //           borderRadius: BorderRadius.circular(30.0)),
+                //       child: Container(
+                //         constraints:
+                //             BoxConstraints(maxWidth: 250.0, minHeight: 50.0),
+                //         alignment: Alignment.center,
+                //         child: Text(
+                //           "Done",
+                //           textAlign: TextAlign.center,
+                //           style: TextStyle(color: Colors.white, fontSize: 20),
+                //         ),
+                //       ),
+                //     ),
+                //   ),
+                // ),
               ],
             ),
           ),

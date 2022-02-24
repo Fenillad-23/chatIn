@@ -13,7 +13,7 @@ class otpScreen extends StatefulWidget {
   _otpScreenState createState() => _otpScreenState();
 }
 
-class _otpScreenState extends State<otpScreen> {    
+class _otpScreenState extends State<otpScreen> {
   NetworkRepository nw = NetworkRepository();
   String? get_email;
   String get_otp = '';
@@ -21,21 +21,23 @@ class _otpScreenState extends State<otpScreen> {
   String get_password = '';
   String get_contactNo = '';
   bool _isEnable = false;
-  
+
   @override
   void initState() {
     get();
     super.initState();
   }
 
-  get()async{
+  get() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     get_email = sharedPreferences.getString("email").toString();
   }
 
   reSendOTP() async {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => otpScreen()));
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    
+
     dynamic resendOTP = await nw.httpPost(
       'User/sendotp',
       {
@@ -178,7 +180,7 @@ class _otpScreenState extends State<otpScreen> {
                   "00:${value.toInt()}",
                   style: TextStyle(color: Colors.blue),
                 ),
-                onEnd: (){
+                onEnd: () {
                   setState(() {
                     _isEnable = true;
                   });
@@ -244,8 +246,7 @@ class _otpScreenState extends State<otpScreen> {
                     child: new Ink(
                       child: Text(
                         "Resend OTP",
-                        style: TextStyle(
-                            color: Color(0xFF42A5F5)),
+                        style: TextStyle(color: Color(0xFF42A5F5)),
                       ),
                     ),
                   ),

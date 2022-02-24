@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../Splash_Screen/onBoarding.dart';
 
 class Setting extends StatefulWidget {
   const Setting({Key? key}) : super(key: key);
@@ -337,7 +340,9 @@ class _SettingState extends State<Setting> {
                       child: Material(
                         color: Colors.white.withOpacity(0.0),
                         child: InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            LogOut();
+                          },
                           child: Ink(
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
@@ -366,5 +371,13 @@ class _SettingState extends State<Setting> {
         ),
       ),
     );
+  }
+
+  LogOut() async {
+    print("logout");
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    sharedPreferences.clear();
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => onBoarding()));
   }
 }

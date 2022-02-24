@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 import 'package:chattin/Network/network_dio.dart';
 import 'package:chattin/validation/validation.dart';
 import 'package:flutter/material.dart';
@@ -50,6 +51,7 @@ class _UploadImageState extends State<UploadImage> {
       request.fields['username'] = 'fenil.23';
     }
     var response = await request.send();
+    print('Response: $response');
     var responseData = await response.stream.toBytes();
     var responseString = String.fromCharCodes(responseData);
     var msg = await json.decode(responseString);
@@ -140,90 +142,93 @@ class _UploadImageState extends State<UploadImage> {
               ),
               onPressed: () {
                 showModalBottomSheet(
+                    backgroundColor: Colors.transparent,
                     context: context,
+                    isScrollControlled: true,
                     builder: (context) {
-                      return SingleChildScrollView(
-                        child: Padding(
-                          padding: EdgeInsets.only(
-                              bottom:
-                                  MediaQuery.of(context).viewInsets.bottom),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: <Widget>[
-                              Container(
-                                height: 280,
-                                width: MediaQuery.of(context).size.width,
+                      return Padding(
+                        padding: EdgeInsets.only(
+                            bottom: MediaQuery.of(context).viewInsets.bottom),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            Container(
+                              height: 280,
+                              width: MediaQuery.of(context).size.width,
+                              decoration: new BoxDecoration(
                                 color: Colors.white,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(20.0),
-                                  child: Form(
-                                    key: _formKey,
-                                    child: Column(
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Text("Add Caption",
-                                                textAlign: TextAlign.left,
-                                                style: TextStyle(
-                                                    fontSize: 20,
-                                                    fontWeight:
-                                                        FontWeight.w500)),
-                                          ],
+                                borderRadius: new BorderRadius.only(
+                                    topLeft: Radius.circular(25.0),
+                                    topRight: Radius.circular(25.0)),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(20.0),
+                                child: Form(
+                                  key: _formKey,
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Text("Add Caption",
+                                              textAlign: TextAlign.left,
+                                              style: TextStyle(
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.w500)),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 30,
+                                      ),
+                                      TextFormField(
+                                        decoration: InputDecoration(
+                                          prefixIcon:
+                                              Icon(Icons.description_outlined),
+                                          alignLabelWithHint: true,
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(9),
+                                          ),
+                                          labelText: 'Write a Caption',
+                                          hintText:
+                                              'Enter your caption here ...',
                                         ),
-                                        SizedBox(
-                                          height: 30,
-                                        ),
-                                        TextFormField(
-                                          decoration: InputDecoration(
-                                            prefixIcon: Icon(
-                                                Icons.account_circle_sharp),
-                                            alignLabelWithHint: true,
-                                            border: OutlineInputBorder(
+                                        controller: captionController,
+                                        validator: (value) =>
+                                            Validators.captionValidator(
+                                                value!.trim(), "caption"),
+                                      ),
+                                      SizedBox(
+                                        height: 50,
+                                      ),
+                                      Container(
+                                        height: 50,
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        child: ElevatedButton(
+                                          onPressed: () {
+                                            if (_formKey.currentState!
+                                                .validate()) {
+                                              upload(images);
+                                            }
+                                          },
+                                          style: ElevatedButton.styleFrom(
+                                            shape: RoundedRectangleBorder(
                                               borderRadius:
-                                                  BorderRadius.circular(9),
-                                            ),
-                                            labelText: 'Write a Caption',
-                                            hintText:
-                                                'Enter your caption here ...',
-                                          ),
-                                          controller: captionController,
-                                          validator: (value) =>
-                                              Validators.captionValidator(
-                                                  value!.trim(), "caption"),
-                                        ),
-                                        SizedBox(
-                                          height: 50,
-                                        ),
-                                        Container(
-                                          height: 50,
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                          child: ElevatedButton(
-                                            onPressed: () {
-                                              if (_formKey.currentState!
-                                                  .validate()) {
-                                                upload(images);
-                                              }
-                                            },
-                                            style: ElevatedButton.styleFrom(
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(28.5),
-                                              ),
-                                            ),
-                                            child: Text(
-                                              "Upload",
-                                              style: TextStyle(fontSize: 20),
+                                                  BorderRadius.circular(28.5),
                                             ),
                                           ),
+                                          child: Text(
+                                            "Upload",
+                                            style: TextStyle(fontSize: 20),
+                                          ),
                                         ),
-                                      ],
-                                    ),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                              )
-                            ],
-                          ),
+                              ),
+                            )
+                          ],
                         ),
                       );
                     });
