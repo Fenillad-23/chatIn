@@ -33,11 +33,21 @@ class _LoginState extends State<Login> {
         SharedPreferences sharedPreferences =
             await SharedPreferences.getInstance();
         sharedPreferences.setBool('isRememberMe', _value);
-        // sharedPreferences.setString(
-        //     'email', response['data']['email'].toString());
+        sharedPreferences.setString(
+            'username', response['data']['username'].toString());
+        print(sharedPreferences.getString("username"));
+        sharedPreferences.setString(
+            'email', response['data']['email'].toString());
+        sharedPreferences.setString(
+            'contactNo', response['data']['contactNo'].toString());
+        sharedPreferences.setString(
+            'password', passwordController.text.toString());
         // sharedPreferences.setString(
         //     'password', passwordController.text.toString());
         // print('\x1b[95m Email : ${sharedPreferences.getString('email')}');
+        // print('\x1b[95m Username : ${sharedPreferences.getString('username')}');
+        // print('\x1b[95m Contact : ${sharedPreferences.getString('contactNo')}');
+        // print('\x1b[95m password : ${sharedPreferences.getString('password')}');
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(

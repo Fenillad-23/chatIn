@@ -12,51 +12,116 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   final myProducts = List<String>.generate(1000, (i) => 'Product $i');
 
-  bool _isLiked = false;
-  List Posts = [
-    "https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-    "https://images.unsplash.com/photo-1643712662909-29fe8f02b613?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDE4fGJvOGpRS1RhRTBZfHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-    "https://images.unsplash.com/photo-1643585186802-ad887747a6d8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDIyfGJvOGpRS1RhRTBZfHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-    "https://images.unsplash.com/photo-1643861707098-a0740dc40560?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDJ8aG1lbnZRaFVteE18fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60",
-    "https://images.unsplash.com/photo-1643345206285-92dfcb3a2bb8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDE2fGhtZW52UWhVbXhNfHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-    "https://images.unsplash.com/photo-1643682782480-35b7ff764bff?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
-    "https://images.unsplash.com/photo-1643579234690-bc90d1615e6d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDMxfHRvd0paRnNrcEdnfHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-    "https://images.unsplash.com/photo-1643329123031-03ea3762b25a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDUxfHRvd0paRnNrcEdnfHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-    "https://images.unsplash.com/photo-1643156702769-14840703ddb7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDY4fHRvd0paRnNrcEdnfHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-    "https://images.unsplash.com/photo-1643028588901-87770ed4469c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDkzfHRvd0paRnNrcEdnfHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-  ];
-  List caption = [
-    "My last day for this year holiday! So excited to share my memories with you guys! 😁😍",
-    "My last day for this year holiday! So excited to share my memories with you guys! 😁😍",
-    "My last day for this year holiday! So excited to share my memories with you guys! 😁😍",
-    "My last day for this year holiday! So excited to share my memories with you guys! 😁😍",
-    "My last day for this year holiday! So excited to share my memories with you guys! 😁😍",
-    "My last day for this year holiday! So excited to share my memories with you guys! 😁😍",
-    "My last day for this year holiday! So excited to share my memories with you guys! 😁😍",
-    "My last day for this year holiday! So excited to share my memories with you guys! 😁😍",
-    "My last day for this year holiday! So excited to share my memories with you guys! 😁😍",
-    "My last day for this year holiday! So excited to share my memories with you guys! 😁😍",
-    "My last day for this year holiday! So excited to share my memories with you guys! 😁😍",
-    "My last day for this year holiday! So excited to share my memories with you guys! 😁😍",
-  ];
-  List name = [
-    "fenil",
-    "dhruvi",
-    "vaidehi",
-    "kenil",
-    "ds",
-    "kenil",
-    "jogendra",
-    "pratik",
-    "dev",
-    "tanisha",
-    "jigar",
-    "darshan"
+  List dataList = [
+    {
+      'imgUrl':
+          'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+      'description':
+          'My last day for this year holiday! So excited to share my memories with you guys! 😁😍',
+      'userName': 'fenil',
+      'profilePic':
+          'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+      'likesCount': '150',
+      'duration': '1 hour ago',
+      'isLike': false,
+      'isSaved': false,
+    },
+    {
+      'imgUrl':
+          'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+      'description':
+          'My last day for this year holiday! So excited to share my memories with you guys! 😁😍',
+      'userName': 'fenil',
+      'profilePic':
+          'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+      'likesCount': '150',
+      'duration': '1 hour ago',
+      'isLike': false,
+      'isSaved': false,
+    },
+    {
+      'imgUrl':
+          'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+      'description':
+          'My last day for this year holiday! So excited to share my memories with you guys! 😁😍',
+      'userName': 'fenil',
+      'profilePic':
+          'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+      'likesCount': '150',
+      'duration': '1 hour ago',
+      'isLike': false,
+      'isSaved': false,
+    },
+    {
+      'imgUrl':
+          'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+      'description':
+          'My last day for this year holiday! So excited to share my memories with you guys! 😁😍',
+      'userName': 'fenil',
+      'profilePic':
+          'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+      'likesCount': '150',
+      'duration': '1 hour ago',
+      'isLike': false,
+      'isSaved': false,
+    },
+    {
+      'imgUrl':
+          'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+      'description':
+          'My last day for this year holiday! So excited to share my memories with you guys! 😁😍',
+      'userName': 'fenil',
+      'profilePic':
+          'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+      'likesCount': '150',
+      'duration': '1 hour ago',
+      'isLike': false,
+      'isSaved': false,
+    },
+    {
+      'imgUrl':
+          'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+      'description':
+          'My last day for this year holiday! So excited to share my memories with you guys! 😁😍',
+      'userName': 'fenil',
+      'profilePic':
+          'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+      'likesCount': '150',
+      'duration': '1 hour ago',
+      'isLike': false,
+      'isSaved': false,
+    },
+    {
+      'imgUrl':
+          'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+      'description':
+          'My last day for this year holiday! So excited to share my memories with you guys! 😁😍',
+      'userName': 'fenil',
+      'profilePic':
+          'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+      'likesCount': '150',
+      'duration': '1 hour ago',
+      'isLike': false,
+      'isSaved': false,
+    },
+    {
+      'imgUrl':
+          'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+      'description':
+          'My last day for this year holiday! So excited to share my memories with you guys! 😁😍',
+      'userName': 'fenil',
+      'profilePic':
+          'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+      'likesCount': '150',
+      'duration': '1 hour ago',
+      'isLike': false,
+      'isSaved': false,
+    },
   ];
 
   postWidget(BuildContext context) {
     return Column(
-        children: List.generate(Posts.length, (index) {
+        children: List.generate(dataList.length, (index) {
       return Container(
         //color: Colors.blue,
         padding: EdgeInsets.only(bottom: 20),
@@ -66,7 +131,7 @@ class _DashboardState extends State<Dashboard> {
             borderRadius: BorderRadius.circular(10),
             borderSide: BorderSide(color: Colors.white),
           ),
-           shadowColor: Colors.white,
+          shadowColor: Colors.white,
           child: Container(
             padding: EdgeInsets.all(15.0),
             child: Column(
@@ -81,7 +146,7 @@ class _DashboardState extends State<Dashboard> {
                             radius: 20.0,
                             child: ClipOval(
                               child: Image.network(
-                                Posts[index],
+                                dataList[index]['profilePic'],
                                 height: 40,
                                 width: 40,
                                 fit: BoxFit.cover,
@@ -90,7 +155,7 @@ class _DashboardState extends State<Dashboard> {
                         Padding(
                           padding: EdgeInsets.only(left: 10),
                           child: Text(
-                            name[index],
+                            dataList[index]['userName'],
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 18),
                           ),
@@ -119,7 +184,7 @@ class _DashboardState extends State<Dashboard> {
                   children: [
                     Container(
                         width: MediaQuery.of(context).size.width - 58,
-                        child: Text(caption[index],
+                        child: Text(dataList[index]['description'],
                             style: TextStyle(
                                 color: Colors.black.withOpacity(0.6),
                                 fontSize: 12)))
@@ -135,7 +200,7 @@ class _DashboardState extends State<Dashboard> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(10.0),
                         child: Image.network(
-                          Posts[index],
+                          dataList[index]['imgUrl'],
                           fit: BoxFit.fill,
                         ),
                       ),
@@ -151,27 +216,21 @@ class _DashboardState extends State<Dashboard> {
                     Row(
                       children: [
                         GestureDetector(
-                            child: _isLiked
+                            child: dataList[index]['isLike'] == true
                                 ? Icon(
                                     Icons.favorite,
                                     color: Colors.red,
+                                    size: 32,
                                   )
                                 : Icon(
-                                    FontAwesomeIcons.heart,
-                                    color: null,
+                                    Icons.favorite_outline,
+                                    size: 32,
                                   ),
                             onTap: () {
-                              if (!_isLiked) {
-                                setState(() {
-                                  _isLiked = true;
-                                });
-                              } else {
-                                setState(() {
-                                  _isLiked = false;
-                                });
-                              }
+                              dataList[index]['isLike'] =
+                                  !dataList[index]['isLike'];
+                              setState(() {});
                             }),
-                        // const Text("45",style: TextStyle(fontSize: 15),),
                         SizedBox(
                           width: 25,
                         ),
@@ -183,7 +242,19 @@ class _DashboardState extends State<Dashboard> {
                         // const Text("45",style: TextStyle(fontSize: 15),),
                       ],
                     ),
-                    Icon(FontAwesomeIcons.bookmark)
+                    InkWell(
+                      onTap: () {
+                        dataList[index]['isSaved'] =
+                            !dataList[index]['isSaved'];
+                        setState(() {});
+                      },
+                      child: Icon(
+                        dataList[index]['isSaved'] == true
+                            ? Icons.bookmark
+                            : Icons.bookmark_outline,
+                        size: 32,
+                      ),
+                    )
                   ],
                 ),
                 SizedBox(
@@ -191,9 +262,13 @@ class _DashboardState extends State<Dashboard> {
                 ),
                 Row(
                   children: [
-                    Text("1048 Likes",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 14))
+                    Text(
+                      dataList[index]['likesCount'],
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14,
+                      ),
+                    )
                   ],
                 ),
                 SizedBox(
@@ -201,9 +276,13 @@ class _DashboardState extends State<Dashboard> {
                 ),
                 Row(
                   children: [
-                    Text("1 hour ago",
-                        style: TextStyle(
-                            color: Colors.black.withOpacity(0.6), fontSize: 12))
+                    Text(
+                      dataList[index]['duration'],
+                      style: TextStyle(
+                        color: Colors.black.withOpacity(0.6),
+                        fontSize: 12,
+                      ),
+                    )
                   ],
                 ),
               ],
@@ -219,22 +298,25 @@ class _DashboardState extends State<Dashboard> {
     return Scaffold(
         backgroundColor: new Color(0xFFECEFF1),
         appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          title: Text('Home',
-              style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 22)),
-          actions: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(right: 8.0),
-              child: IconButton(
-                  icon: Icon(FontAwesomeIcons.commentDots, color: Colors.black),
-                  onPressed: () {}),
-            )
-          ],
-        ),
+            backgroundColor: Colors.white,
+            title: Text("ChatIn", style: TextStyle(color: Colors.black))),
+        // appBar: AppBar(
+        //   backgroundColor: Colors.transparent,
+        //   elevation: 0,
+        //   title: Text('Home',
+        //       style: TextStyle(
+        //           color: Colors.black,
+        //           fontWeight: FontWeight.bold,
+        //           fontSize: 22)),
+        // actions: <Widget>[
+        //   Padding(
+        //     padding: const EdgeInsets.only(right: 8.0),
+        //     child: IconButton(
+        //         icon: Icon(FontAwesomeIcons.commentDots, color: Colors.black),
+        //         onPressed: () {}),
+        //   )
+        // ],
+        // ),
         body: SafeArea(
             child: Container(
           child: ListView(

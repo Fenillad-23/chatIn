@@ -1,11 +1,15 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
+import 'package:chattin/HomeScreen/Home.dart';
 import 'package:chattin/Network/network_dio.dart';
 import 'package:chattin/validation/validation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
+import 'package:lottie/lottie.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UploadImage extends StatefulWidget {
   const UploadImage({Key? key}) : super(key: key);
@@ -30,16 +34,100 @@ class _UploadImageState extends State<UploadImage> {
     setState(() {});
   }
 
+  redirect_to() async {
+    Timer(Duration(seconds: 2), () {
+      Navigator.pushAndRemoveUntil(context,
+          MaterialPageRoute(builder: (context) => Home()), (route) => false);
+    });
+  }
+
   void selectedImage() async {
     final List<XFile>? selectedImage = await _picker.pickMultiImage();
     if (selectedImage!.isNotEmpty) {
-      images!.addAll(selectedImage);
+      if (selectedImage.length > 10) {
+        showModalBottomSheet(
+            backgroundColor: Colors.transparent,
+            context: context,
+            isScrollControlled: true,
+            builder: (context) {
+              return Padding(
+                padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Container(
+                      height: 300,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: new BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: new BorderRadius.only(
+                            topLeft: Radius.circular(25.0),
+                            topRight: Radius.circular(25.0)),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Form(
+                          key: _formKey,
+                          child: Column(
+                            children: [
+                              Lottie.asset("assets/json/false.json",
+                                  height: 100),
+                              SizedBox(height: 10),
+                              Text("Upload failed",
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w500)),
+                              SizedBox(height: 20),
+                              Text(
+                                  "You can't upload more than 10 images at a time",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      color: Colors.black.withOpacity(0.8),
+                                      fontSize: 12)),
+                              SizedBox(height: 20),
+                              Container(
+                                height: 50,
+                                width: MediaQuery.of(context).size.width,
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                UploadImage()),
+                                        (route) => false);
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(28.5),
+                                    ),
+                                  ),
+                                  child: Text(
+                                    "Try Again",
+                                    style: TextStyle(fontSize: 20),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              );
+            });
+      } else {
+        images!.addAll(selectedImage);
+      }
     }
     print("'\x1b[97m response :image length " + images!.length.toString());
     setState(() {});
   }
 
   Future upload(selectedImageList) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     var uri = Uri.parse("http://192.168.29.170:3000/post/createpost");
     var request = http.MultipartRequest(
       "POST",
@@ -48,7 +136,9 @@ class _UploadImageState extends State<UploadImage> {
     for (var i = 0; i < selectedImageList.length; i++) {
       request.files.add(await http.MultipartFile.fromPath(
           "image", selectedImageList[i].path));
-      request.fields['username'] = 'fenil.23';
+      request.fields['username'] =
+          sharedPreferences.getString("username").toString();
+      request.fields['caption'] = captionController.text;
     }
     var response = await request.send();
     print('Response: $response');
@@ -56,9 +146,114 @@ class _UploadImageState extends State<UploadImage> {
     var responseString = String.fromCharCodes(responseData);
     var msg = await json.decode(responseString);
     if (response.statusCode == 200) {
-      return msg;
+      redirect_to();
+      showModalBottomSheet(
+          backgroundColor: Colors.transparent,
+          context: context,
+          isScrollControlled: true,
+          builder: (context) {
+            return Padding(
+              padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Container(
+                    height: 280,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: new BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: new BorderRadius.only(
+                          topLeft: Radius.circular(25.0),
+                          topRight: Radius.circular(25.0)),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Column(
+                        children: [
+                          Lottie.asset("assets/json/true.json", height: 150),
+                          Text("Yay!! Post Uploaded",
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.w500)),
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            );
+          });
     } else {
-      return '';
+      showModalBottomSheet(
+          backgroundColor: Colors.transparent,
+          context: context,
+          isScrollControlled: true,
+          builder: (context) {
+            return Padding(
+              padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Container(
+                    height: 300,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: new BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: new BorderRadius.only(
+                          topLeft: Radius.circular(25.0),
+                          topRight: Radius.circular(25.0)),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Form(
+                        key: _formKey,
+                        child: Column(
+                          children: [
+                            Lottie.asset("assets/json/false.json", height: 100),
+                            SizedBox(height: 10),
+                            Text("Upload failed",
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.w500)),
+                            SizedBox(height: 20),
+                            Text(
+                                "Your memories cannot be uploaded, check your internet connection and try again.",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Colors.black.withOpacity(0.8),
+                                    fontSize: 12)),
+                            SizedBox(height: 20),
+                            Container(
+                              height: 50,
+                              width: MediaQuery.of(context).size.width,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  Navigator.pushAndRemoveUntil(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => UploadImage()),
+                                      (route) => false);
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(28.5),
+                                  ),
+                                ),
+                                child: Text(
+                                  "Try Again",
+                                  style: TextStyle(fontSize: 20),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            );
+          });
     }
   }
 
@@ -137,7 +332,7 @@ class _UploadImageState extends State<UploadImage> {
             ),
             child: TextButton(
               child: Text(
-                "Add Caption",
+                "Upload Post",
                 style: TextStyle(fontSize: 20, color: Colors.black),
               ),
               onPressed: () {
@@ -193,9 +388,6 @@ class _UploadImageState extends State<UploadImage> {
                                               'Enter your caption here ...',
                                         ),
                                         controller: captionController,
-                                        validator: (value) =>
-                                            Validators.captionValidator(
-                                                value!.trim(), "caption"),
                                       ),
                                       SizedBox(
                                         height: 50,
@@ -237,47 +429,6 @@ class _UploadImageState extends State<UploadImage> {
           ),
         ],
       ),
-      // body: SafeArea(
-      //   child: Column(
-      //     children: [
-      //       TextButton(
-      //         onPressed: selectedImage,
-      //         child: Text("select"),
-      //       ),
-      //       Expanded(
-      //         child: Padding(
-      //           padding: const EdgeInsets.all(18.0),
-      //           child: GridView.builder(
-      //               itemCount: images!.length,
-      //               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-      //                 crossAxisCount: 2,
-      //                 crossAxisSpacing: 25,
-      //                 mainAxisSpacing: 25,
-      //               ),
-      //               shrinkWrap: true,
-      //               itemBuilder: (BuildContext context, int index) => GridTile(
-      //                     child: ClipRRect(
-      //                       borderRadius: BorderRadius.circular(18.0),
-      //                       child: Image.file(
-      //                         File(images![index].path),
-      //                         fit: BoxFit.cover,
-      //                       ),
-      //                     ),
-      //                   )),
-      //         ),
-      //       ),
-      //       Padding(
-      //         padding: const EdgeInsets.only(bottom: 28.0),
-      //         child: TextButton(
-      //           onPressed: () {
-      //             upload(images);
-      //           },
-      //           child: Text("upload"),
-      //         ),
-      //       )
-      //     ],
-      //   ),
-      // ),
     );
   }
 

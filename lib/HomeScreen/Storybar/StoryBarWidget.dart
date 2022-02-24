@@ -49,7 +49,9 @@ class _StoryBarWidgetState extends State<StoryBarWidget> {
                   width: 60,
                   height: 60,
                   decoration: BoxDecoration(
-                      shape: BoxShape.circle, color: Color.fromARGB(255, 174, 175, 179)),
+                      //shape: BoxShape.circle,
+                      borderRadius: BorderRadius.circular(22.0),
+                      color: Color.fromARGB(255, 174, 175, 179)),
                   child: Center(
                     child: Icon(
                       Icons.add,
@@ -78,26 +80,28 @@ class _StoryBarWidgetState extends State<StoryBarWidget> {
                     width: 60,
                     height: 60,
                     child: Stack(
-                      children: <Widget>[Container(
-                                decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    border: Border.all(
-                                        color: Colors.blueAccent, width: 3)),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(0.0),
-                                  child: Container(
-                                    width: 75,
-                                    height: 75,
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        image: DecorationImage(
-                                            image: NetworkImage(
-                                                loadDetails[index]),
-                                            fit: BoxFit.cover)),
-                                  ),
-                                ),
-                              )
-                            
+                      children: <Widget>[
+                        Container(
+                          decoration: BoxDecoration(
+                              //shape: BoxShape.circle,
+                              borderRadius: BorderRadius.circular(22.0),
+                              border: Border.all(
+                                  color: Colors.blueAccent, width: 3)),
+                          child: Padding(
+                            padding: const EdgeInsets.all(0.0),
+                            child: Container(
+                              width: 75,
+                              height: 75,
+                              decoration: BoxDecoration(
+                                  //shape: BoxShape.circle,
+                                  borderRadius: BorderRadius.circular(18.5),
+                                  image: DecorationImage(
+                                      image: NetworkImage(loadDetails[index]),
+                                      fit: BoxFit.cover)),
+                            ),
+                          ),
+                        )
+
                         // storyList[index]['isOnline']
                         //     ? Positioned(
                         //         top: 38,
@@ -135,53 +139,4 @@ class _StoryBarWidgetState extends State<StoryBarWidget> {
       ),
     );
   }
-
-  // SizedBox _buildStoryListView() {
-    
-  //   return SizedBox(
-  //     height: 90.0,
-  //     child: Padding(
-  //       padding: const EdgeInsets.all(8.0),
-  //       child: ListView.builder(
-  //         scrollDirection: Axis.horizontal,
-  //         itemCount: loadDetails.length,
-  //         itemExtent: 90.0,
-  //         itemBuilder: (context, index) {
-  //           return Padding(
-  //             padding: EdgeInsets.only(top: 15.0, left: 8.0, right: 8.0),
-  //             child: Container(
-  //               decoration: BoxDecoration(
-  //                 image: DecorationImage(
-  //                   image: NetworkImage(
-  //                     loadDetails[index],
-  //                   ),
-  //                   fit: BoxFit.cover,
-  //                 ),
-  //                 borderRadius: BorderRadius.circular(10.0),
-  //                 color: Colors.grey,
-  //               ),
-  //               child: Column(
-  //                 crossAxisAlignment: CrossAxisAlignment.start,
-  //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //                 children: <Widget>[
-  //                   SizedBox(height: 2),
-  //                   Padding(
-  //                     padding: const EdgeInsets.all(8.0),
-  //                     child: Text(
-  //                       name[index],
-  //                       style: TextStyle(
-  //                         color: Colors.white,
-  //                         fontWeight: FontWeight.bold,
-  //                       ),
-  //                     ),
-  //                   ),
-  //                 ],
-  //               ),
-  //             ),
-  //           );
-  //         },
-  //       ),
-  //     ),
-  //   );
-  // }
 }
