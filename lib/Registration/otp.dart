@@ -125,7 +125,21 @@ class _otpScreenState extends State<otpScreen> {
           backgroundColor: Colors.blue,
         ));
       }
-    } else {}
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(response['message'].toString()),
+        action: SnackBarAction(
+          label: '',
+          textColor: Colors.white,
+          onPressed: () {},
+        ),
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(24),
+        ),
+        backgroundColor: Colors.blue,
+      ));
+    }
   }
 
   @override
@@ -166,7 +180,7 @@ class _otpScreenState extends State<otpScreen> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  "We sent code $get_email to kindly check your mail.",
+                  "We sent code pratikdhameliya6@gmail.com to kindly check your mail.",
                   textAlign: TextAlign.center,
                 ),
               ),

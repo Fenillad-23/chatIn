@@ -59,7 +59,7 @@ class _codeVerificationState extends State<codeVerification> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.transparent,
         title: Text("Code Verification",
             style: TextStyle(
               color: Colors.white,

@@ -132,6 +132,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                           left: 20, right: 20, top: 0, bottom: 0),
                       child: Text(
                         "Enter your email,you will receive a verification code on it.",
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: 18.0,

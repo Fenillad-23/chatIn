@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class UserProfile extends StatefulWidget {
   String? userName;
-
+  List ImageUrl = [];
   UserProfile({Key? key, this.userName}) : super(key: key);
 
   @override
@@ -194,7 +194,7 @@ class _UserProfileState extends State<UserProfile> {
                             // Respond to button press
                           },
                           child: Padding(
-                            padding: EdgeInsets.only(right: 10.0,left: 10.0),
+                            padding: EdgeInsets.only(right: 10.0, left: 10.0),
                             child: Column(
                               children: [
                                 Text("1.5 k",
@@ -216,7 +216,7 @@ class _UserProfileState extends State<UserProfile> {
                         TextButton(
                           onPressed: () {},
                           child: Padding(
-                            padding: EdgeInsets.only(right: 10.0,left: 10.0),
+                            padding: EdgeInsets.only(right: 10.0, left: 10.0),
                             child: Column(
                               children: [
                                 Text("1.5 k",
@@ -238,7 +238,7 @@ class _UserProfileState extends State<UserProfile> {
                         TextButton(
                           onPressed: () {},
                           child: Padding(
-                            padding: EdgeInsets.only(right: 10.0,left: 10.0),
+                            padding: EdgeInsets.only(right: 10.0, left: 10.0),
                             child: Column(
                               children: [
                                 Text("1.5 m",

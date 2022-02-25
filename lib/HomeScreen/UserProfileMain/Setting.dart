@@ -377,7 +377,9 @@ class _SettingState extends State<Setting> {
     print("logout");
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     sharedPreferences.clear();
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => onBoarding()));
+    Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => onBoarding()),
+        (route) => false);
   }
 }

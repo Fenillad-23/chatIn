@@ -23,6 +23,8 @@ class _otpSucceedState extends State<otpSucceed> {
   redirect_to() async {
     Timer(Duration(seconds: 2), () {
       Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+      Navigator.pushAndRemoveUntil(context,
+          MaterialPageRoute(builder: (context) => Home()), (route) => false);
     });
   }
 

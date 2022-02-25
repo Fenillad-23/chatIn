@@ -24,8 +24,8 @@ class _LoginState extends State<Login> {
       dynamic response = await nw.httpPost(
         'User/login',
         {
-          'username': userNameController.text.toString(),
-          'password': passwordController.text.toString(),
+          'username': userNameController.text.toString().trim(),
+          'password': passwordController.text.toString().trim(),
         },
       );
       if (response != null &&

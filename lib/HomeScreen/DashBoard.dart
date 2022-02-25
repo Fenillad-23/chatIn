@@ -10,8 +10,6 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
-  final myProducts = List<String>.generate(1000, (i) => 'Product $i');
-
   List dataList = [
     {
       'imgUrl':
@@ -31,7 +29,7 @@ class _DashboardState extends State<Dashboard> {
           'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
       'description':
           'My last day for this year holiday! So excited to share my memories with you guys! 😁😍',
-      'userName': 'fenil',
+      'userName': 'vaidehi',
       'profilePic':
           'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
       'likesCount': '150',
@@ -296,44 +294,50 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: new Color(0xFFECEFF1),
-        appBar: AppBar(
-            backgroundColor: Colors.white,
-            title: Text("ChatIn", style: TextStyle(color: Colors.black))),
+        backgroundColor: Colors.transparent,
         // appBar: AppBar(
-        //   backgroundColor: Colors.transparent,
-        //   elevation: 0,
-        //   title: Text('Home',
-        //       style: TextStyle(
-        //           color: Colors.black,
-        //           fontWeight: FontWeight.bold,
-        //           fontSize: 22)),
-        // actions: <Widget>[
-        //   Padding(
-        //     padding: const EdgeInsets.only(right: 8.0),
-        //     child: IconButton(
-        //         icon: Icon(FontAwesomeIcons.commentDots, color: Colors.black),
-        //         onPressed: () {}),
-        //   )
-        // ],
-        // ),
+        //     backgroundColor: Colors.transparent,
+        //     title: Padding(
+        //       padding: const EdgeInsets.all(8.0),
+        //       child: Text("ChatIn", style: TextStyle(color: Colors.black)),
+        //     )),
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          title: Text('Home',
+              style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 22)),
+          actions: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(right: 8.0),
+              child: IconButton(
+                  icon: Icon(FontAwesomeIcons.commentDots, color: Colors.black),
+                  onPressed: () {}),
+            )
+          ],
+        ),
         body: SafeArea(
-            child: Container(
-          child: ListView(
-            children: [
-              StoryBarWidget(),
-              SizedBox(
-                height: 10,
-              ),
-              Column(
-                children: [
-                  Container(
-                    padding: EdgeInsets.all(10.0),
-                    child: postWidget(context),
-                  )
-                ],
-              )
-            ],
+            child: Padding(
+          padding: const EdgeInsets.only(top: 13.0),
+          child: Container(
+            child: ListView(
+              children: [
+                StoryBarWidget(),
+                SizedBox(
+                  height: 10,
+                ),
+                Column(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.all(10.0),
+                      child: postWidget(context),
+                    )
+                  ],
+                )
+              ],
+            ),
           ),
         )));
   }

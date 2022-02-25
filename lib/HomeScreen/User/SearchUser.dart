@@ -152,10 +152,13 @@ class _SearchUserState extends State<SearchUser> {
                         Container(
                           //color: Colors.blue,
                           width: MediaQuery.of(context).size.width / 5,
-                          height: 70,
-                          child: ClipOval(
-                            child: Image.network(image,
-                                width: 80, height: 80, fit: BoxFit.cover),
+                          // height: 70,
+                          child: CircleAvatar(
+                            radius: 30,
+                            child: ClipOval(
+                              child: Image.network(image,
+                                  width: 60, height: 60, fit: BoxFit.cover),
+                            ),
                           ),
                         )
                       ]),

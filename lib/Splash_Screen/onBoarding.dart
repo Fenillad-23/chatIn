@@ -1,3 +1,4 @@
+import 'package:chattin/HomeScreen/DashBoard.dart';
 import 'package:chattin/Login/login.dart';
 import 'package:chattin/Registration/registration.dart';
 import 'package:chattin/Splash_Screen/content_model.dart';
@@ -89,9 +90,11 @@ class _onBoardingState extends State<onBoarding> {
                         height: 50,
                         width: 150,
                         child: OutlinedButton(
-                          child: Text("Sign In",style: TextStyle(fontSize: 18,color: Colors.black)),
+                          child: Text("Sign In",
+                              style:
+                                  TextStyle(fontSize: 18, color: Colors.black)),
                           onPressed: () {
-                            Navigator.push(
+                            Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
                                 builder: (_) => Login(),
@@ -99,14 +102,14 @@ class _onBoardingState extends State<onBoarding> {
                             );
                           },
                           style: OutlinedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(28.5),
-                          ),
-                          side: BorderSide(
-                            width: 2.0,
-                            color: Colors.blue,
-                            style: BorderStyle.solid,
-                          )),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(28.5),
+                              ),
+                              side: BorderSide(
+                                width: 2.0,
+                                color: Colors.blue,
+                                style: BorderStyle.solid,
+                              )),
                         ),
                       )
                     ],
@@ -118,7 +121,7 @@ class _onBoardingState extends State<onBoarding> {
                         width: 150,
                         child: ElevatedButton(
                           onPressed: () {
-                            Navigator.push(
+                            Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
                                 builder: (_) => Registration(),

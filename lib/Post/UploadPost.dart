@@ -128,7 +128,7 @@ class _UploadImageState extends State<UploadImage> {
 
   Future upload(selectedImageList) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    var uri = Uri.parse("http://192.168.29.170:3000/post/createpost");
+    var uri = Uri.parse("http://192.168.29.171:3000/post/createpost");
     var request = http.MultipartRequest(
       "POST",
       Uri.parse("$uri"),
