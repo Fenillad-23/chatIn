@@ -243,11 +243,14 @@ class _LoginState extends State<Login> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => Registration())),
-                          child: Text(
-                            "Don't have an account? sign up",
-                            style: TextStyle(
-                                decoration: TextDecoration.underline,
-                                fontSize: 16),
+                          child: InkWell(
+                            child: Text(
+                              "Don't have an account? sign up",
+                              style: TextStyle(
+                                  decoration: TextDecoration.underline,
+                                  fontSize: 16,
+                                  color: Colors.blue[300]),
+                            ),
                           ),
                         )
                       ],

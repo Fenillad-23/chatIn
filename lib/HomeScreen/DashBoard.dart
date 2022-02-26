@@ -2,6 +2,8 @@ import 'package:chattin/HomeScreen/Storybar/StoryBarWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'Chat/Chat_Ui_Main.dart';
+
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
 
@@ -314,7 +316,12 @@ class _DashboardState extends State<Dashboard> {
               padding: const EdgeInsets.only(right: 8.0),
               child: IconButton(
                   icon: Icon(FontAwesomeIcons.commentDots, color: Colors.black),
-                  onPressed: () {}),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => chat_main_list()));
+                  }),
             )
           ],
         ),

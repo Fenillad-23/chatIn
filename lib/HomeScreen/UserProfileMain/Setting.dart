@@ -35,6 +35,7 @@ class _SettingState extends State<Setting> {
         child: Container(
           padding: EdgeInsets.all(25.0),
           color: new Color(0xFFECEFF1),
+          height: MediaQuery.of(context).size.height,
           child: Column(
             children: [
               Container(

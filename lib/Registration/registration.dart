@@ -346,7 +346,8 @@ class _RegistrationState extends State<Registration> {
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   decoration: TextDecoration.underline,
-                                  fontSize: 16),
+                                  fontSize: 16,
+                                  color: Colors.blue[300]),
                             ),
                           )
                         ],
