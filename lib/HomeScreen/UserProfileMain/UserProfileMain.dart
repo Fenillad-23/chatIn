@@ -28,8 +28,8 @@ class _UserProfileMainState extends State<UserProfileMain> {
     NetworkRepository nw = NetworkRepository();
     print(sharedPreferences.getString('username'));
     userName = sharedPreferences.getString('username');
-    dynamic response = await nw.httpPost("post/getUserAccountDetails",
-        {'postedBy': userName});
+    dynamic response =
+        await nw.httpPost("post/getUserAccountDetails", {'postedBy': userName});
     if (response['statusCode'] != null && response['statusCode'] == 200 ||
         response['statusCode'] == "200") {
       // print('\x1b[93m --- $response');
@@ -40,8 +40,8 @@ class _UserProfileMainState extends State<UserProfileMain> {
       name = response['name'].toString();
       print("name----------------------------$name");
       setState(() {});
-    }else{
-     // print("name----------------------------$userName");
+    } else {
+      // print("name----------------------------$userName");
       print(response['message']);
     }
   }
@@ -123,11 +123,13 @@ class _UserProfileMainState extends State<UserProfileMain> {
                                     fontSize: 20, fontWeight: FontWeight.w500)),
                             Container(
                                 padding: EdgeInsets.fromLTRB(2, 5, 0, 0),
-                                child: name == 'vaidehi' ? Text(" "):
-                                Text('$name',
-                                    style: TextStyle(
-                                        color: Colors.black.withOpacity(0.6),
-                                        fontSize: 12))),
+                                child: name == 'vaidehi'
+                                    ? Text(" ")
+                                    : Text('$name',
+                                        style: TextStyle(
+                                            color:
+                                                Colors.black.withOpacity(0.6),
+                                            fontSize: 12))),
                           ],
                         ),
                       ),
@@ -151,7 +153,10 @@ class _UserProfileMainState extends State<UserProfileMain> {
                         primary: Colors.black,
                       ),
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>editProfile()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => editProfile()));
                       },
                     ),
                   )),
@@ -263,7 +268,7 @@ class _UserProfileMainState extends State<UserProfileMain> {
   }
 }
 
-String url = "http://192.168.29.170:3000/";
+// String url = "http://192.168.29.170:3000/";
 List dataList = [
   // 'https://cdn.pixabay.com/photo/2019/03/15/09/49/girl-4056684_960_720.jpg',
   // 'https://cdn.pixabay.com/photo/2020/12/15/16/25/clock-5834193__340.jpg',
@@ -292,11 +297,8 @@ Widget __contentGridView() {
         itemBuilder: (context, index) => GridTile(
           child: ClipRRect(
             borderRadius: BorderRadius.circular(15.0),
-            child: Image.network(
-                '${url + dataList[index]['image'][0].toString()}',
-                width: 300,
-                height: 150,
-                fit: BoxFit.cover),
+            child: Image.network(dataList[index]['image'][0],
+                width: 300, height: 150, fit: BoxFit.cover),
           ),
         ),
       );
