@@ -96,6 +96,8 @@ class _otpScreenState extends State<otpScreen> {
           'contactNo': get_contactNo,
           'email': get_email,
           'password': get_password,
+          'name':'vaidehi kheni',
+        'profilepicture':'abc/abc.jpg'
         },
       );
       Map registrationData = {
@@ -103,6 +105,8 @@ class _otpScreenState extends State<otpScreen> {
         'contactNo': get_contactNo,
         'email': get_email,
         'password': get_password,
+        'name':'vaidehi kheni',
+        'profilepicture':'abc/abc.jpg'
       };
       print('\x1b[96m ----$registrationData');
       if (do_register != null &&

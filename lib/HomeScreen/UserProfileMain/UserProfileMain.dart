@@ -3,6 +3,8 @@ import 'package:chattin/Network/network_dio.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'EditProfile.dart';
+
 class UserProfileMain extends StatefulWidget {
   const UserProfileMain({Key? key}) : super(key: key);
 
@@ -12,7 +14,8 @@ class UserProfileMain extends StatefulWidget {
 
 class _UserProfileMainState extends State<UserProfileMain> {
   int index = 0;
-  String? userName, name;
+  String? userName;
+  String name = 'vaidehi';
   @override
   void initState() {
     super.initState();
@@ -24,16 +27,22 @@ class _UserProfileMainState extends State<UserProfileMain> {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     NetworkRepository nw = NetworkRepository();
     print(sharedPreferences.getString('username'));
+    userName = sharedPreferences.getString('username');
     dynamic response = await nw.httpPost("post/getUserAccountDetails",
-        {'username': sharedPreferences.getString('username')});
+        {'postedBy': userName});
     if (response['statusCode'] != null && response['statusCode'] == 200 ||
         response['statusCode'] == "200") {
       // print('\x1b[93m --- $response');
       dataList = response['data'];
-      userName = response["postedBy"].toString();
-      name = response["name"].toString();
-      print("name-----$userName");
+      //print(response['data'][2]['uploaddate']);
+      //name = 'DS';
+      //userName = response['postedBy'].toString();
+      name = response['name'].toString();
+      print("name----------------------------$name");
       setState(() {});
+    }else{
+     // print("name----------------------------$userName");
+      print(response['message']);
     }
   }
 
@@ -114,7 +123,8 @@ class _UserProfileMainState extends State<UserProfileMain> {
                                     fontSize: 20, fontWeight: FontWeight.w500)),
                             Container(
                                 padding: EdgeInsets.fromLTRB(2, 5, 0, 0),
-                                child: Text('$name',
+                                child: name == 'vaidehi' ? Text(" "):
+                                Text('$name',
                                     style: TextStyle(
                                         color: Colors.black.withOpacity(0.6),
                                         fontSize: 12))),
@@ -141,7 +151,7 @@ class _UserProfileMainState extends State<UserProfileMain> {
                         primary: Colors.black,
                       ),
                       onPressed: () {
-                        print('Pressed');
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>editProfile()));
                       },
                     ),
                   )),
@@ -253,7 +263,7 @@ class _UserProfileMainState extends State<UserProfileMain> {
   }
 }
 
-String url = "http://192.168.29.171:3000/";
+String url = "http://192.168.29.170:3000/";
 List dataList = [
   // 'https://cdn.pixabay.com/photo/2019/03/15/09/49/girl-4056684_960_720.jpg',
   // 'https://cdn.pixabay.com/photo/2020/12/15/16/25/clock-5834193__340.jpg',
@@ -283,7 +293,7 @@ Widget __contentGridView() {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(15.0),
             child: Image.network(
-                '${url + dataList[index]['image'][index].toString()}',
+                '${url + dataList[index]['image'][0].toString()}',
                 width: 300,
                 height: 150,
                 fit: BoxFit.cover),

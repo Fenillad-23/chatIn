@@ -13,7 +13,7 @@ class Registration extends StatefulWidget {
 }
 
 class _RegistrationState extends State<Registration> {
-  TextEditingController userNameController = TextEditingController();
+  TextEditingController fullNameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController contactNoController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
@@ -55,10 +55,10 @@ class _RegistrationState extends State<Registration> {
 
   verifyUser() async {
     dynamic verifyUser = await nw.httpPost('User/checkusername', {
-      'username': userNameController.text.toString(),
+      //'username': userNameController.text.toString(),
     });
     Map checkUserData = {
-      'username': userNameController.text.toString(),
+      //'username': userNameController.text.toString(),
     };
     print('\x1b[97m ----$checkUserData');
     if (verifyUser != null &&
@@ -98,8 +98,8 @@ class _RegistrationState extends State<Registration> {
       SharedPreferences sharedPreferences =
           await SharedPreferences.getInstance();
       sharedPreferences.setString('email', emailController.text.toString());
-      sharedPreferences.setString(
-          'userName', userNameController.text.toString());
+      // sharedPreferences.setString(
+      //     'userName', sharedPreferences.getString('uName'));
       sharedPreferences.setString(
           'contactNo', contactNoController.text.toString());
       sharedPreferences.setString(
@@ -197,18 +197,18 @@ class _RegistrationState extends State<Registration> {
                       Padding(
                         padding: EdgeInsets.all(15),
                         child: TextFormField(
-                          controller: userNameController,
+                          controller: fullNameController,
                           decoration: InputDecoration(
                             prefixIcon: Icon(Icons.person),
                             alignLabelWithHint: true,
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(9),
                             ),
-                            labelText: 'User Name',
-                            hintText: 'Enter Your Name',
+                            labelText: 'Full Name',
+                            hintText: 'Enter Your full Name',
                           ),
                           validator: (value) => Validators.userNameValidator(
-                              value!.trim(), "User Name"),
+                              value!.trim(), "full Name"),
                         ),
                       ),
                       Padding(

@@ -43,6 +43,7 @@ class _UploadImageState extends State<UploadImage> {
 
   void selectedImage() async {
     final List<XFile>? selectedImage = await _picker.pickMultiImage();
+    // List<XFile?> _videoFile = ImagePicker.pickVideo(source: ImageSource.gallery);
     if (selectedImage!.isNotEmpty) {
       if (selectedImage.length > 10) {
         showModalBottomSheet(
@@ -128,7 +129,7 @@ class _UploadImageState extends State<UploadImage> {
 
   Future upload(selectedImageList) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    var uri = Uri.parse("http://192.168.29.171:3000/post/createpost");
+    var uri = Uri.parse("http://192.168.29.170:3000/post/createpost");
     var request = http.MultipartRequest(
       "POST",
       Uri.parse("$uri"),
