@@ -16,6 +16,7 @@ class _UserProfileMainState extends State<UserProfileMain> {
   int index = 0;
   String? userName;
   String name = 'vaidehi';
+  int? following, followers;
   @override
   void initState() {
     super.initState();
@@ -34,6 +35,9 @@ class _UserProfileMainState extends State<UserProfileMain> {
         response['statusCode'] == "200") {
       // print('\x1b[93m --- $response');
       dataList = response['data'];
+      print("----------------------------------");
+      following = response['followingCount'][0]['count'];
+      followers = response['followersCount'][0]['count'];
       //print(response['data'][2]['uploaddate']);
       //name = 'DS';
       //userName = response['postedBy'].toString();
@@ -123,7 +127,7 @@ class _UserProfileMainState extends State<UserProfileMain> {
                                     fontSize: 20, fontWeight: FontWeight.w500)),
                             Container(
                                 padding: EdgeInsets.fromLTRB(2, 5, 0, 0),
-                                child: name == 'vaidehi' ? Text(" "):
+                                child: name == 'null' ? Text(" "):
                                 Text('$name',
                                     style: TextStyle(
                                         color: Colors.black.withOpacity(0.6),
@@ -207,7 +211,7 @@ class _UserProfileMainState extends State<UserProfileMain> {
                             padding: EdgeInsets.only(right: 10.0, left: 10.0),
                             child: Column(
                               children: [
-                                Text("1.5 m",
+                                Text("$followers",
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 20,
@@ -229,7 +233,7 @@ class _UserProfileMainState extends State<UserProfileMain> {
                             padding: EdgeInsets.only(right: 10.0, left: 10.0),
                             child: Column(
                               children: [
-                                Text("1.5 k",
+                                Text("$following",
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 20,
