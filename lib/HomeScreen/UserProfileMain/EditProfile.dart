@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
 
-
 class editProfile extends StatefulWidget {
   const editProfile({Key? key}) : super(key: key);
 
@@ -16,7 +15,7 @@ class _editProfileState extends State<editProfile> {
   TextEditingController bioController = TextEditingController();
   List<XFile>? images = [];
 
-void selectedImage() async {
+  void selectedImage() async {
     final List<XFile>? selectedImage = await _picker.pickMultiImage();
     if (selectedImage!.isNotEmpty) {
       if (selectedImage.length > 1) {
@@ -54,8 +53,7 @@ void selectedImage() async {
                                       fontSize: 20,
                                       fontWeight: FontWeight.w500)),
                               SizedBox(height: 20),
-                              Text(
-                                  "You select only one image",
+                              Text("You select only one image",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       color: Colors.black.withOpacity(0.8),
@@ -107,7 +105,6 @@ void selectedImage() async {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            
             Stack(
               children: [
                 Container(
@@ -302,5 +299,4 @@ void selectedImage() async {
       ),
     );
   }
-
 }
