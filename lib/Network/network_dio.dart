@@ -7,7 +7,7 @@ class NetworkRepository {
     dynamic data,
   ) async {
     var url = Uri.parse(
-        'https://chatin-env.eba-muyjrq8b.ap-south-1.elasticbeanstalk.com/$Url');
+        'http://chatin-env.eba-muyjrq8b.ap-south-1.elasticbeanstalk.com/$Url');
     print('\x1b[97m URL : $url----$data');
     dynamic response = await http.post(
       url,
@@ -27,7 +27,7 @@ class NetworkRepository {
     dynamic data,
   ) async {
     var url = Uri.parse(
-        'https://chatin-env.eba-muyjrq8b.ap-south-1.elasticbeanstalk.com/$Url');
+        'http://chatin-env.eba-muyjrq8b.ap-south-1.elasticbeanstalk.com/$Url');
     print('\x1b[97m URL : $url----$data');
     dynamic response = await http.patch(
       url,
@@ -46,7 +46,7 @@ class NetworkRepository {
     String Url,
   ) async {
     var url = Uri.parse(
-        'https://chatin-env.eba-muyjrq8b.ap-south-1.elasticbeanstalk.com/$Url');
+        'http://chatin-env.eba-muyjrq8b.ap-south-1.elasticbeanstalk.com/$Url');
     dynamic response = await http.get(url);
 
     print('\x1b[92m Dio get res : $response');

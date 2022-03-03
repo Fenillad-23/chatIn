@@ -15,8 +15,8 @@ class UserProfileMain extends StatefulWidget {
 class _UserProfileMainState extends State<UserProfileMain> {
   int index = 0;
   String? userName;
-  String name = 'vaidehi';
-  int? following, followers;
+  String name = 'user';
+  int? following, followers, postCount;
   @override
   void initState() {
     super.initState();
@@ -38,6 +38,7 @@ class _UserProfileMainState extends State<UserProfileMain> {
       print("----------------------------------");
       following = response['followingCount'][0]['count'];
       followers = response['followersCount'][0]['count'];
+      postCount = dataList.length;
       //print(response['data'][2]['uploaddate']);
       //name = 'DS';
       //userName = response['postedBy'].toString();
@@ -189,7 +190,7 @@ class _UserProfileMainState extends State<UserProfileMain> {
                             padding: EdgeInsets.only(right: 10.0, left: 10.0),
                             child: Column(
                               children: [
-                                Text("1.5 k",
+                                Text("$postCount",
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 20,
@@ -267,7 +268,7 @@ class _UserProfileMainState extends State<UserProfileMain> {
   }
 }
 
-String url = "http://192.168.29.170:3000/";
+// String url = "http://192.168.29.170:3000/";
 List dataList = [
   // 'https://cdn.pixabay.com/photo/2019/03/15/09/49/girl-4056684_960_720.jpg',
   // 'https://cdn.pixabay.com/photo/2020/12/15/16/25/clock-5834193__340.jpg',
@@ -297,7 +298,7 @@ Widget __contentGridView() {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(15.0),
             child: Image.network(
-                '${url + dataList[index]['image'][0].toString()}',
+                dataList[index]['image'][0].toString(),
                 width: 300,
                 height: 150,
                 fit: BoxFit.cover),
