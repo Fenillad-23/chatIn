@@ -149,7 +149,8 @@ class _chat_main_listState extends State<chat_main_list> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => individualChat(
-                                      username: chatUsers[index]['username']),
+                                      username: chatUsers[index]['username'],
+                                      profile: chatUsers[index]['image']),
                                 ),
                               );
                             },

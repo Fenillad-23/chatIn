@@ -29,8 +29,8 @@ class _UserProfileMainState extends State<UserProfileMain> {
     NetworkRepository nw = NetworkRepository();
     print(sharedPreferences.getString('username'));
     userName = sharedPreferences.getString('username');
-    dynamic response = await nw.httpPost("post/getUserAccountDetails",
-        {'postedBy': userName});
+    dynamic response =
+        await nw.httpPost("post/getUserAccountDetails", {'postedBy': userName});
     if (response['statusCode'] != null && response['statusCode'] == 200 ||
         response['statusCode'] == "200") {
       // print('\x1b[93m --- $response');
@@ -45,8 +45,8 @@ class _UserProfileMainState extends State<UserProfileMain> {
       name = response['name'].toString();
       print("name----------------------------$name");
       setState(() {});
-    }else{
-     // print("name----------------------------$userName");
+    } else {
+      // print("name----------------------------$userName");
       print(response['message']);
     }
   }
@@ -128,11 +128,13 @@ class _UserProfileMainState extends State<UserProfileMain> {
                                     fontSize: 20, fontWeight: FontWeight.w500)),
                             Container(
                                 padding: EdgeInsets.fromLTRB(2, 5, 0, 0),
-                                child: name == 'null' ? Text(" "):
-                                Text('$name',
-                                    style: TextStyle(
-                                        color: Colors.black.withOpacity(0.6),
-                                        fontSize: 12))),
+                                child: name == 'null'
+                                    ? Text(" ")
+                                    : Text('$name',
+                                        style: TextStyle(
+                                            color:
+                                                Colors.black.withOpacity(0.6),
+                                            fontSize: 12))),
                           ],
                         ),
                       ),
@@ -156,7 +158,10 @@ class _UserProfileMainState extends State<UserProfileMain> {
                         primary: Colors.black,
                       ),
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>editProfile()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => editProfile()));
                       },
                     ),
                   )),
@@ -297,11 +302,8 @@ Widget __contentGridView() {
         itemBuilder: (context, index) => GridTile(
           child: ClipRRect(
             borderRadius: BorderRadius.circular(15.0),
-            child: Image.network(
-                dataList[index]['image'][0].toString(),
-                width: 300,
-                height: 150,
-                fit: BoxFit.cover),
+            child: Image.network(dataList[index]['image'][0].toString(),
+                width: 300, height: 150, fit: BoxFit.cover),
           ),
         ),
       );
