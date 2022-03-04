@@ -1,7 +1,6 @@
 import 'package:chattin/HomeScreen/DashBoard.dart';
 import 'package:chattin/Login/login.dart';
 import 'package:chattin/Registration/registration.dart';
-import 'package:chattin/Registration/signup.dart';
 import 'package:chattin/Splash_Screen/content_model.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -125,7 +124,7 @@ class _onBoardingState extends State<onBoarding> {
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                builder: (_) => signUp(),
+                                builder: (_) => Registration(),
                               ),
                             );
                           },

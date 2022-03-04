@@ -20,6 +20,7 @@ class _otpScreenState extends State<otpScreen> {
   String get_username = '';
   String get_password = '';
   String get_contactNo = '';
+  String get_fullname = '';
   bool _isEnable = false;
 
   @override
@@ -74,6 +75,7 @@ class _otpScreenState extends State<otpScreen> {
     get_username = sharedPreferences.getString("userName").toString();
     get_contactNo = sharedPreferences.getString("contactNo").toString();
     get_password = sharedPreferences.getString("password").toString();
+    get_fullname = sharedPreferences.getString("fullName").toString();
     //print(get_otp);
     dynamic response = await nw.httpPost(
       'User/verifyOTP',
@@ -96,8 +98,7 @@ class _otpScreenState extends State<otpScreen> {
           'contactNo': get_contactNo,
           'email': get_email,
           'password': get_password,
-          'name':'vaidehi kheni',
-        'profilepicture':'abc/abc.jpg'
+          'name':get_fullname
         },
       );
       Map registrationData = {
@@ -105,8 +106,7 @@ class _otpScreenState extends State<otpScreen> {
         'contactNo': get_contactNo,
         'email': get_email,
         'password': get_password,
-        'name':'vaidehi kheni',
-        'profilepicture':'abc/abc.jpg'
+        'name':get_fullname
       };
       print('\x1b[96m ----$registrationData');
       if (do_register != null &&
