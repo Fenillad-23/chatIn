@@ -138,10 +138,11 @@ class _UploadImageState extends State<UploadImage> {
     for (var i = 0; i < selectedImageList.length; i++) {
       request.files.add(await http.MultipartFile.fromPath(
           "image", selectedImageList[i].path));
-      request.fields['username'] =
+      request.fields['postedBy'] =
           sharedPreferences.getString("username").toString();
       request.fields['caption'] = captionController.text;
     }
+    print(sharedPreferences.getString("username").toString());
     var response = await request.send();
     print('Response: $response');
     var responseData = await response.stream.toBytes();

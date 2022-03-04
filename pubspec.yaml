@@ -34,14 +34,12 @@ dependencies:
   lottie: ^1.2.1
   otp_text_field: ^1.1.1
   shared_preferences: ^2.0.11
-  flutter_signin_button: ^2.0.0
   stories_for_flutter: ^1.1.1
   curved_navigation_bar: ^1.0.1
   js: ^0.6.2
   image_picker: ^0.8.4+6
   flutter_switch: ^0.3.2
   font_awesome_flutter: ^9.2.0
-  get_storage: ^2.0.3
   im_stepper: ^0.1.3
   
  
