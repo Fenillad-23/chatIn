@@ -5,12 +5,41 @@ import 'package:chattin/Login/login.dart';
 import 'package:chattin/Splash_Screen/onBoarding.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter/services.dart';
+import 'package:local_auth/local_auth.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
   @override
   _SplashScreenState createState() => _SplashScreenState();
+}
+
+class LocalAuthApi {
+  static final _auth = LocalAuthentication();
+
+  static Future<bool> authenticate() async {
+    final isAvailable = await hasBiometrics();
+    if (!isAvailable) return false;
+    try {
+      // ignore: deprecated_member_use
+      return await _auth.authenticateWithBiometrics(
+        localizedReason: 'chatin is locked',
+        useErrorDialogs: true,
+        stickyAuth: true,
+      );
+    } on PlatformException catch (e) {
+      return false;
+    }
+  }
+
+  static Future<bool> hasBiometrics() async {
+    try {
+      return await _auth.canCheckBiometrics;
+    } on PlatformException catch (e) {
+      return false;
+    }
+  }
 }
 
 class _SplashScreenState extends State<SplashScreen> {
@@ -23,15 +52,26 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   navigator() async {
+    // LocalAuthApi o= LocalAuthApi();
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    if (sharedPreferences.getBool('isRememberMe') == true) {
+    if (sharedPreferences.getBool('isRememberMe') == true &&
+        sharedPreferences.getBool('fingerprint') == true) {
+      print(sharedPreferences.getBool('fingerprint'));
+      final isAuthenticated = await LocalAuthApi.authenticate();
+      if (isAuthenticated) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => Home()),
+        );
+      }
+    } else if (sharedPreferences.getBool('isRememberMe') == false) {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => Home(),
+          builder: (context) => Login(),
         ),
       );
-    } else {
+    } else if (sharedPreferences.getString('username') == "" &&
+        sharedPreferences.getString('password') == "") {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(

@@ -79,6 +79,7 @@ class _UserProfileMainState extends State<UserProfileMain> {
       ),
       body: SingleChildScrollView(
         child: Container(
+            height: MediaQuery.of(context).size.height,
             padding: EdgeInsets.fromLTRB(20, 30, 20, 0),
             color: new Color(0xFFECEFF1),
             child: Column(children: [

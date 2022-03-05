@@ -104,7 +104,7 @@ class _RegistrationState extends State<Registration> {
           await SharedPreferences.getInstance();
       sharedPreferences.setString('email', emailController.text.toString());
       sharedPreferences.setString(
-          'userName', userNameController.text.toString());
+          'username', userNameController.text.toString());
       sharedPreferences.setString(
           'contactNo', contactNoController.text.toString());
       sharedPreferences.setString(
@@ -252,24 +252,22 @@ class _RegistrationState extends State<Registration> {
                   ),
                 ),
                 Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          GestureDetector(
-                            onTap: () => Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Login())),
-                            child: Text(
-                              "Already have an account? Sign in",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  decoration: TextDecoration.underline,
-                                  fontSize: 16,
-                                  color: Colors.blue[300]),
-                            ),
-                          )
-                        ],
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    GestureDetector(
+                      onTap: () => Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (context) => Login())),
+                      child: Text(
+                        "Already have an account? Sign in",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            decoration: TextDecoration.underline,
+                            fontSize: 16,
+                            color: Colors.blue[300]),
                       ),
+                    )
+                  ],
+                ),
               ],
             ),
           ),
@@ -277,6 +275,7 @@ class _RegistrationState extends State<Registration> {
       ),
     );
   }
+
   Column stepList() {
     switch (activeStep) {
       case 0:
@@ -430,10 +429,10 @@ class _RegistrationState extends State<Registration> {
   Widget nextButton() {
     return ElevatedButton(
       onPressed: () {
-        if(activeStep == 1){
+        if (activeStep == 1) {
           //print(userNameController);
           validate();
-        }else if (activeStep < dotCount - 1) {
+        } else if (activeStep < dotCount - 1) {
           setState(() {
             activeStep++;
           });

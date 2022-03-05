@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../Splash_Screen/onBoarding.dart';
+import 'package:flutter/services.dart';
+import 'package:local_auth/local_auth.dart';
 
 class Setting extends StatefulWidget {
   const Setting({Key? key}) : super(key: key);
@@ -11,9 +12,41 @@ class Setting extends StatefulWidget {
   _SettingState createState() => _SettingState();
 }
 
+class LocalAuthApi {
+  static final _auth = LocalAuthentication();
+  static Future<bool> hasBiometrics() async {
+    try {
+      return await _auth.canCheckBiometrics;
+    } on PlatformException catch (e) {
+      return false;
+    }
+  }
+}
+
 class _SettingState extends State<Setting> {
   bool Notification = false;
-  bool Account = false;
+  bool? Fingerprint;
+  void initState() {
+    super.initState();
+    verify();
+  }
+
+  verify() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    if (sharedPreferences.getBool('fingerprint') == true) {
+      Fingerprint = true;
+    } else {
+      Fingerprint = false;
+    }
+    setState(() {});
+  }
+
+  EnableFingerPrint() async {
+    LocalAuthApi.hasBiometrics();
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    sharedPreferences.setBool("fingerprint", Fingerprint!);
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -292,7 +325,7 @@ class _SettingState extends State<Setting> {
                                 Padding(
                                   padding:
                                       const EdgeInsets.fromLTRB(23, 15, 0, 15),
-                                  child: Text("Private Account",
+                                  child: Text("Fingerprint",
                                       textAlign: TextAlign.left,
                                       style: TextStyle(
                                           color: Colors.black,
@@ -302,12 +335,14 @@ class _SettingState extends State<Setting> {
                                 Padding(
                                   padding: const EdgeInsets.only(right: 13),
                                   child: FlutterSwitch(
-                                    value: Account,
+                                    value: Fingerprint!,
                                     height: 25,
                                     width: 50,
                                     onToggle: (val) {
                                       setState(() {
-                                        Account = val;
+                                        Fingerprint = val;
+                                        EnableFingerPrint();
+                                        print(Fingerprint);
                                       });
                                     },
                                   ),

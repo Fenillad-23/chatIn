@@ -15,7 +15,7 @@ class individualChat extends StatefulWidget {
 class _individualChatState extends State<individualChat> {
   // late bool userType;
   TextEditingController sendMessage = TextEditingController();
-  ScrollController _scrollController = ScrollController();
+  ScrollController? scrollController;
   List messages = [
     {"messageContent": "Hello, bankim", "messageType": "receiver"},
     {"messageContent": "what's up", "messageType": "receiver"},
@@ -30,6 +30,13 @@ class _individualChatState extends State<individualChat> {
     });
     sendMessage.clear();
     setState(() {});
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+
+    super.initState();
   }
 
   @override
@@ -92,8 +99,10 @@ class _individualChatState extends State<individualChat> {
           children: <Widget>[
             ListView.builder(
               // reverse: true,
+              controller: scrollController,
+              shrinkWrap: true,
               itemCount: messages.length,
-              physics: BouncingScrollPhysics(),
+              physics: NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) {
                 return Container(
                   padding:
