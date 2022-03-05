@@ -42,12 +42,6 @@ class _LoginState extends State<Login> {
             'contactNo', response['data']['contactNo'].toString());
         sharedPreferences.setString(
             'password', passwordController.text.toString());
-        // sharedPreferences.setString(
-        //     'password', passwordController.text.toString());
-        // print('\x1b[95m Email : ${sharedPreferences.getString('email')}');
-        // print('\x1b[95m Username : ${sharedPreferences.getString('username')}');
-        // print('\x1b[95m Contact : ${sharedPreferences.getString('contactNo')}');
-        // print('\x1b[95m password : ${sharedPreferences.getString('password')}');
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
@@ -55,37 +49,21 @@ class _LoginState extends State<Login> {
           ),
         );
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(response['message'].toString()),
-          action: SnackBarAction(
-            label: '',
-            textColor: Colors.white,
-            onPressed: () {},
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(response['message'].toString()),
+            action: SnackBarAction(
+              label: '',
+              textColor: Colors.white,
+              onPressed: () {},
+            ),
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(24),
+            ),
+            backgroundColor: Colors.blue,
           ),
-          behavior: SnackBarBehavior.floating,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(24),
-          ),
-          backgroundColor: Colors.blue,
-        ));
-        // showDialog<String>(
-        //   context: context,
-        //   builder: (BuildContext context) => AlertDialog(
-        //     title: const Text('Something Went Wrong'),
-        //     content: Text(response['message'].toString()),
-
-        //     actions: <Widget>[
-        //       TextButton(
-        //         onPressed: () => Navigator.pop(context, 'Cancel'),
-        //         child: const Text('Cancel'),
-        //       ),
-        //       TextButton(
-        //         onPressed: () => Navigator.pop(context, 'OK'),
-        //         child: const Text('OK'),
-        //       ),
-        //     ],
-        //   ),
-        // );
+        );
       }
       print('\x1b[93m --- $response');
     }

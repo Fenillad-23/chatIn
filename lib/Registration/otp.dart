@@ -16,11 +16,11 @@ class otpScreen extends StatefulWidget {
 class _otpScreenState extends State<otpScreen> {
   NetworkRepository nw = NetworkRepository();
   String? get_email;
-  String get_otp = '';
-  String get_username = '';
-  String get_password = '';
-  String get_contactNo = '';
-  String get_fullname = '';
+  String? get_otp;
+  String? get_username;
+  String? get_password;
+  String? get_contactNo;
+  String? get_fullname;
   bool _isEnable = false;
 
   @override
@@ -72,10 +72,11 @@ class _otpScreenState extends State<otpScreen> {
 
   verify_otp() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    get_username = sharedPreferences.getString("userName").toString();
-    get_contactNo = sharedPreferences.getString("contactNo").toString();
-    get_password = sharedPreferences.getString("password").toString();
-    get_fullname = sharedPreferences.getString("fullName").toString();
+    get_username = sharedPreferences.getString('userName');
+    get_contactNo = sharedPreferences.getString('contactNo');
+    get_password = sharedPreferences.getString('password');
+    get_fullname = sharedPreferences.getString('fullName');
+    setState(() {});
     //print(get_otp);
     dynamic response = await nw.httpPost(
       'User/verifyOTP',
@@ -98,7 +99,7 @@ class _otpScreenState extends State<otpScreen> {
           'contactNo': get_contactNo,
           'email': get_email,
           'password': get_password,
-          'name':get_fullname
+          'name': get_fullname
         },
       );
       Map registrationData = {
@@ -106,7 +107,7 @@ class _otpScreenState extends State<otpScreen> {
         'contactNo': get_contactNo,
         'email': get_email,
         'password': get_password,
-        'name':get_fullname
+        'name': get_fullname
       };
       print('\x1b[96m ----$registrationData');
       if (do_register != null &&
@@ -184,7 +185,7 @@ class _otpScreenState extends State<otpScreen> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  "We sent code pratikdhameliya6@gmail.com to kindly check your mail.",
+                  "We sent code to kindly check your mail.",
                   textAlign: TextAlign.center,
                 ),
               ),

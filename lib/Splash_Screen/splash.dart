@@ -24,7 +24,7 @@ class LocalAuthApi {
     try {
       // ignore: deprecated_member_use
       return await _auth.authenticateWithBiometrics(
-        localizedReason: 'chatin is locked',
+        localizedReason: 'chatIn is locked',
         useErrorDialogs: true,
         stickyAuth: true,
       );
@@ -63,15 +63,8 @@ class _SplashScreenState extends State<SplashScreen> {
           MaterialPageRoute(builder: (context) => Home()),
         );
       }
-    } else if (sharedPreferences.getBool('isRememberMe') == false) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => Login(),
-        ),
-      );
-    } else if (sharedPreferences.getString('username') == "" &&
-        sharedPreferences.getString('password') == "") {
+    } else if (sharedPreferences.getString('username') == null &&
+        sharedPreferences.getString('password') == null) {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(

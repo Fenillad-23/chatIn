@@ -427,6 +427,7 @@ class _RegistrationState extends State<Registration> {
 
   /// Returns the next button widget.
   Widget nextButton() {
+    print(userNameController.text.toString());
     return ElevatedButton(
       onPressed: () {
         if (activeStep == 1) {
