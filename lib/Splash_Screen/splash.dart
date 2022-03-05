@@ -52,8 +52,13 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   navigator() async {
-    // LocalAuthApi o= LocalAuthApi();
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    print(sharedPreferences.getBool('isRememberMe'));
+    print(sharedPreferences.getBool('fingerprint'));
+    print(sharedPreferences.getString('username'));
+    print(sharedPreferences.getString('password'));
+    // LocalAuthApi o= LocalAuthApi();
+
     if (sharedPreferences.getBool('isRememberMe') == true &&
         sharedPreferences.getBool('fingerprint') == true) {
       print(sharedPreferences.getBool('fingerprint'));
@@ -63,13 +68,16 @@ class _SplashScreenState extends State<SplashScreen> {
           MaterialPageRoute(builder: (context) => Home()),
         );
       }
-    } else if (sharedPreferences.getString('username') == null &&
-        sharedPreferences.getString('password') == null) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => onBoarding(),
-        ),
+    } else if (sharedPreferences.getBool('isRememberMe') == false ||
+        sharedPreferences.getBool('fingerprint') == null) {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => Login()),
+      );
+    } else {
+      print(sharedPreferences.getBool('isRememberMe'));
+      print(sharedPreferences.getBool('fingerprint'));
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => onBoarding()),
       );
     }
   }
