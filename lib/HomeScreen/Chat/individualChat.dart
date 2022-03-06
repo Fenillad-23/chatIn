@@ -15,7 +15,7 @@ class individualChat extends StatefulWidget {
 class _individualChatState extends State<individualChat> {
   // late bool userType;
   TextEditingController sendMessage = TextEditingController();
-  ScrollController? scrollController;
+  ScrollController _scrollController = ScrollController();
   List messages = [
     {"messageContent": "Hello, bankim", "messageType": "receiver"},
     {"messageContent": "what's up", "messageType": "receiver"},
@@ -95,91 +95,111 @@ class _individualChatState extends State<individualChat> {
                     Icon(Icons.more_vert_sharp, color: Colors.black, size: 22))
           ],
         ),
-        body: Stack(
-          children: <Widget>[
-            ListView.builder(
-              // reverse: true,
-              controller: scrollController,
-              shrinkWrap: true,
-              itemCount: messages.length,
-              physics: NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) {
-                return Container(
-                  padding:
-                      EdgeInsets.only(left: 16, right: 16, top: 10, bottom: 10),
-                  child: Align(
-                      alignment: (messages[index]['messageType'] == "receiver"
-                          ? Alignment.topLeft
-                          : Alignment.topRight),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(8),
-                              topRight: Radius.circular(8),
-                              bottomLeft: Radius.circular(8),
-                              bottomRight: Radius.circular(8)),
-                          color: (messages[index]["messageType"] == "receiver"
-                              ? Colors.white
-                              : Colors.blue[200]),
-                        ),
-                        padding: EdgeInsets.all(16),
-                        child: Text(
-                          messages[index]['messageContent'],
-                          style: TextStyle(
-                              fontSize: 15,
+        body: Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          child: Column(
+            children: <Widget>[
+              Expanded(
+                child: ListView.builder(
+                  controller: _scrollController,
+                  shrinkWrap: true,
+                  itemCount: messages.length + 1,
+                  physics: BouncingScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    if (index == messages.length) {
+                      return Container(
+                        height: 70,
+                      );
+                    }
+                    return Container(
+                      padding: EdgeInsets.only(
+                          left: 16, right: 16, top: 10, bottom: 10),
+                      child: Align(
+                          alignment:
+                              (messages[index]['messageType'] == "receiver"
+                                  ? Alignment.topLeft
+                                  : Alignment.topRight),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(8),
+                                  topRight: Radius.circular(8),
+                                  bottomLeft: Radius.circular(8),
+                                  bottomRight: Radius.circular(8)),
                               color:
-                                  messages[index]['messageType'] == "receiver"
+                                  (messages[index]["messageType"] == "receiver"
+                                      ? Colors.white
+                                      : Colors.blue[200]),
+                            ),
+                            padding: EdgeInsets.all(16),
+                            child: Text(
+                              messages[index]['messageContent'],
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  color: messages[index]['messageType'] ==
+                                          "receiver"
                                       ? Colors.black
                                       : Colors.white),
-                        ),
-                      )),
-                );
-              },
-            ),
-            Align(
-              alignment: Alignment.bottomLeft,
-              child: Container(
-                padding: EdgeInsets.only(bottom: 10, top: 10),
-                height: 65,
-                width: MediaQuery.of(context).size.width,
-                color: Colors.transparent,
-                child: Row(
-                  children: <Widget>[
-                    SizedBox(
-                      width: 15,
-                    ),
-                    Expanded(
-                      child: TextFormField(
-                        decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.emoji_emotions_outlined),
-                          fillColor: Colors.white,
-                          filled: true,
-                          suffixIcon: IconButton(
-                            icon: Icon(
-                              Icons.send,
-                              color: Colors.blue,
                             ),
-                            onPressed: () {
-                              send();
-                            },
-                            color: Colors.black54,
-                          ),
-                          hintText: "Type a message",
-                          hintStyle: TextStyle(color: Colors.black54),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(25),
-                            borderSide:
-                                BorderSide(width: 0, style: BorderStyle.none),
-                          ),
-                        ),
-                        controller: sendMessage,
-                      ),
-                    )
-                  ],
+                          )),
+                    );
+                  },
                 ),
               ),
-            )
-          ],
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  height: 70,
+                  color: Colors.transparent,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Row(
+                        children: <Widget>[
+                          SizedBox(
+                            width: 15,
+                          ),
+                          Expanded(
+                            child: TextFormField(
+                              decoration: InputDecoration(
+                                prefixIcon: Icon(Icons.emoji_emotions_outlined),
+                                fillColor: Colors.white,
+                                filled: true,
+                                suffixIcon: IconButton(
+                                  icon: Icon(
+                                    Icons.send,
+                                    color: Colors.blue,
+                                  ),
+                                  onPressed: () {
+                                    _scrollController.animateTo(
+                                        _scrollController
+                                            .position.maxScrollExtent,
+                                        duration: Duration(milliseconds: 300),
+                                        curve: Curves.easeOut);
+                                    send();
+                                  },
+                                  color: Colors.black54,
+                                ),
+                                hintText: "Type a message",
+                                hintStyle: TextStyle(color: Colors.black54),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(25),
+                                  borderSide: BorderSide(
+                                      width: 0, style: BorderStyle.none),
+                                ),
+                              ),
+                              controller: sendMessage,
+                            ),
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
         ));
   }
 }

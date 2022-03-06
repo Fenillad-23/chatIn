@@ -16,11 +16,11 @@ class otpScreen extends StatefulWidget {
 class _otpScreenState extends State<otpScreen> {
   NetworkRepository nw = NetworkRepository();
   String? get_email;
-  String get_otp = '';
-  String get_username = '';
-  String get_password = '';
-  String get_contactNo = '';
-  String get_fullname = '';
+  String? get_otp;
+  String? get_username;
+  String? get_password;
+  String? get_contactNo;
+  String? get_fullname;
   bool _isEnable = false;
   get() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
@@ -97,7 +97,7 @@ class _otpScreenState extends State<otpScreen> {
           'contactNo': get_contactNo,
           'email': get_email,
           'password': get_password,
-          'name':get_fullname
+          'name': get_fullname
         },
       );
       Map registrationData = {
@@ -105,7 +105,7 @@ class _otpScreenState extends State<otpScreen> {
         'contactNo': get_contactNo,
         'email': get_email,
         'password': get_password,
-        'name':get_fullname
+        'name': get_fullname
       };
       print('\x1b[96m ----$registrationData');
       if (do_register != null &&

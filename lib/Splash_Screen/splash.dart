@@ -22,7 +22,7 @@ class LocalAuthApi {
     try {
       // ignore: deprecated_member_use
       return await _auth.authenticateWithBiometrics(
-        localizedReason: 'chatin is locked',
+        localizedReason: 'chatIn is locked',
         useErrorDialogs: true,
         stickyAuth: true,
       );
@@ -50,8 +50,13 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   navigator() async {
-    // LocalAuthApi o= LocalAuthApi();
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    print(sharedPreferences.getBool('isRememberMe'));
+    print(sharedPreferences.getBool('fingerprint'));
+    print(sharedPreferences.getString('username'));
+    print(sharedPreferences.getString('password'));
+    // LocalAuthApi o= LocalAuthApi();
+
     if (sharedPreferences.getBool('isRememberMe') == true &&
         sharedPreferences.getBool('fingerprint') == true) {
       print(sharedPreferences.getBool('fingerprint'));
