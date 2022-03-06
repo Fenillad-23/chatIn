@@ -14,9 +14,9 @@ class UserProfileMain extends StatefulWidget {
 
 class _UserProfileMainState extends State<UserProfileMain> {
   int index = 0;
-  String? userName;
+  String userName = ' ';
   String name = 'user';
-  int? following, followers, postCount;
+  int following = 0, followers = 0, postCount = 0;
   @override
   void initState() {
     super.initState();
@@ -28,7 +28,7 @@ class _UserProfileMainState extends State<UserProfileMain> {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     NetworkRepository nw = NetworkRepository();
     print(sharedPreferences.getString('username'));
-    userName = sharedPreferences.getString('username');
+    userName = sharedPreferences.getString('username')!;
     dynamic response =
         await nw.httpPost("post/getUserAccountDetails", {'postedBy': userName});
     if (response['statusCode'] != null && response['statusCode'] == 200 ||
@@ -124,9 +124,12 @@ class _UserProfileMainState extends State<UserProfileMain> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('$userName',
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.w500)),
+                            userName == 'null'
+                                ? Text(" ")
+                                : Text('$userName',
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w500)),
                             Container(
                                 padding: EdgeInsets.fromLTRB(2, 5, 0, 0),
                                 child: name == 'null'
@@ -196,11 +199,17 @@ class _UserProfileMainState extends State<UserProfileMain> {
                             padding: EdgeInsets.only(right: 10.0, left: 10.0),
                             child: Column(
                               children: [
-                                Text("$postCount",
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w500)),
+                                postCount == 'null'
+                                    ? Text("0",
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w500))
+                                    : Text("$postCount",
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w500)),
                                 SizedBox(
                                   height: 6,
                                 ),
@@ -218,11 +227,17 @@ class _UserProfileMainState extends State<UserProfileMain> {
                             padding: EdgeInsets.only(right: 10.0, left: 10.0),
                             child: Column(
                               children: [
-                                Text("$followers",
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w500)),
+                                followers == 'null'
+                                    ? Text("0",
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w500))
+                                    : Text("$followers",
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w500)),
                                 SizedBox(
                                   height: 6,
                                 ),
@@ -240,11 +255,17 @@ class _UserProfileMainState extends State<UserProfileMain> {
                             padding: EdgeInsets.only(right: 10.0, left: 10.0),
                             child: Column(
                               children: [
-                                Text("$following",
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w500)),
+                                following == 'null'
+                                    ? Text("0",
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w500))
+                                    : Text("$following",
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w500)),
                                 SizedBox(
                                   height: 6,
                                 ),
@@ -265,8 +286,10 @@ class _UserProfileMainState extends State<UserProfileMain> {
                 ),
               ),
               SizedBox(height: 20),
-              Column(
-                children: [__contentGridView()],
+              Expanded(
+                child: Column(
+                  children: [__contentGridView()],
+                ),
               )
             ])),
       ),

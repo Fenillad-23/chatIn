@@ -1,7 +1,5 @@
 import 'dart:async';
-import 'package:chattin/HomeScreen/DashBoard.dart';
 import 'package:chattin/HomeScreen/Home.dart';
-import 'package:chattin/Login/login.dart';
 import 'package:chattin/Splash_Screen/onBoarding.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -63,15 +61,15 @@ class _SplashScreenState extends State<SplashScreen> {
           MaterialPageRoute(builder: (context) => Home()),
         );
       }
-    } else if (sharedPreferences.getBool('isRememberMe') == false) {
+    } else if (sharedPreferences.getBool('isRememberMe') == true ||
+        sharedPreferences.getBool('fingerprint') == false) {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => Login(),
+          builder: (context) => Home(),
         ),
       );
-    } else if (sharedPreferences.getString('username') == "" &&
-        sharedPreferences.getString('password') == "") {
+    } else {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
