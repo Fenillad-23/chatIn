@@ -68,14 +68,7 @@ class _SplashScreenState extends State<SplashScreen> {
           MaterialPageRoute(builder: (context) => Home()),
         );
       }
-    } else if (sharedPreferences.getBool('isRememberMe') == false ||
-        sharedPreferences.getBool('fingerprint') == null) {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => Login()),
-      );
     } else {
-      print(sharedPreferences.getBool('isRememberMe'));
-      print(sharedPreferences.getBool('fingerprint'));
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => onBoarding()),
       );
