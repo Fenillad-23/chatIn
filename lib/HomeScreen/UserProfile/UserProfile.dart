@@ -1,4 +1,6 @@
+import 'package:chattin/Network/network_dio.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UserProfile extends StatefulWidget {
   String? userName;
@@ -11,6 +13,26 @@ class UserProfile extends StatefulWidget {
 
 class _UserProfileState extends State<UserProfile> {
   int index = 0;
+  int? followersCount, followingCount, postCount;
+  bool? followed;
+  String? name;
+  void initState() {
+    super.initState();
+    sendUserName();
+  }
+
+  sendUserName() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    name = sharedPreferences.getString("username");
+    // print(name);
+    NetworkRepository nw = NetworkRepository();
+    dynamic response = await nw.httpPost("user/getDetails", {
+      'username': widget.userName.toString(),
+    });
+    if (response.statusCode == 200 || response.statusCode == "200") {
+      print("response----------$response");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -158,12 +180,24 @@ class _UserProfileState extends State<UserProfile> {
                                   ? new Color(0xFFECEFF1)
                                   : Colors.blue,
                             ),
-                            child: Text(
-                              index == 1 ? 'Following' : 'Follow',
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  color:
-                                      index == 1 ? Colors.black : Colors.white),
+                            child: TextButton(
+                              onPressed: () {
+                                followed = true;
+                                if (followed == null) {
+                                  followed = true;
+                                } else if (followed == true) {
+                                  followed = false;
+                                }
+                                setState(() {});
+                              },
+                              child: Text(
+                                followed == true ? 'Following' : 'Follow',
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    color: index == 1
+                                        ? Colors.black
+                                        : Colors.white),
+                              ),
                             ),
                           ),
                         ),
@@ -197,7 +231,7 @@ class _UserProfileState extends State<UserProfile> {
                             padding: EdgeInsets.only(right: 10.0, left: 10.0),
                             child: Column(
                               children: [
-                                Text("1.5 k",
+                                Text(postCount.toString(),
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 20,
@@ -219,7 +253,7 @@ class _UserProfileState extends State<UserProfile> {
                             padding: EdgeInsets.only(right: 10.0, left: 10.0),
                             child: Column(
                               children: [
-                                Text("1.5 k",
+                                Text(followersCount.toString(),
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 20,
@@ -241,7 +275,7 @@ class _UserProfileState extends State<UserProfile> {
                             padding: EdgeInsets.only(right: 10.0, left: 10.0),
                             child: Column(
                               children: [
-                                Text("1.5 m",
+                                Text(followingCount.toString(),
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 20,

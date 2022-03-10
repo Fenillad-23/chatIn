@@ -31,7 +31,9 @@ class _editProfileState extends State<editProfile> {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     get_email = sharedPreferences.getString("email");
     get_contact = sharedPreferences.getString("contactNo");
-    setState(() {print("OK");});
+    setState(() {
+      print("OK");
+    });
   }
 
   void selectedImage() async {
@@ -262,7 +264,8 @@ class _editProfileState extends State<editProfile> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => resetPassword(email: get_email)));
+                                    builder: (context) =>
+                                        resetPassword(email: get_email)));
                           },
                           child: Ink(
                             child: Row(
