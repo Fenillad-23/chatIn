@@ -22,16 +22,15 @@ class _otpScreenState extends State<otpScreen> {
   String? get_contactNo;
   String? get_fullname;
   bool _isEnable = false;
-
-  @override
-  void initState() {
-    get();
-    super.initState();
-  }
-
   get() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     get_email = sharedPreferences.getString("email").toString();
+    setState(() {});
+  }
+  @override
+  void initState() {
+    super.initState();
+    get();
   }
 
   reSendOTP() async {
@@ -72,11 +71,10 @@ class _otpScreenState extends State<otpScreen> {
 
   verify_otp() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    get_username = sharedPreferences.getString('userName');
-    get_contactNo = sharedPreferences.getString('contactNo');
-    get_password = sharedPreferences.getString('password');
-    get_fullname = sharedPreferences.getString('fullName');
-    setState(() {});
+    get_username = sharedPreferences.getString("username").toString();
+    get_contactNo = sharedPreferences.getString("contactNo").toString();
+    get_password = sharedPreferences.getString("password").toString();
+    get_fullname = sharedPreferences.getString("fullName").toString();
     //print(get_otp);
     dynamic response = await nw.httpPost(
       'User/verifyOTP',
@@ -185,7 +183,7 @@ class _otpScreenState extends State<otpScreen> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  "We sent code to kindly check your mail.",
+                  "We sent code $get_email to kindly check your mail.",
                   textAlign: TextAlign.center,
                 ),
               ),

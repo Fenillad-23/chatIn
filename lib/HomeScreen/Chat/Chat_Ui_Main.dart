@@ -18,15 +18,15 @@ class _chat_main_listState extends State<chat_main_list> {
 
   List chatUsers = [
     {
-      'username': "fenil",
-      'message': "hey ",
+      'username': "Fenil",
+      'message': "hey, How are you?",
       'image':
           "https://images.unsplash.com/photo-1562174949-4591859cae0a?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max",
       'time': "Now"
     },
     {
-      'username': "vaidehi",
-      'message': "tommorow is your practical exam be ready",
+      'username': "Vaidehi",
+      'message': "tommorow is our practical exam be ready",
       'image':
           "https://cdn.pixabay.com/photo/2020/12/15/16/25/clock-5834193__340.jpg",
       "time": "Yesterday"
@@ -197,16 +197,14 @@ class _chat_main_listState extends State<chat_main_list> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              Expanded(
-                                                child: Text(
-                                                    chatUsers[index]
-                                                        ['username'],
-                                                    style: TextStyle(
-                                                        fontSize: 20,
-                                                        fontWeight:
-                                                            FontWeight.w500)),
-                                              ),
-                                              Expanded(
+                                              Text(chatUsers[index]['username'],
+                                                  style: TextStyle(
+                                                      fontSize: 20,
+                                                      fontWeight:
+                                                          FontWeight.w500)),
+                                              Padding(
+                                                padding:
+                                                    EdgeInsets.only(top: 5.0),
                                                 child: Text(
                                                   chatUsers[index]['message'],
                                                   style: TextStyle(

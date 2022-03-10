@@ -70,11 +70,13 @@ class _individualChatState extends State<individualChat> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
-                  child: Text(
-                    widget.username.toString(),
-                    style: TextStyle(color: Colors.black),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: Text(
+                      widget.username.toString(),overflow: TextOverflow.ellipsis,
+                      style: TextStyle(color: Colors.black),
+                    ),
                   ),
                 ),
               ],
