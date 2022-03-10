@@ -82,7 +82,7 @@ class _UserProfileMainState extends State<UserProfileMain> {
         ],
       ),
       body: SingleChildScrollView(
-        child: Stack(
+        child: Column(
           children: [
             Container(
                 height: MediaQuery.of(context).size.height,
@@ -301,7 +301,6 @@ class _UserProfileMainState extends State<UserProfileMain> {
                   Expanded(
                     child: GridView.builder(
                       itemCount: dataList.length,
-                      physics: BouncingScrollPhysics(),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           crossAxisSpacing: 16,

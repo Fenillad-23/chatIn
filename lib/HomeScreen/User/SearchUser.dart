@@ -62,6 +62,7 @@ class _SearchUserState extends State<SearchUser> {
   void initState() {
     super.initState();
     getdata();
+    // setState(() {});
   }
 
   List _searchResult = [];

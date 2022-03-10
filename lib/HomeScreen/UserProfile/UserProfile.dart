@@ -12,26 +12,76 @@ class UserProfile extends StatefulWidget {
 }
 
 class _UserProfileState extends State<UserProfile> {
-  int index = 0;
+  int? index;
   int? followersCount, followingCount, postCount;
   bool? followed;
   String? name;
+  bool? isDataLoading = false;
+  List names = [];
   void initState() {
     super.initState();
     sendUserName();
   }
 
+  NetworkRepository nw = NetworkRepository();
   sendUserName() async {
+    isDataLoading = true;
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     name = sharedPreferences.getString("username");
     // print(name);
-    NetworkRepository nw = NetworkRepository();
-    dynamic response = await nw.httpPost("user/getDetails", {
-      'username': widget.userName.toString(),
+
+    dynamic response = await nw.httpPost("user/getData", {
+      'newUsername': widget.userName.toString(),
     });
-    if (response.statusCode == 200 || response.statusCode == "200") {
-      print("response----------$response");
+    imageList.clear();
+    if (response != null &&
+        (response['statusCode'] == 200 || response['statusCode'] == "200")) {
+      // print("response----------$response");
+      followersCount = response['followersCount'][0]['count'];
+      followingCount = response['followingCount'][0]['count'];
+      postCount =
+          response['postresult'] != null && response['postresult'].length != 0
+              ? response['postresult'][0]['image'].length
+              : 0;
+      imageList =
+          response['postresult'] != null && response['postresult'].length != 0
+              ? response['postresult'][0]['image']
+              : [];
+      print("----------------");
+      names = response['result'][0]['followers'];
+      print(names);
+      if (names.contains(name)) {
+        print("already following");
+        index = 0;
+      } else {
+        print("not following");
+        index = 1;
+      }
+      print("post----------$postCount");
+      print("followcount $followersCount");
+      print("followingCount----------$followingCount");
+      isDataLoading = false;
+      setState(() {});
     }
+    setState(() {});
+  }
+
+  followUser() async {
+    dynamic response = await nw.httpPost("user/follow", {
+      'username': name,
+      'followUsername': widget.userName.toString(),
+    });
+    sendUserName();
+    setState(() {});
+  }
+
+  unfollow() async {
+    dynamic response = await nw.httpPost("user/unfollow", {
+      'username': name,
+      'followUsername': widget.userName.toString(),
+    });
+    sendUserName();
+    setState(() {});
   }
 
   @override
@@ -66,6 +116,7 @@ class _UserProfileState extends State<UserProfile> {
       ),
       body: SingleChildScrollView(
         child: Container(
+            height: MediaQuery.of(context).size.height,
             padding: EdgeInsets.fromLTRB(20, 30, 20, 0),
             color: new Color(0xFFECEFF1),
             child: Column(children: [
@@ -162,9 +213,11 @@ class _UserProfileState extends State<UserProfile> {
                             onPressed: () {
                               setState(() {
                                 if (index == 0) {
-                                  index = 1;
+                                  unfollow();
+                                  setState(() {});
                                 } else if (index == 1) {
-                                  index = 0;
+                                  followUser();
+                                  setState(() {});
                                 }
                               });
                             },
@@ -176,28 +229,15 @@ class _UserProfileState extends State<UserProfile> {
                                 width: 2.0,
                                 color: Colors.blue,
                               ),
-                              primary: index == 1
-                                  ? new Color(0xFFECEFF1)
-                                  : Colors.blue,
+                              primary: index == 1 ? Colors.blue : Colors.white,
                             ),
-                            child: TextButton(
-                              onPressed: () {
-                                followed = true;
-                                if (followed == null) {
-                                  followed = true;
-                                } else if (followed == true) {
-                                  followed = false;
-                                }
-                                setState(() {});
-                              },
-                              child: Text(
-                                followed == true ? 'Following' : 'Follow',
-                                style: TextStyle(
-                                    fontSize: 18,
-                                    color: index == 1
-                                        ? Colors.black
-                                        : Colors.white),
-                              ),
+                            child: Text(
+                              index == 1 ? 'Follow' : 'Unfollow',
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w400,
+                                  color:
+                                      index == 1 ? Colors.white : Colors.black),
                             ),
                           ),
                         ),
@@ -231,11 +271,17 @@ class _UserProfileState extends State<UserProfile> {
                             padding: EdgeInsets.only(right: 10.0, left: 10.0),
                             child: Column(
                               children: [
-                                Text(postCount.toString(),
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w500)),
+                                postCount == null
+                                    ? Text("0",
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w500))
+                                    : Text(postCount.toString(),
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w500)),
                                 SizedBox(
                                   height: 6,
                                 ),
@@ -253,11 +299,17 @@ class _UserProfileState extends State<UserProfile> {
                             padding: EdgeInsets.only(right: 10.0, left: 10.0),
                             child: Column(
                               children: [
-                                Text(followersCount.toString(),
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w500)),
+                                followersCount == null
+                                    ? Text("0",
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w500))
+                                    : Text(followersCount.toString(),
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w500)),
                                 SizedBox(
                                   height: 6,
                                 ),
@@ -275,11 +327,17 @@ class _UserProfileState extends State<UserProfile> {
                             padding: EdgeInsets.only(right: 10.0, left: 10.0),
                             child: Column(
                               children: [
-                                Text(followingCount.toString(),
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w500)),
+                                followingCount == null
+                                    ? Text("0",
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w500))
+                                    : Text(followingCount.toString(),
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w500)),
                                 SizedBox(
                                   height: 6,
                                 ),
@@ -309,19 +367,7 @@ class _UserProfileState extends State<UserProfile> {
   }
 }
 
-List imageList = [
-  'https://cdn.pixabay.com/photo/2019/03/15/09/49/girl-4056684_960_720.jpg',
-  'https://cdn.pixabay.com/photo/2020/12/15/16/25/clock-5834193__340.jpg',
-  'https://cdn.pixabay.com/photo/2020/09/18/19/31/laptop-5582775_960_720.jpg',
-  'https://media.istockphoto.com/photos/woman-kayaking-in-fjord-in-norway-picture-id1059380230?b=1&k=6&m=1059380230&s=170667a&w=0&h=kA_A_XrhZJjw2bo5jIJ7089-VktFK0h0I4OWDqaac0c=',
-  'https://cdn.pixabay.com/photo/2019/11/05/00/53/cellular-4602489_960_720.jpg',
-  'https://cdn.pixabay.com/photo/2017/02/12/10/29/christmas-2059698_960_720.jpg',
-  'https://cdn.pixabay.com/photo/2020/01/29/17/09/snowboard-4803050_960_720.jpg',
-  'https://cdn.pixabay.com/photo/2020/02/06/20/01/university-library-4825366_960_720.jpg',
-  'https://cdn.pixabay.com/photo/2020/11/22/17/28/cat-5767334_960_720.jpg',
-  'https://cdn.pixabay.com/photo/2020/12/13/16/22/snow-5828736_960_720.jpg',
-  'https://cdn.pixabay.com/photo/2020/12/09/09/27/women-5816861_960_720.jpg',
-];
+List imageList = [];
 Widget __contentGridView() {
   return LayoutBuilder(
     builder: (context, constraints) {

@@ -107,7 +107,7 @@ class _chat_main_listState extends State<chat_main_list> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: Padding(
