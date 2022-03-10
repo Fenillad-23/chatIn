@@ -24,12 +24,12 @@ class _ForgetPasswordState extends State<ForgetPassword> {
       dynamic verify_mail = await nw.httpPost(
           'User/checkemail', {'email': emailController.text.toString()});
       Map Email = {
-        'email': emailController.text.toString(),
+        'email': emailController.text.toString().trim(),
       };
       print('VerifyEmail:$Email');
       if (verify_mail != null &&
-          (verify_mail['statusCode'] == 500 ||
-              verify_mail['statusCode'] == '500')) {
+          (verify_mail['statusCode'] == 200 ||
+              verify_mail['statusCode'] == '200')) {
         reSendOTP();
       } else {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -97,10 +97,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
             color: Colors.white,
           ),
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => Login()),
-            );
+            Navigator.pop(context);
           },
         ),
       ),

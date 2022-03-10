@@ -1,6 +1,8 @@
+import 'package:chattin/HomeScreen/UserProfileMain/EditProfile/resetPassword.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class editProfile extends StatefulWidget {
   const editProfile({Key? key}) : super(key: key);
@@ -13,7 +15,24 @@ class _editProfileState extends State<editProfile> {
   final ImagePicker _picker = ImagePicker();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController bioController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+
   List<XFile>? images = [];
+  String? get_email, get_contact;
+
+  @override
+  void initState() {
+    super.initState();
+    setState(() {});
+    get();
+  }
+
+  get() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    get_email = sharedPreferences.getString("email");
+    get_contact = sharedPreferences.getString("contactNo");
+    setState(() {print("OK");});
+  }
 
   void selectedImage() async {
     final List<XFile>? selectedImage = await _picker.pickMultiImage();
@@ -193,34 +212,25 @@ class _editProfileState extends State<editProfile> {
                       labelText: 'Bio',
                       hintText: 'Enter bio',
                     ),
-                    // validator: (value) =>
-                    //     Validators.emailAddressValidator(value!.trim(), "email"),
                   ),
                   SizedBox(
                     height: 20,
                   ),
                   TextFormField(
-                    initialValue: "vaidehikheni4@gmail.com",
                     readOnly: true,
-                    // controller: emailController,
                     decoration: InputDecoration(
                       prefixIcon: Icon(Icons.email),
                       alignLabelWithHint: true,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(9),
                       ),
-                      labelText: 'Email',
-                      //hintText: 'vaidehikheni4@gmail.com',
+                      hintText: get_email,
                     ),
-                    // validator: (value) =>
-                    //     Validators.emailAddressValidator(value!.trim(), "email"),
                   ),
                   SizedBox(
                     height: 20,
                   ),
                   TextFormField(
-                    //controller: contactNoController,
-                    initialValue: "9727293055",
                     readOnly: true,
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
@@ -229,11 +239,8 @@ class _editProfileState extends State<editProfile> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(9),
                       ),
-                      labelText: 'Contact Number',
-                      // hintText: '9924',
+                      hintText: get_contact,
                     ),
-                    // validator: (value) => Validators.ContactNumberValidator(
-                    //     value!.trim(), "contact"),
                   ),
                   SizedBox(
                     height: 20,
@@ -245,28 +252,39 @@ class _editProfileState extends State<editProfile> {
                         border: Border.all(color: Colors.grey, width: 1)),
                     child: Material(
                       color: Colors.white.withOpacity(0.0),
-                      child: InkWell(
-                        onTap: () {},
-                        child: Ink(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(23, 15, 0, 15),
-                                child: Text("Change Password",
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w400)),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(right: 15),
-                                child: Icon(Icons.arrow_forward_ios_rounded,
-                                    size: 20, color: Colors.black),
-                              ),
-                            ],
+                      child: GestureDetector(
+                        onTap: () {
+                          print("ok");
+                        },
+                        child: InkWell(
+                          onTap: () {
+                            print("OK");
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => resetPassword(email: get_email)));
+                          },
+                          child: Ink(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(23, 15, 0, 15),
+                                  child: Text("Change Password",
+                                      textAlign: TextAlign.left,
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w400)),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 15),
+                                  child: Icon(Icons.arrow_forward_ios_rounded,
+                                      size: 20, color: Colors.black),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),

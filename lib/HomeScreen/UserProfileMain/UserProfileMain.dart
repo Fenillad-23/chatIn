@@ -5,7 +5,7 @@ import 'package:chattin/Network/network_dio.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'EditProfile.dart';
+import 'EditProfile/EditProfile.dart';
 
 class UserProfileMain extends StatefulWidget {
   const UserProfileMain({Key? key}) : super(key: key);
@@ -81,100 +81,99 @@ class _UserProfileMainState extends State<UserProfileMain> {
           )
         ],
       ),
-      body: SingleChildScrollView(
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        padding: EdgeInsets.fromLTRB(20, 30, 20, 0),
+        color: new Color(0xFFECEFF1),
         child: Stack(
           children: [
-            Container(
-                height: MediaQuery.of(context).size.height,
-                padding: EdgeInsets.fromLTRB(20, 30, 20, 0),
-                color: new Color(0xFFECEFF1),
-                child: Column(children: [
-                  Container(
-                    //color: Colors.blue,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          height: 110,
-                          width: MediaQuery.of(context).size.width / 3,
-                          //color:Colors.green,
-                          padding: EdgeInsets.only(right: 20),
-                          child: Column(
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(100),
-                                  border: Border.all(
-                                    color: Colors.blue,
-                                    width: 2,
-                                  ),
-                                ),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(100),
-                                  child: Image.network(
-                                      "https://images.unsplash.com/photo-1562174949-4591859cae0a?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max",
-                                      width: 90,
-                                      height: 90,
-                                      fit: BoxFit.cover),
+            SingleChildScrollView(
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        height: 110,
+                        width: MediaQuery.of(context).size.width / 3,
+                        //color:Colors.green,
+                        padding: EdgeInsets.only(right: 20),
+                        child: Column(
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(100),
+                                border: Border.all(
+                                  color: Colors.blue,
+                                  width: 2,
                                 ),
                               ),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(100),
+                                child: Image.network(
+                                    "https://images.unsplash.com/photo-1562174949-4591859cae0a?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max",
+                                    width: 90,
+                                    height: 90,
+                                    fit: BoxFit.cover),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(0, 0, 20, 20),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width / 2,
+                          height: 60,
+                          //color: Colors.yellow,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              userName == 'null'
+                                  ? Text(" ")
+                                  : Text('$userName',
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w500)),
+                              Container(
+                                  padding: EdgeInsets.fromLTRB(2, 5, 0, 0),
+                                  child: name == 'null'
+                                      ? Text(" ")
+                                      : Text('$name',
+                                          style: TextStyle(
+                                              color:
+                                                  Colors.black.withOpacity(0.6),
+                                              fontSize: 12))),
                             ],
                           ),
                         ),
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(0, 0, 20, 20),
-                          child: Container(
-                            width: MediaQuery.of(context).size.width / 2,
-                            height: 60,
-                            //color: Colors.yellow,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                userName == 'null'
-                                    ? Text(" ")
-                                    : Text('$userName',
-                                        style: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w500)),
-                                Container(
-                                    padding: EdgeInsets.fromLTRB(2, 5, 0, 0),
-                                    child: name == 'null'
-                                        ? Text(" ")
-                                        : Text('$name',
-                                            style: TextStyle(
-                                                color: Colors.black
-                                                    .withOpacity(0.6),
-                                                fontSize: 12))),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                   Card(
-                      elevation: 8,
-                      shape: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(color: Colors.white),
-                      ),
-                      // shadowColor: Colors.grey[800],
-                      child: Container(
-                        height: 35,
-                        width: MediaQuery.of(context).size.width,
-                        child: OutlinedButton(
-                          child: Text('Edit profile'),
-                          style: OutlinedButton.styleFrom(
-                            primary: Colors.black,
-                          ),
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => editProfile()));
-                          },
+                    elevation: 8,
+                    shape: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
+                    // shadowColor: Colors.grey[800],
+                    child: Container(
+                      height: 35,
+                      width: MediaQuery.of(context).size.width,
+                      child: OutlinedButton(
+                        child: Text('Edit profile'),
+                        style: OutlinedButton.styleFrom(
+                          primary: Colors.black,
                         ),
-                      )),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => editProfile()));
+                        },
+                      ),
+                    ),
+                  ),
                   SizedBox(
                     height: 7,
                   ),
@@ -298,39 +297,42 @@ class _UserProfileMainState extends State<UserProfileMain> {
                     ),
                   ),
                   SizedBox(height: 20),
-                  Expanded(
-                    child: GridView.builder(
-                      itemCount: dataList.length,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 16,
-                          mainAxisSpacing: 16),
-                      itemBuilder: (BuildContext context, int index) {
-                        return GestureDetector(
-                          onLongPress: () {
-                            setState(() {
-                              _showPreview = true;
-                              _image = dataList[index]['image'][0].toString();
-                            });
-                          },
-                          onLongPressEnd: (details) {
-                            setState(() {
-                              _showPreview = false;
-                            });
-                          },
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(15.0),
-                            child: Image.network(
-                                dataList[index]['image'][0].toString(),
-                                width: 300,
-                                height: 150,
-                                fit: BoxFit.cover),
+                  GridView.builder(
+                    itemCount: dataList.length,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 16,
+                        mainAxisSpacing: 16),
+                    physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemBuilder: (BuildContext context, int index) {
+                      return GestureDetector(
+                        onLongPress: () {
+                          setState(() {
+                            _showPreview = true;
+                            _image = dataList[index]['image'][0].toString();
+                          });
+                        },
+                        onLongPressEnd: (details) {
+                          setState(() {
+                            _showPreview = false;
+                          });
+                        },
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(15.0),
+                          child: Image.network(
+                            dataList[index]['image'][0].toString(),
+                            width: 300,
+                            height: 150,
+                            fit: BoxFit.cover,
                           ),
-                        );
-                      },
-                    ),
+                        ),
+                      );
+                    },
                   ),
-                ])),
+                ],
+              ),
+            ),
             if (_showPreview) ...[
               BackdropFilter(
                 filter: ImageFilter.blur(
@@ -343,21 +345,10 @@ class _UserProfileMainState extends State<UserProfileMain> {
               ),
               Container(
                 child: Center(
-                  child: Padding(
-                    padding: EdgeInsets.only(top: 0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(15.0),
-                      child: Image.network(_image!,
-                          width: 300, height: 500, fit: BoxFit.cover),
-                    ),
-                    // child: ClipRRect(
-                    //   borderRadius: BorderRadius.circular(10.0),
-                    //   child: Image.network(
-                    //     _image!,
-                    //     height: 300,
-                    //     width: 300,
-                    //   ),
-                    // ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(15.0),
+                    child: Image.network(_image!,
+                        width: 300, height: 400, fit: BoxFit.cover),
                   ),
                 ),
               ),
