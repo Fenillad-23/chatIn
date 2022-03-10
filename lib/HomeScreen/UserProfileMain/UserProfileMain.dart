@@ -298,7 +298,7 @@ Widget __contentGridView() {
           crossAxisSpacing: 16,
           mainAxisSpacing: 16,
         ),
-        physics: BouncingScrollPhysics(),
+        physics: NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         itemBuilder: (context, index) => GridTile(
           child: ClipRRect(

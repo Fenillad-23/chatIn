@@ -18,42 +18,42 @@ class _chat_main_listState extends State<chat_main_list> {
 
   List chatUsers = [
     {
-      'username': "bankim",
-      'message': "hey kalpesh",
+      'username': "fenil",
+      'message': "hey ",
       'image':
           "https://images.unsplash.com/photo-1562174949-4591859cae0a?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max",
       'time': "Now"
     },
     {
-      'username': "jenisha tailor",
+      'username': "vaidehi",
       'message': "tommorow is your practical exam be ready",
       'image':
           "https://cdn.pixabay.com/photo/2020/12/15/16/25/clock-5834193__340.jpg",
       "time": "Yesterday"
     },
     {
-      'username': "Jorge Henry",
+      'username': "mahesh",
       'message': "Hey where are you?",
       'image':
           "https://cdn.pixabay.com/photo/2020/09/18/19/31/laptop-5582775_960_720.jpg",
       'time': "31 Mar"
     },
     {
-      'username': "Philip Fox",
+      'username': "suresh",
       'message': "Busy! Call me in 20 mins",
       'image':
           "https://cdn.pixabay.com/photo/2020/12/09/09/27/women-5816861_960_720.jpg",
       'time': "28 Mar"
     },
     {
-      'username': "Debra Hawkins",
+      'username': "ramesh",
       'message': "Thankyou, It's awesome",
       'image':
           "https://cdn.pixabay.com/photo/2019/11/05/00/53/cellular-4602489_960_720.jpg",
       'time': "23 Mar"
     },
     {
-      'username': "Jacob Pena",
+      'username': "hey",
       'message': "will update you in evening",
       'image':
           "https://cdn.pixabay.com/photo/2017/02/12/10/29/christmas-2059698_960_720.jpg",
