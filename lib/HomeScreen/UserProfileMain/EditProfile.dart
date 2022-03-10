@@ -246,7 +246,9 @@ class _editProfileState extends State<editProfile> {
                     child: Material(
                       color: Colors.white.withOpacity(0.0),
                       child: InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          print("Press the");
+                        },
                         child: Ink(
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,

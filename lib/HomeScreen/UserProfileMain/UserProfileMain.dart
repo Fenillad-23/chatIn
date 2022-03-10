@@ -301,6 +301,7 @@ class _UserProfileMainState extends State<UserProfileMain> {
                   Expanded(
                     child: GridView.builder(
                       itemCount: dataList.length,
+                      physics: BouncingScrollPhysics(),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           crossAxisSpacing: 16,
