@@ -1,8 +1,8 @@
-import 'package:chattin/Network/network_dio.dart';
 import 'package:chattin/Post/UploadPost.dart';
 import 'package:chattin/Splash_Screen/onBoarding.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../Notification/NotoficationScreen.dart';
 import 'DashBoard.dart';
 import 'User/SearchUser.dart';
 import 'UserProfile/UserProfile.dart';
@@ -21,8 +21,8 @@ class _HomeState extends State<Home> {
   final List<Widget> screens = [
     Dashboard(),
     SearchUser(),
-    UserProfile(),
-    UserProfileMain()
+    UserProfileMain(),
+    Notificationscreen()
   ];
 
   final PageStorageBucket bucket = PageStorageBucket();
@@ -106,7 +106,7 @@ class _HomeState extends State<Home> {
                     //minWidth: 30,
                     onPressed: () {
                       setState(() {
-                        currentScreen = UserProfile();
+                        currentScreen = Notificationscreen();
                         currentTab = 2;
                       });
                     },
