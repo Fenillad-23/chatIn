@@ -24,7 +24,6 @@ class _SearchUserState extends State<SearchUser> {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     userMainName = sharedPreferences.getString("username");
     dynamic getUserId = await nw.httpGet('User/find');
-    late bool OwnAccount;
     loadUserList = getUserId;
     loadUserList.removeWhere((data) => data['username'] == userMainName);
     setState(() {});
