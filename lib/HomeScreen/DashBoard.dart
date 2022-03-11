@@ -318,9 +318,11 @@ class _DashboardState extends State<Dashboard> {
                   icon: Icon(FontAwesomeIcons.commentDots, color: Colors.black),
                   onPressed: () {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => chat_main_list()));
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => chat_main_list(),
+                      ),
+                    );
                   }),
             )
           ],
