@@ -19,7 +19,7 @@ class _UserProfileState extends State<UserProfile> {
   int? index;
   int? followersCount, followingCount, postCount;
   bool? followed;
-  String? name, fullName;
+  String? name, fullName, profilepic;
   bool? isDataLoading = false;
   List names = [];
   void initState() {
@@ -31,7 +31,7 @@ class _UserProfileState extends State<UserProfile> {
   sendUserName() async {
     isDataLoading = true;
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    name = sharedPreferences.getString("username");
+    name = sharedPreferences.getString("username")!;
     // print(name);
 
     dynamic response = await nw.httpPost("user/getData", {
@@ -43,6 +43,7 @@ class _UserProfileState extends State<UserProfile> {
       // print("response----------$response");
       followersCount = response['followersCount'][0]['count'];
       followingCount = response['followingCount'][0]['count'];
+      profilepic = response['result'][0]['profilepicture'];
       fullName = response['result'][0]['name'] != null
           ? response['result'][0]['name']
           : " ";
@@ -150,14 +151,24 @@ class _UserProfileState extends State<UserProfile> {
                                     width: 2,
                                   ),
                                 ),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(100),
-                                  child: Image.network(
-                                      "https://images.unsplash.com/photo-1562174949-4591859cae0a?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max",
-                                      width: 90,
-                                      height: 90,
-                                      fit: BoxFit.cover),
-                                ),
+                                child: isDataLoading == true
+                                    ? ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(100),
+                                        child: Image.asset(
+                                            'assets/images/user.jpeg',
+                                            width: 90,
+                                            height: 90,
+                                            fit: BoxFit.cover),
+                                      )
+                                    : ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(100),
+                                        child: Image.network(profilepic!,
+                                            width: 90,
+                                            height: 90,
+                                            fit: BoxFit.cover),
+                                      ),
                               ),
                             ],
                           ),
