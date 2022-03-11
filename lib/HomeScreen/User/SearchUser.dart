@@ -15,9 +15,7 @@ class _SearchUserState extends State<SearchUser> {
   String? userMainName;
   NetworkRepository nw = new NetworkRepository();
   late TextEditingController _textController = new TextEditingController();
-  String image =
-      "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMDg4MDd8MHwxfHNlYXJjaHwyM3x8cGVvcGxlfGVufDB8fHx8MTY0Mzg2MTUwOA&ixlib=rb-1.2.1&q=80&w=1080";
-  String fname = "fenil lad";
+
   List loadUserList = [];
 
   getdata() async {
@@ -26,6 +24,7 @@ class _SearchUserState extends State<SearchUser> {
     dynamic getUserId = await nw.httpGet('User/find');
     loadUserList = getUserId;
     loadUserList.removeWhere((data) => data['username'] == userMainName);
+    print(loadUserList);
     setState(() {});
   }
 
@@ -46,16 +45,9 @@ class _SearchUserState extends State<SearchUser> {
     loadUserList.forEach((userDetail) {
       if (userDetail['username'].toLowerCase().contains(text.toLowerCase())) {
         _searchResult.add(userDetail);
-        // if (_searchResult.contains(userMainName?.toLowerCase())) {
-        //   _searchResult.removeWhere((data) => data.username == userMainName);
-        // }
-        // print("---------");
-        // print(_searchResult);
       }
       setState(() {});
     });
-
-    // setState(() {});
   }
 
   @override
@@ -94,7 +86,6 @@ class _SearchUserState extends State<SearchUser> {
       ),
       body: Padding(
         padding: const EdgeInsets.only(top: 20, left: 05),
-        // child: listView(datalist: _searchResult),
         child: _searchResult.length != 0
             ? listView(datalist: _searchResult)
             : listView(datalist: loadUserList),
@@ -133,8 +124,11 @@ class _SearchUserState extends State<SearchUser> {
                           child: CircleAvatar(
                             radius: 30,
                             child: ClipOval(
-                              child: Image.network(image,
-                                  width: 60, height: 60, fit: BoxFit.cover),
+                              child: Image.network(
+                                  datalist[index]['profilepicture'],
+                                  width: 60,
+                                  height: 60,
+                                  fit: BoxFit.cover),
                             ),
                           ),
                         )
@@ -143,7 +137,6 @@ class _SearchUserState extends State<SearchUser> {
                         padding: EdgeInsets.only(left: 10),
                         child: Column(children: [
                           Container(
-                            //color: Colors.yellow,
                             padding: EdgeInsets.only(top: 20),
                             height: 70,
                             width: MediaQuery.of(context).size.width / 2,
@@ -156,7 +149,7 @@ class _SearchUserState extends State<SearchUser> {
                                         fontWeight: FontWeight.w500)),
                                 Container(
                                     padding: EdgeInsets.fromLTRB(2, 5, 0, 0),
-                                    child: Text(fname,
+                                    child: Text(datalist[index]['name'],
                                         style: TextStyle(
                                             color:
                                                 Colors.black.withOpacity(0.6),

@@ -17,9 +17,10 @@ class UserProfileMain extends StatefulWidget {
 class _UserProfileMainState extends State<UserProfileMain> {
   bool _showPreview = false;
   String? _image;
+  String? profile;
   int index = 0;
   String userName = ' ';
-  String name = 'user';
+  String name = '';
   int following = 0, followers = 0, postCount = 0;
   @override
   void initState() {
@@ -35,22 +36,22 @@ class _UserProfileMainState extends State<UserProfileMain> {
     userName = sharedPreferences.getString('username')!;
     dynamic response =
         await nw.httpPost("post/getUserAccountDetails", {'postedBy': userName});
-    if (response['statusCode'] != null && response['statusCode'] == 200 ||
-        response['statusCode'] == "200") {
+    if (response['statusCode'] != null &&
+        (response['statusCode'] == 200 || response['statusCode'] == "200")) {
       // print('\x1b[93m --- $response');
       dataList = response['data'];
-      print("----------------------------------");
+      name =
+          response['result'].length != 0 ? response['result'][0]['name'] : '';
+      profile = response['result'].length != 0
+          ? response['result'][0]['profilepicture']
+          : '';
+      print("----------------------------------$profile");
       following = response['followingCount'][0]['count'];
       followers = response['followersCount'][0]['count'];
       postCount = dataList.length;
-      //print(response['data'][2]['uploaddate']);
-      //name = 'DS';
-      //userName = response['postedBy'].toString();
-      name = response['name'].toString();
       print("name----------------------------$name");
       setState(() {});
     } else {
-      // print("name----------------------------$userName");
       print(response['message']);
     }
   }
@@ -110,11 +111,20 @@ class _UserProfileMainState extends State<UserProfileMain> {
                               ),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(100),
-                                child: Image.network(
-                                    "https://images.unsplash.com/photo-1562174949-4591859cae0a?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max",
-                                    width: 90,
-                                    height: 90,
-                                    fit: BoxFit.cover),
+                                child: profile.toString() != 'null'
+                                    ? Image.network(profile!,
+                                        width: 90,
+                                        height: 90,
+                                        fit: BoxFit.cover)
+                                    : ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(100),
+                                        child: Image.asset(
+                                            'assets/images/user.jpeg',
+                                            width: 90,
+                                            height: 90,
+                                            fit: BoxFit.cover),
+                                      ),
                               ),
                             ),
                           ],
@@ -131,19 +141,21 @@ class _UserProfileMainState extends State<UserProfileMain> {
                             children: [
                               userName == 'null'
                                   ? Text(" ")
-                                  : Text('$userName',
+                                  : Text(
+                                      '$userName',
                                       style: TextStyle(
                                           fontSize: 20,
-                                          fontWeight: FontWeight.w500)),
+                                          fontWeight: FontWeight.w500),
+                                    ),
                               Container(
-                                  padding: EdgeInsets.fromLTRB(2, 5, 0, 0),
-                                  child: name == 'null'
-                                      ? Text(" ")
-                                      : Text('$name',
-                                          style: TextStyle(
-                                              color:
-                                                  Colors.black.withOpacity(0.6),
-                                              fontSize: 12))),
+                                padding: EdgeInsets.fromLTRB(2, 5, 0, 0),
+                                child: Text(
+                                  name != null ? name : "N/A",
+                                  style: TextStyle(
+                                      color: Colors.black.withOpacity(0.6),
+                                      fontSize: 12),
+                                ),
+                              ),
                             ],
                           ),
                         ),
