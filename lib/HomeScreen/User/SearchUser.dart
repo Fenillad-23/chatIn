@@ -1,6 +1,8 @@
 import 'package:chattin/HomeScreen/UserProfile/UserProfile.dart';
+import 'package:chattin/HomeScreen/UserProfileMain/UserProfileMain.dart';
 import 'package:chattin/Network/network_dio.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SearchUser extends StatefulWidget {
   const SearchUser({Key? key}) : super(key: key);
@@ -10,6 +12,7 @@ class SearchUser extends StatefulWidget {
 }
 
 class _SearchUserState extends State<SearchUser> {
+  String? userMainName;
   NetworkRepository nw = new NetworkRepository();
   late TextEditingController _textController = new TextEditingController();
   String image =
@@ -17,52 +20,20 @@ class _SearchUserState extends State<SearchUser> {
   String fname = "fenil lad";
   List loadUserList = [];
 
-  // searchdata() async {
-  //   dynamic response = await nw.httpPost(
-  //     'User/search',
-  //     {
-  //       'username': _textController.text.toString(),
-  //     },
-  //   );
-  //   Map search_data = {
-  //     'username': _textController.text.toString(),
-  //   };
-  //   print('\x1b[95m ----$search_data');
-  //   if (response != null &&
-  //       (response['statusCode'] == 200 || response['statusCode'] == '200')) {
-  //     print("\x1b[95m ----$response");
-  //     loadUserList = response;
-  //     print(loadUserList);
-  //   } else {
-  //     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-  //       content: Text(response['message'].toString()),
-  //       action: SnackBarAction(
-  //         label: '',
-  //         textColor: Colors.white,
-  //         onPressed: () {},
-  //       ),
-  //       behavior: SnackBarBehavior.floating,
-  //       shape: RoundedRectangleBorder(
-  //         borderRadius: BorderRadius.circular(24),
-  //       ),
-  //       backgroundColor: Colors.blue,
-  //     ));
-  //   }
-  // }
-
   getdata() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    userMainName = sharedPreferences.getString("username");
     dynamic getUserId = await nw.httpGet('User/find');
+    late bool OwnAccount;
     loadUserList = getUserId;
-    print(loadUserList);
+    loadUserList.removeWhere((data) => data['username'] == userMainName);
     setState(() {});
-    // return loadUserList;
   }
 
   @override
   void initState() {
     super.initState();
     getdata();
-    // setState(() {});
   }
 
   List _searchResult = [];
@@ -76,6 +47,11 @@ class _SearchUserState extends State<SearchUser> {
     loadUserList.forEach((userDetail) {
       if (userDetail['username'].toLowerCase().contains(text.toLowerCase())) {
         _searchResult.add(userDetail);
+        // if (_searchResult.contains(userMainName?.toLowerCase())) {
+        //   _searchResult.removeWhere((data) => data.username == userMainName);
+        // }
+        // print("---------");
+        // print(_searchResult);
       }
       setState(() {});
     });
@@ -107,6 +83,7 @@ class _SearchUserState extends State<SearchUser> {
                     onPressed: () {
                       this.setState(() {
                         _textController.clear(); //Clear value
+                        _searchResult.clear();
                       });
                     },
                   ),
