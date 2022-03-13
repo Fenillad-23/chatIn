@@ -137,7 +137,7 @@ class _SearchUserState extends State<SearchUser> {
                         padding: EdgeInsets.only(left: 10),
                         child: Column(children: [
                           Container(
-                            padding: EdgeInsets.only(top: 20),
+                            padding: EdgeInsets.only(top: 10),
                             height: 70,
                             width: MediaQuery.of(context).size.width / 2,
                             child: Column(

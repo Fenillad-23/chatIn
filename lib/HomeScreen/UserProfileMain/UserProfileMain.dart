@@ -1,11 +1,13 @@
 import 'dart:ui';
 
+import 'package:chattin/HomeScreen/UserProfileMain/FollowingList.dart';
 import 'package:chattin/HomeScreen/UserProfileMain/Setting.dart';
 import 'package:chattin/Network/network_dio.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'EditProfile/EditProfile.dart';
+import 'FollowerList.dart';
 
 class UserProfileMain extends StatefulWidget {
   const UserProfileMain({Key? key}) : super(key: key);
@@ -241,7 +243,15 @@ class _UserProfileMainState extends State<UserProfileMain> {
                               ),
                             ),
                             TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        followerList(Name: userName),
+                                  ),
+                                );
+                              },
                               child: Padding(
                                 padding:
                                     EdgeInsets.only(right: 10.0, left: 10.0),
@@ -271,7 +281,15 @@ class _UserProfileMainState extends State<UserProfileMain> {
                               ),
                             ),
                             TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        followingList(Name: userName),
+                                  ),
+                                );
+                              },
                               child: Padding(
                                 padding:
                                     EdgeInsets.only(right: 10.0, left: 10.0),

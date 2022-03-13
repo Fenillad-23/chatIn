@@ -1,8 +1,11 @@
 import 'dart:ui';
 
+import 'package:chattin/HomeScreen/UserProfileMain/FollowingList.dart';
 import 'package:chattin/Network/network_dio.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../UserProfileMain/FollowerList.dart';
 
 class UserProfile extends StatefulWidget {
   String? userName;
@@ -325,7 +328,15 @@ class _UserProfileState extends State<UserProfile> {
                               ),
                             ),
                             TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => followerList(
+                                        Name: widget.userName.toString()),
+                                  ),
+                                );
+                              },
                               child: Padding(
                                 padding:
                                     EdgeInsets.only(right: 10.0, left: 10.0),
@@ -355,7 +366,15 @@ class _UserProfileState extends State<UserProfile> {
                               ),
                             ),
                             TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => followingList(
+                                        Name: widget.userName.toString()),
+                                  ),
+                                );
+                              },
                               child: Padding(
                                 padding:
                                     EdgeInsets.only(right: 10.0, left: 10.0),
