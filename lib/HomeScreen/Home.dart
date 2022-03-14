@@ -1,11 +1,8 @@
 import 'package:chattin/Post/UploadPost.dart';
-import 'package:chattin/Splash_Screen/onBoarding.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../Notification/NotoficationScreen.dart';
 import 'DashBoard.dart';
 import 'User/SearchUser.dart';
-import 'UserProfile/UserProfile.dart';
 import 'UserProfileMain/UserProfileMain.dart';
 
 class Home extends StatefulWidget {

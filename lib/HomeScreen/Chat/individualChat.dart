@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -34,8 +32,6 @@ class _individualChatState extends State<individualChat> {
 
   @override
   void initState() {
-    // TODO: implement initState
-
     super.initState();
   }
 
@@ -74,7 +70,8 @@ class _individualChatState extends State<individualChat> {
                   child: Padding(
                     padding: const EdgeInsets.only(left: 8.0),
                     child: Text(
-                      widget.username.toString(),overflow: TextOverflow.ellipsis,
+                      widget.username.toString(),
+                      overflow: TextOverflow.ellipsis,
                       style: TextStyle(color: Colors.black),
                     ),
                   ),
