@@ -4,6 +4,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../Splash_Screen/onBoarding.dart';
 import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
+// import 'package:restart_app/restart_app.dart';
+
+// String fonts = 'Slabo';
 
 class Setting extends StatefulWidget {
   const Setting({Key? key}) : super(key: key);
@@ -26,9 +29,24 @@ class LocalAuthApi {
 class _SettingState extends State<Setting> {
   bool Notification = false;
   bool? Fingerprint;
+  String dropdownvalue = 'Default';
+
+  // List of items in our dropdown menu
+  var items = [
+    'Default',
+    'Slabo',
+    'DancingScript',
+  ];
+
   void initState() {
     super.initState();
     verify();
+  }
+
+  setFontStyle() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    sharedPreferences.setString('fontFamily', dropdownvalue);
+    print(dropdownvalue);
   }
 
   verify() async {
@@ -198,9 +216,28 @@ class _SettingState extends State<Setting> {
                                           fontWeight: FontWeight.w500)),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.only(right: 15),
-                                  child: Icon(Icons.arrow_forward_ios_rounded,
-                                      size: 20, color: Colors.black),
+                                  padding: EdgeInsets.only(right: 20),
+                                  child: DropdownButton(
+                                    value: dropdownvalue,
+                                    icon: const Icon(Icons.keyboard_arrow_down),
+                                    items: items.map((String items) {
+                                      return DropdownMenuItem(
+                                        value: items,
+                                        child: Text(
+                                          items,
+                                          style: TextStyle(fontFamily: items),
+                                        ),
+                                      );
+                                    }).toList(),
+                                    onChanged: (String? newValue) {
+                                      setState(() {
+                                        dropdownvalue = newValue!;
+                                        setFontStyle();
+                                        // Restart.restartApp();
+                                        RestartWidget.restartApp(context);
+                                      });
+                                    },
+                                  ),
                                 ),
                               ],
                             ),
@@ -417,5 +454,36 @@ class _SettingState extends State<Setting> {
         context,
         MaterialPageRoute(builder: (context) => onBoarding()),
         (route) => false);
+  }
+}
+
+class RestartWidget extends StatefulWidget {
+  RestartWidget({required this.child});
+
+  final Widget child;
+
+  static void restartApp(BuildContext context) {
+    context.findAncestorStateOfType<_RestartWidgetState>()?.restartApp();
+  }
+
+  @override
+  _RestartWidgetState createState() => _RestartWidgetState();
+}
+
+class _RestartWidgetState extends State<RestartWidget> {
+  Key key = UniqueKey();
+
+  void restartApp() {
+    setState(() {
+      key = UniqueKey();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return KeyedSubtree(
+      key: key,
+      child: widget.child,
+    );
   }
 }

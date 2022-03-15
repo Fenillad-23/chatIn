@@ -1,5 +1,4 @@
 import 'package:chattin/HomeScreen/UserProfile/UserProfile.dart';
-import 'package:chattin/HomeScreen/UserProfileMain/UserProfileMain.dart';
 import 'package:chattin/Network/network_dio.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -137,7 +136,7 @@ class _SearchUserState extends State<SearchUser> {
                         padding: EdgeInsets.only(left: 10),
                         child: Column(children: [
                           Container(
-                            padding: EdgeInsets.only(top: 20),
+                            padding: EdgeInsets.only(top: 10),
                             height: 70,
                             width: MediaQuery.of(context).size.width / 2,
                             child: Column(

@@ -172,8 +172,11 @@ class _editProfileState extends State<editProfile> {
                       children: [
                         ClipRRect(
                           borderRadius: BorderRadius.circular(100),
-                          child: Image.network("",
-                              width: 90, height: 90, fit: BoxFit.cover),
+                          child: Image.network(
+                              "https://images.unsplash.com/photo-1562174949-4591859cae0a?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max",
+                              width: 90,
+                              height: 90,
+                              fit: BoxFit.cover),
                         ),
                       ],
                     ),
