@@ -1,11 +1,15 @@
+import 'dart:convert';
+import 'dart:io';
 import 'package:chattin/HomeScreen/UserProfileMain/EditProfile/resetPassword.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:lottie/lottie.dart';
+import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../../Network/network_dio.dart';
 
 class editProfile extends StatefulWidget {
-  const editProfile({Key? key}) : super(key: key);
+  String? username;
+  editProfile({Key? key, this.username}) : super(key: key);
 
   @override
   _editProfileState createState() => _editProfileState();
@@ -13,13 +17,16 @@ class editProfile extends StatefulWidget {
 
 class _editProfileState extends State<editProfile> {
   final ImagePicker _picker = ImagePicker();
+
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  NetworkRepository nw = NetworkRepository();
   TextEditingController bioController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
+  TextEditingController fullNameController = TextEditingController();
 
   List<XFile>? images = [];
-  String? get_email, get_contact;
-
+  XFile? image;
+  String? get_email, get_contact, username, fullName, profile, bio;
+  bool _load = false;
   @override
   void initState() {
     super.initState();
@@ -27,96 +34,57 @@ class _editProfileState extends State<editProfile> {
     get();
   }
 
-  get() async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    get_email = sharedPreferences.getString("email");
-    get_contact = sharedPreferences.getString("contactNo");
-    setState(() {
-      print("OK");
-    });
+  editInformation() async {
+    var uri = Uri.parse(
+        "http://chatin-env.eba-muyjrq8b.ap-south-1.elasticbeanstalk.com/user/editprofile");
+    var request = http.MultipartRequest(
+      "PATCH",
+      Uri.parse("$uri"),
+    );
+    request.files.add(await http.MultipartFile.fromPath("image", image!.path));
+    request.fields['bio'] = bioController.text.toString().trim();
+    request.fields['name'] = fullNameController.text.toString().trim();
+    request.fields['username'] = username.toString();
+    print("-----------${image!.path}");
+    var response = await request.send();
+    print('Response: $response');
+    var responseData = await response.stream.toBytes();
+    var responseString = String.fromCharCodes(responseData);
+    var msg = await json.decode(responseString);
+    if (response.statusCode == 200) {
+      print("Done");
+      get();
+    } else {
+      print(response.statusCode);
+    }
   }
 
-  void selectedImage() async {
-    final List<XFile>? selectedImage = await _picker.pickMultiImage();
-    if (selectedImage!.isNotEmpty) {
-      if (selectedImage.length > 1) {
-        showModalBottomSheet(
-            backgroundColor: Colors.transparent,
-            context: context,
-            isScrollControlled: true,
-            builder: (context) {
-              return Padding(
-                padding: EdgeInsets.only(
-                    bottom: MediaQuery.of(context).viewInsets.bottom),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    Container(
-                      height: 300,
-                      width: MediaQuery.of(context).size.width,
-                      decoration: new BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: new BorderRadius.only(
-                            topLeft: Radius.circular(25.0),
-                            topRight: Radius.circular(25.0)),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: Form(
-                          key: _formKey,
-                          child: Column(
-                            children: [
-                              Lottie.asset("assets/json/false.json",
-                                  height: 100),
-                              SizedBox(height: 10),
-                              Text("Upload failed",
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w500)),
-                              SizedBox(height: 20),
-                              Text("You select only one image",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      color: Colors.black.withOpacity(0.8),
-                                      fontSize: 12)),
-                              SizedBox(height: 20),
-                              Container(
-                                height: 50,
-                                width: MediaQuery.of(context).size.width,
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.pushAndRemoveUntil(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                editProfile()),
-                                        (route) => false);
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(28.5),
-                                    ),
-                                  ),
-                                  child: Text(
-                                    "Try Again",
-                                    style: TextStyle(fontSize: 20),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              );
-            });
-      } else {
-        images!.addAll(selectedImage);
-      }
+  get() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    username = sharedPreferences.getString("username");
+    dynamic response =
+        await nw.httpPost("post/getUserAccountDetails", {'postedBy': username});
+    if (response['statusCode'] != null &&
+        (response['statusCode'] == 200 || response['statusCode'] == "200")) {
+      fullName = response['result'][0]['name'] != null
+          ? response['result'][0]['name']
+          : "Enter full Name";
+      get_email = response['result'][0]['email'];
+      get_contact = response['result'][0]['contactNo'];
+      profile = response['result'][0]['profilepicture'];
+      bio = response['result'][0]['bio'] != null
+          ? response['result'][0]['bio']
+          : "Enter bio";
+      setState(() {});
+    } else {
+      print(response['message']);
     }
-    print("'\x1b[97m response :image length " + images!.length.toString());
+    setState(() {});
+  }
+
+  selectImage() async {
+    image = await _picker.pickImage(source: ImageSource.gallery);
+    _load = true;
     setState(() {});
   }
 
@@ -157,7 +125,7 @@ class _editProfileState extends State<editProfile> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("Vaidehi Kheni",
+                        Text(username.toString(),
                             style: TextStyle(
                                 fontSize: 25,
                                 fontWeight: FontWeight.w400,
@@ -170,14 +138,17 @@ class _editProfileState extends State<editProfile> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(100),
-                          child: Image.network(
-                              "https://images.unsplash.com/photo-1562174949-4591859cae0a?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max",
-                              width: 90,
-                              height: 90,
-                              fit: BoxFit.cover),
-                        ),
+                        _load != false
+                            ? ClipRRect(
+                                borderRadius: BorderRadius.circular(100),
+                                child: Image.file(File(image!.path),
+                                    width: 90, height: 90, fit: BoxFit.cover),
+                              )
+                            : ClipRRect(
+                                borderRadius: BorderRadius.circular(100),
+                                child: Image.network(profile.toString(),
+                                    width: 90, height: 90, fit: BoxFit.cover),
+                              ),
                       ],
                     ),
                   ],
@@ -192,7 +163,7 @@ class _editProfileState extends State<editProfile> {
               children: [
                 TextButton(
                     onPressed: () {
-                      selectedImage();
+                      selectImage();
                     },
                     child: Text("Change Your Profile",
                         style: TextStyle(
@@ -204,6 +175,21 @@ class _editProfileState extends State<editProfile> {
               child: Column(
                 children: [
                   TextFormField(
+                    controller: fullNameController,
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.person),
+                      alignLabelWithHint: true,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(9),
+                      ),
+                      // labelText: 'Full Name',
+                      hintText: fullName,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  TextFormField(
                     controller: bioController,
                     decoration: InputDecoration(
                       prefixIcon: Icon(Icons.create),
@@ -211,8 +197,8 @@ class _editProfileState extends State<editProfile> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(9),
                       ),
-                      labelText: 'Bio',
-                      hintText: 'Enter bio',
+                      // labelText: 'Bio',
+                      hintText: bio,
                     ),
                   ),
                   SizedBox(
@@ -300,7 +286,9 @@ class _editProfileState extends State<editProfile> {
                     height: 50,
                     width: MediaQuery.of(context).size.width,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        editInformation();
+                      },
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(28.5),
