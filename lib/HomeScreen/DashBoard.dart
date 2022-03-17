@@ -1,6 +1,9 @@
 import 'package:chattin/HomeScreen/Storybar/StoryBarWidget.dart';
+import 'package:chattin/HomeScreen/UserProfileMain/UserProfileMain.dart';
+import 'package:chattin/Network/network_dio.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'Chat/Chat_Ui_Main.dart';
 
@@ -12,116 +15,138 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+  NetworkRepository nw = NetworkRepository();
+  @override
+  void initState() {
+    super.initState();
+    LoadPosts();
+  }
+
+  LoadPosts() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    dynamic response = await nw.httpPost(
+        "user/homepage", {'username': sharedPreferences.getString("username")});
+    print("Loading posts...${response['posts']}");
+    if (response['statusCode'] != null ||
+        response['statusCode'] == 200 && response['statusCode'] == '200') {
+      dataList.add(response['posts'][0]);
+      setState(() {});
+      print("...................");
+      // ListView == >  0,1,2,
+      print(dataList[0][0].length);
+    }
+  }
+
   List dataList = [
-    {
-      'imgUrl':
-          'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-      'description':
-          'My last day for this year holiday! So excited to share my memories with you guys! 😁😍',
-      'userName': 'Fenil',
-      'profilePic':
-          'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-      'likesCount': '150',
-      'duration': '1 hour ago',
-      'isLike': false,
-      'isSaved': false,
-    },
-    {
-      'imgUrl':
-          'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-      'description':
-          'My last day for this year holiday! So excited to share my memories with you guys! 😁😍',
-      'userName': 'Vaidehi',
-      'profilePic':
-          'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-      'likesCount': '150',
-      'duration': '1 hour ago',
-      'isLike': false,
-      'isSaved': false,
-    },
-    {
-      'imgUrl':
-          'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-      'description':
-          'My last day for this year holiday! So excited to share my memories with you guys! 😁😍',
-      'userName': 'Fenil',
-      'profilePic':
-          'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-      'likesCount': '150',
-      'duration': '1 hour ago',
-      'isLike': false,
-      'isSaved': false,
-    },
-    {
-      'imgUrl':
-          'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-      'description':
-          'My last day for this year holiday! So excited to share my memories with you guys! 😁😍',
-      'userName': 'Fenil',
-      'profilePic':
-          'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-      'likesCount': '150',
-      'duration': '1 hour ago',
-      'isLike': false,
-      'isSaved': false,
-    },
-    {
-      'imgUrl':
-          'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-      'description':
-          'My last day for this year holiday! So excited to share my memories with you guys! 😁😍',
-      'userName': 'Fenil',
-      'profilePic':
-          'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-      'likesCount': '150',
-      'duration': '1 hour ago',
-      'isLike': false,
-      'isSaved': false,
-    },
-    {
-      'imgUrl':
-          'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-      'description':
-          'My last day for this year holiday! So excited to share my memories with you guys! 😁😍',
-      'userName': 'Fenil',
-      'profilePic':
-          'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-      'likesCount': '150',
-      'duration': '1 hour ago',
-      'isLike': false,
-      'isSaved': false,
-    },
-    {
-      'imgUrl':
-          'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-      'description':
-          'My last day for this year holiday! So excited to share my memories with you guys! 😁😍',
-      'userName': 'Fenil',
-      'profilePic':
-          'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-      'likesCount': '150',
-      'duration': '1 hour ago',
-      'isLike': false,
-      'isSaved': false,
-    },
-    {
-      'imgUrl':
-          'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-      'description':
-          'My last day for this year holiday! So excited to share my memories with you guys! 😁😍',
-      'userName': 'Fenil',
-      'profilePic':
-          'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-      'likesCount': '150',
-      'duration': '1 hour ago',
-      'isLike': false,
-      'isSaved': false,
-    },
+    // {
+    //   'imgUrl':
+    //       'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+    //   'description':
+    //       'My last day for this year holiday! So excited to share my memories with you guys! 😁😍',
+    //   'userName': 'Fenil',
+    //   'profilePic':
+    //       'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+    //   'likesCount': '150',
+    //   'duration': '1 hour ago',
+    //   'isLike': false,
+    //   'isSaved': false,
+    // },
+    // {
+    //   'imgUrl':
+    //       'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+    //   'description':
+    //       'My last day for this year holiday! So excited to share my memories with you guys! 😁😍',
+    //   'userName': 'Vaidehi',
+    //   'profilePic':
+    //       'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+    //   'likesCount': '150',
+    //   'duration': '1 hour ago',
+    //   'isLike': false,
+    //   'isSaved': false,
+    // },
+    // {
+    //   'imgUrl':
+    //       'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+    //   'description':
+    //       'My last day for this year holiday! So excited to share my memories with you guys! 😁😍',
+    //   'userName': 'Fenil',
+    //   'profilePic':
+    //       'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+    //   'likesCount': '150',
+    //   'duration': '1 hour ago',
+    //   'isLike': false,
+    //   'isSaved': false,
+    // },
+    // {
+    //   'imgUrl':
+    //       'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+    //   'description':
+    //       'My last day for this year holiday! So excited to share my memories with you guys! 😁😍',
+    //   'userName': 'Fenil',
+    //   'profilePic':
+    //       'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+    //   'likesCount': '150',
+    //   'duration': '1 hour ago',
+    //   'isLike': false,
+    //   'isSaved': false,
+    // },
+    // {
+    //   'imgUrl':
+    //       'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+    //   'description':
+    //       'My last day for this year holiday! So excited to share my memories with you guys! 😁😍',
+    //   'userName': 'Fenil',
+    //   'profilePic':
+    //       'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+    //   'likesCount': '150',
+    //   'duration': '1 hour ago',
+    //   'isLike': false,
+    //   'isSaved': false,
+    // },
+    // {
+    //   'imgUrl':
+    //       'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+    //   'description':
+    //       'My last day for this year holiday! So excited to share my memories with you guys! 😁😍',
+    //   'userName': 'Fenil',
+    //   'profilePic':
+    //       'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+    //   'likesCount': '150',
+    //   'duration': '1 hour ago',
+    //   'isLike': false,
+    //   'isSaved': false,
+    // },
+    // {
+    //   'imgUrl':
+    //       'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+    //   'description':
+    //       'My last day for this year holiday! So excited to share my memories with you guys! 😁😍',
+    //   'userName': 'Fenil',
+    //   'profilePic':
+    //       'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+    //   'likesCount': '150',
+    //   'duration': '1 hour ago',
+    //   'isLike': false,
+    //   'isSaved': false,
+    // },
+    // {
+    //   'imgUrl':
+    //       'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+    //   'description':
+    //       'My last day for this year holiday! So excited to share my memories with you guys! 😁😍',
+    //   'userName': 'Fenil',
+    //   'profilePic':
+    //       'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+    //   'likesCount': '150',
+    //   'duration': '1 hour ago',
+    //   'isLike': false,
+    //   'isSaved': false,
+    // },
   ];
 
   postWidget(BuildContext context) {
     return Column(
-        children: List.generate(dataList.length, (index) {
+        children: List.generate(dataList[0]["post"].length, (index) {
       return Container(
         //color: Colors.blue,
         padding: EdgeInsets.only(bottom: 20),
@@ -146,7 +171,7 @@ class _DashboardState extends State<Dashboard> {
                             radius: 20.0,
                             child: ClipOval(
                               child: Image.network(
-                                dataList[index]['profilePic'],
+                                dataList[index],
                                 height: 40,
                                 width: 40,
                                 fit: BoxFit.cover,
@@ -155,7 +180,7 @@ class _DashboardState extends State<Dashboard> {
                         Padding(
                           padding: EdgeInsets.only(left: 10),
                           child: Text(
-                            dataList[index]['userName'],
+                            dataList[index]['postedBy'],
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 18),
                           ),
@@ -203,7 +228,7 @@ class _DashboardState extends State<Dashboard> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(10.0),
                         child: Image.network(
-                          dataList[index]['imgUrl'],
+                          dataList[index]['posts']['image'][0],
                           fit: BoxFit.fill,
                         ),
                       ),

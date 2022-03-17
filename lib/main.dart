@@ -61,18 +61,19 @@ class _ChattinState extends State<Chattin> {
       accentColor: Colors.white,
     );
     return loaded == false
-        ? CircularProgressIndicator()
-        : MaterialApp(
-            theme: theme ? _Dark : _light,
-            // darkTheme: ThemeData.dark(),
-
+        ? MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'ChatIn',
-            // theme: ThemeData(
-            //   fontFamily: fontFamily,
-            //   primarySwatch: Colors.blue,
-            // ),
-
+            theme: ThemeData(
+              fontFamily: fontFamily,
+              primarySwatch: Colors.blue,
+            ),
+            home: SplashScreen(),
+          )
+        : MaterialApp(
+            theme: theme ? _Dark : _light,
+            debugShowCheckedModeBanner: false,
+            title: 'ChatIn',
             home: SplashScreen(),
           );
   }
