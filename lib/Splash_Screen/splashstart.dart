@@ -4,25 +4,24 @@ import 'package:chattin/Splash_Screen/splash.dart';
 import 'package:flutter/material.dart';
 
 class splashStart extends StatefulWidget {
-  const splashStart({ Key? key }) : super(key: key);
+  const splashStart({Key? key}) : super(key: key);
 
   @override
   _splashStartState createState() => _splashStartState();
 }
 
 class _splashStartState extends State<splashStart> {
-
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 3), () {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => SplashScreen(),
-        ),
-      );
-    });
+    // Timer(const Duration(seconds: 3), () {
+    //   Navigator.pushReplacement(
+    //     context,
+    //     MaterialPageRoute(
+    //       builder: (context) => SplashScreen(),
+    //     ),
+    //   );
+    // });
   }
 
   @override
@@ -54,9 +53,9 @@ class _splashStartState extends State<splashStart> {
             ),
             Spacer(),
             CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                      strokeWidth: 4,
-                    ),
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+              strokeWidth: 4,
+            ),
             SizedBox(
               height: 120,
             ),

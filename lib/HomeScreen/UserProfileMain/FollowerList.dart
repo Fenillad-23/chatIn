@@ -1,5 +1,7 @@
 import 'package:chattin/HomeScreen/UserProfile/UserProfile.dart';
+import 'package:chattin/HomeScreen/UserProfileMain/UserProfileMain.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Network/network_dio.dart';
 
@@ -16,6 +18,7 @@ class _followerListState extends State<followerList> {
   List dataList = [];
   List data = [];
   NetworkRepository nw = NetworkRepository();
+  String? username;
 
   @override
   void initState() {
@@ -24,6 +27,8 @@ class _followerListState extends State<followerList> {
   }
 
   getdata() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    username = sharedPreferences.getString('username');
     dynamic getUserId = await nw.httpGet('User/find');
     loadUserList = getUserId;
     for (int i = 0; i < dataList.length; i++) {
@@ -85,14 +90,22 @@ class _followerListState extends State<followerList> {
                   padding: EdgeInsets.only(left: 0, right: 0),
                   child: ListTile(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => UserProfile(
-                            userName: data[index]['username'],
+                      if (data[index]['username'] == username) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => UserProfileMain()),
+                        );
+                      } else {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => UserProfile(
+                              userName: data[index]['username'],
+                            ),
                           ),
-                        ),
-                      );
+                        );
+                      }
                     },
                     title: Column(
                       children: [

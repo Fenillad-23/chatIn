@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:chattin/HomeScreen/Home.dart';
 import 'package:chattin/Splash_Screen/onBoarding.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
@@ -71,7 +72,7 @@ class _SplashScreenState extends State<SplashScreen> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => onBoarding(),
+          builder: (context) => Home(),
         ),
       );
     } else {
@@ -97,7 +98,7 @@ class _SplashScreenState extends State<SplashScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
-              height: 150,
+              height: 120,
             ),
             ClipRRect(
               borderRadius: BorderRadius.circular(100),
@@ -112,12 +113,19 @@ class _SplashScreenState extends State<SplashScreen> {
               height: 10,
             ),
             Spacer(),
-            CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
-              strokeWidth: 4,
+            Lottie.asset(
+              'assets/json/loader.json',
+              width: 70,
             ),
             SizedBox(
-              height: 120,
+              height: 30,
+            ),
+            Image.asset(
+              'assets/images/Semicolon_logo.jpg',
+              width: 150,
+            ),
+            SizedBox(
+              height: 100,
             ),
           ],
         ),

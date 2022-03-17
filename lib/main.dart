@@ -1,3 +1,5 @@
+import 'package:chattin/HomeScreen/UserProfileMain/UserProfileMain.dart';
+import 'package:chattin/Splash_Screen/splash.dart';
 import 'package:chattin/Splash_Screen/splashstart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -30,6 +32,7 @@ class _ChattinState extends State<Chattin> {
   getFontFamily() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     fontFamily = sharedPreferences.getString('fontFamily');
+    print(fontFamily);
     setState(() {});
   }
 
@@ -42,7 +45,7 @@ class _ChattinState extends State<Chattin> {
         fontFamily: fontFamily,
         primarySwatch: Colors.blue,
       ),
-      home: splashStart(),
+      home: SplashScreen(),
     );
   }
 }

@@ -4,9 +4,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../Splash_Screen/onBoarding.dart';
 import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
-// import 'package:restart_app/restart_app.dart';
-
-// String fonts = 'Slabo';
 
 class Setting extends StatefulWidget {
   const Setting({Key? key}) : super(key: key);

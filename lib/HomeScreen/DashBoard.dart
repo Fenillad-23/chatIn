@@ -18,7 +18,7 @@ class _DashboardState extends State<Dashboard> {
           'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
       'description':
           'My last day for this year holiday! So excited to share my memories with you guys! 😁😍',
-      'userName': 'fenil',
+      'userName': 'Fenil',
       'profilePic':
           'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
       'likesCount': '150',
@@ -31,7 +31,7 @@ class _DashboardState extends State<Dashboard> {
           'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
       'description':
           'My last day for this year holiday! So excited to share my memories with you guys! 😁😍',
-      'userName': 'vaidehi',
+      'userName': 'Vaidehi',
       'profilePic':
           'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
       'likesCount': '150',
@@ -44,7 +44,7 @@ class _DashboardState extends State<Dashboard> {
           'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
       'description':
           'My last day for this year holiday! So excited to share my memories with you guys! 😁😍',
-      'userName': 'fenil',
+      'userName': 'Fenil',
       'profilePic':
           'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
       'likesCount': '150',
@@ -57,7 +57,7 @@ class _DashboardState extends State<Dashboard> {
           'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
       'description':
           'My last day for this year holiday! So excited to share my memories with you guys! 😁😍',
-      'userName': 'fenil',
+      'userName': 'Fenil',
       'profilePic':
           'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
       'likesCount': '150',
@@ -70,7 +70,7 @@ class _DashboardState extends State<Dashboard> {
           'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
       'description':
           'My last day for this year holiday! So excited to share my memories with you guys! 😁😍',
-      'userName': 'fenil',
+      'userName': 'Fenil',
       'profilePic':
           'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
       'likesCount': '150',
@@ -83,7 +83,7 @@ class _DashboardState extends State<Dashboard> {
           'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
       'description':
           'My last day for this year holiday! So excited to share my memories with you guys! 😁😍',
-      'userName': 'fenil',
+      'userName': 'Fenil',
       'profilePic':
           'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
       'likesCount': '150',
@@ -96,7 +96,7 @@ class _DashboardState extends State<Dashboard> {
           'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
       'description':
           'My last day for this year holiday! So excited to share my memories with you guys! 😁😍',
-      'userName': 'fenil',
+      'userName': 'Fenil',
       'profilePic':
           'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
       'likesCount': '150',
@@ -109,7 +109,7 @@ class _DashboardState extends State<Dashboard> {
           'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
       'description':
           'My last day for this year holiday! So excited to share my memories with you guys! 😁😍',
-      'userName': 'fenil',
+      'userName': 'Fenil',
       'profilePic':
           'https://images.unsplash.com/photo-1578166375397-5711fb282325?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
       'likesCount': '150',
