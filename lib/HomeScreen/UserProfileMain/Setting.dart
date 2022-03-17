@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
 
 class Setting extends StatefulWidget {
-  const Setting({Key? key}) : super(key: key);
+  Setting({Key? key}) : super(key: key);
 
   @override
   _SettingState createState() => _SettingState();
@@ -27,7 +27,7 @@ class _SettingState extends State<Setting> {
   bool Notification = false;
   bool? Fingerprint;
   String dropdownvalue = 'Default';
-
+  late bool lightTheme;
   // List of items in our dropdown menu
   var items = [
     'Default',
@@ -38,6 +38,17 @@ class _SettingState extends State<Setting> {
   void initState() {
     super.initState();
     verify();
+    setDefaults();
+  }
+
+  setDefaults() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    if (sharedPreferences.getBool('lightTheme') == true) {
+      lightTheme = true;
+    } else {
+      lightTheme = false;
+    }
+    setState(() {});
   }
 
   setFontStyle() async {
@@ -61,6 +72,13 @@ class _SettingState extends State<Setting> {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     sharedPreferences.setBool("fingerprint", Fingerprint!);
     setState(() {});
+  }
+
+  changeTheme(bool val) async {
+    lightTheme = val;
+    print(val);
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    sharedPreferences.setBool("lightTheme", lightTheme);
   }
 
   @override
@@ -263,7 +281,7 @@ class _SettingState extends State<Setting> {
                                 Padding(
                                   padding:
                                       const EdgeInsets.fromLTRB(23, 15, 0, 15),
-                                  child: Text("Themes",
+                                  child: Text("Dark Mode",
                                       textAlign: TextAlign.left,
                                       style: TextStyle(
                                           color: Colors.black,
@@ -271,9 +289,19 @@ class _SettingState extends State<Setting> {
                                           fontWeight: FontWeight.w500)),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.only(right: 15),
-                                  child: Icon(Icons.arrow_forward_ios_rounded,
-                                      size: 20, color: Colors.black),
+                                  padding: const EdgeInsets.only(right: 13),
+                                  child: FlutterSwitch(
+                                    value: lightTheme,
+                                    height: 25,
+                                    width: 50,
+                                    onToggle: (val) {
+                                      setState(() {
+                                        lightTheme = !lightTheme;
+                                        changeTheme(lightTheme);
+                                        RestartWidget.restartApp(context);
+                                      });
+                                    },
+                                  ),
                                 ),
                               ],
                             ),

@@ -114,7 +114,7 @@ class _chat_main_listState extends State<chat_main_list> {
           child: Text("Chats",
               style: TextStyle(
                   fontSize: 27,
-                  color: Colors.black,
+                  // color: Colors.black,
                   fontWeight: FontWeight.bold)),
         ),
         actions: <Widget>[
@@ -122,14 +122,16 @@ class _chat_main_listState extends State<chat_main_list> {
             padding: const EdgeInsets.only(left: 15.0, top: 18.0),
             child: IconButton(
                 onPressed: () {},
-                icon: Icon(Icons.more_vert, color: Colors.black)),
+                icon: Icon(
+                  Icons.more_vert, //color: Colors.black
+                )),
           )
         ],
       ),
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Container(
-          color: new Color(0xFFECEFF1),
+          // color: new Color(0xFFECEFF1),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -207,8 +209,8 @@ class _chat_main_listState extends State<chat_main_list> {
                                                 child: Text(
                                                   chatUsers[index]['message'],
                                                   style: TextStyle(
-                                                      color: Colors.black
-                                                          .withOpacity(0.6),
+                                                      // color: Colors.black
+                                                      // .withOpacity(0.6),
                                                       fontSize: 12),
                                                   overflow:
                                                       TextOverflow.ellipsis,

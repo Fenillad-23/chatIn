@@ -87,7 +87,7 @@ class _UserProfileMainState extends State<UserProfileMain> {
       body: Container(
         height: MediaQuery.of(context).size.height,
         padding: EdgeInsets.fromLTRB(20, 30, 20, 0),
-        color: new Color(0xFFECEFF1),
+        // color: new Color(0xFFECEFF1),
         child: Stack(
           children: [
             SingleChildScrollView(
@@ -154,7 +154,7 @@ class _UserProfileMainState extends State<UserProfileMain> {
                                 child: Text(
                                   name != null ? name : "N/A",
                                   style: TextStyle(
-                                      color: Colors.black.withOpacity(0.6),
+                                      // color: Colors.black.withOpacity(0.6),
                                       fontSize: 12),
                                 ),
                               ),
@@ -222,12 +222,12 @@ class _UserProfileMainState extends State<UserProfileMain> {
                                     postCount == 'null'
                                         ? Text("0",
                                             style: TextStyle(
-                                                color: Colors.black,
+                                                // color: Colors.black,
                                                 fontSize: 20,
                                                 fontWeight: FontWeight.w500))
                                         : Text("$postCount",
                                             style: TextStyle(
-                                                color: Colors.black,
+                                                // color: Colors.black,
                                                 fontSize: 20,
                                                 fontWeight: FontWeight.w500)),
                                     SizedBox(
@@ -235,8 +235,8 @@ class _UserProfileMainState extends State<UserProfileMain> {
                                     ),
                                     Text("Post",
                                         style: TextStyle(
-                                            color:
-                                                Colors.black.withOpacity(0.6),
+                                            // color:
+                                            // Colors.black.withOpacity(0.6),
                                             fontSize: 12))
                                   ],
                                 ),
@@ -265,7 +265,7 @@ class _UserProfileMainState extends State<UserProfileMain> {
                                                 fontWeight: FontWeight.w500))
                                         : Text("$followers",
                                             style: TextStyle(
-                                                color: Colors.black,
+                                                // color: Colors.black,
                                                 fontSize: 20,
                                                 fontWeight: FontWeight.w500)),
                                     SizedBox(
@@ -273,8 +273,8 @@ class _UserProfileMainState extends State<UserProfileMain> {
                                     ),
                                     Text("Followers",
                                         style: TextStyle(
-                                            color:
-                                                Colors.black.withOpacity(0.6),
+                                            // color:
+                                            // Colors.black.withOpacity(0.6),
                                             fontSize: 12))
                                   ],
                                 ),
@@ -298,12 +298,12 @@ class _UserProfileMainState extends State<UserProfileMain> {
                                     following == 'null'
                                         ? Text("0",
                                             style: TextStyle(
-                                                color: Colors.black,
+                                                // color: Colors.black,
                                                 fontSize: 20,
                                                 fontWeight: FontWeight.w500))
                                         : Text("$following",
                                             style: TextStyle(
-                                                color: Colors.black,
+                                                // color: Colors.black,
                                                 fontSize: 20,
                                                 fontWeight: FontWeight.w500)),
                                     SizedBox(
@@ -311,8 +311,8 @@ class _UserProfileMainState extends State<UserProfileMain> {
                                     ),
                                     Text("Following",
                                         style: TextStyle(
-                                            color:
-                                                Colors.black.withOpacity(0.6),
+                                            // color:
+                                            // Colors.black.withOpacity(0.6),
                                             fontSize: 12))
                                   ],
                                 ),

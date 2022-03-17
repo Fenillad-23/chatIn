@@ -1,4 +1,3 @@
-import 'package:chattin/HomeScreen/UserProfileMain/UserProfileMain.dart';
 import 'package:chattin/Splash_Screen/splash.dart';
 import 'package:chattin/Splash_Screen/splashstart.dart';
 import 'package:flutter/material.dart';
@@ -10,11 +9,11 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-  runApp(RestartWidget(child: const Chattin()));
+  runApp(RestartWidget(child: Chattin()));
 }
 
 class Chattin extends StatefulWidget {
-  const Chattin({Key? key}) : super(key: key);
+  Chattin({Key? key}) : super(key: key);
 
   @override
   _ChattinState createState() => _ChattinState();
@@ -22,11 +21,13 @@ class Chattin extends StatefulWidget {
 
 class _ChattinState extends State<Chattin> {
   String? fontFamily;
-
+  late bool theme;
+  late bool loaded = false;
   void initState() {
     super.initState();
     // print(fonts);
     getFontFamily();
+    getTheme();
   }
 
   getFontFamily() async {
@@ -36,16 +37,43 @@ class _ChattinState extends State<Chattin> {
     setState(() {});
   }
 
+  getTheme() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    theme = sharedPreferences.getBool('lightTheme')!;
+    loaded = true;
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'ChatIn',
-      theme: ThemeData(
-        fontFamily: fontFamily,
-        primarySwatch: Colors.blue,
-      ),
-      home: SplashScreen(),
+    ThemeData _light = ThemeData(
+      brightness: Brightness.light,
+      primarySwatch: Colors.blue,
+      fontFamily: fontFamily,
     );
+    ThemeData _Dark = ThemeData(
+      brightness: Brightness.dark,
+      primarySwatch: Colors.blue,
+      fontFamily: fontFamily,
+      iconTheme: IconThemeData(
+        color: Colors.white,
+      ),
+      accentColor: Colors.white,
+    );
+    return loaded == false
+        ? CircularProgressIndicator()
+        : MaterialApp(
+            theme: theme ? _Dark : _light,
+            // darkTheme: ThemeData.dark(),
+
+            debugShowCheckedModeBanner: false,
+            title: 'ChatIn',
+            // theme: ThemeData(
+            //   fontFamily: fontFamily,
+            //   primarySwatch: Colors.blue,
+            // ),
+
+            home: SplashScreen(),
+          );
   }
 }

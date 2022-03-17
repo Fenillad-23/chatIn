@@ -131,7 +131,7 @@ class _DashboardState extends State<Dashboard> {
             borderRadius: BorderRadius.circular(10),
             borderSide: BorderSide(color: Colors.white),
           ),
-          shadowColor: Colors.white,
+          shadowColor: Color.fromRGBO(255, 255, 255, 1),
           child: Container(
             padding: EdgeInsets.all(15.0),
             child: Column(
@@ -183,11 +183,14 @@ class _DashboardState extends State<Dashboard> {
                 Row(
                   children: [
                     Container(
-                        width: MediaQuery.of(context).size.width - 58,
-                        child: Text(dataList[index]['description'],
-                            style: TextStyle(
-                                color: Colors.black.withOpacity(0.6),
-                                fontSize: 12)))
+                      width: MediaQuery.of(context).size.width - 58,
+                      child: Text(
+                        dataList[index]['description'],
+                        style: TextStyle(
+                            // color: Colors.black.withOpacity(0.6),
+                            fontSize: 12),
+                      ),
+                    )
                   ],
                 ),
                 SizedBox(
@@ -308,7 +311,7 @@ class _DashboardState extends State<Dashboard> {
           elevation: 0,
           title: Text('Home',
               style: TextStyle(
-                  color: Colors.black,
+                  // color: Colors.black,
                   fontWeight: FontWeight.bold,
                   fontSize: 22)),
           actions: <Widget>[
