@@ -68,6 +68,29 @@ class _LoginState extends State<Login> {
       print('\x1b[93m --- $response');
     }
   }
+  // login() async {
+  //   dynamic response = await nw.httpPost(
+  //     'api/login/',
+  //     {
+  //       'email': 'fenillad023@gmail.com',
+  //       'password': 'fenil2310',
+  //     },
+  //   );
+  //   if (response['user']['email'] == 'fenillad023@gmail.com') {
+  //     print('logged in successfully');
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       SnackBar(content: Text('logged in successfully')),
+  //     );
+  //     Navigator.pushReplacement(
+  //       context,MaterialPageRoute(builder: (context)=> Home())
+  //     );
+  //   } else if (response['error'] == 'previous session exists!') {
+  //     print('previous session still not terminated');
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       SnackBar(content: Text('previous session still not terminated')),
+  //     );
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
