@@ -48,7 +48,7 @@ class _DashboardState extends State<Dashboard> {
       // print("print posted by\n");
       // print(dataList[0][0]['postedBy']);
       print("print response image\n");
-      print(response['posts'][0][0]['image']);
+      print(response['posts'][0][0]['image'][0]);
       print("print image by\n");
       print(dataList[0][0]['image'][0]);
     }
@@ -248,7 +248,7 @@ class _DashboardState extends State<Dashboard> {
           elevation: 0,
           title: Text('Home',
               style: TextStyle(
-                  // color: Colors.black,
+                  color: Colors.black,
                   fontWeight: FontWeight.bold,
                   fontSize: 22)),
           actions: <Widget>[
