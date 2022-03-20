@@ -14,6 +14,7 @@ class _NotificationState extends State<Notificationscreen> {
   void initState() {
     super.initState();
     setThemeState();
+    setState(() {});
   }
 
   @override

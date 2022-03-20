@@ -40,6 +40,7 @@ class _SettingState extends State<Setting> {
     verify();
     setDefaults();
     setThemeState();
+    setState(() {});
   }
 
   bool? darkthemeState;

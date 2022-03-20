@@ -22,6 +22,7 @@ class _DashboardState extends State<Dashboard> {
     super.initState();
     LoadPosts();
     setThemeState();
+    setState(() {});
   }
 
   void setThemeState() async {

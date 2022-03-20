@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'individualChat.dart';
 
@@ -12,7 +13,16 @@ class chat_main_list extends StatefulWidget {
 class _chat_main_listState extends State<chat_main_list> {
   void initState() {
     super.initState();
+    setThemeState();
     setState(() {});
+  }
+
+  bool? darkthemeState;
+  void setThemeState() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    darkthemeState = sharedPreferences.getBool("lightTheme")!;
+    setState(() {});
+    // print(sharedPreferences.getBool("lightTheme"));
   }
 
   List chatUsers = [
@@ -114,7 +124,7 @@ class _chat_main_listState extends State<chat_main_list> {
           child: Text("Chats",
               style: TextStyle(
                   fontSize: 27,
-                  // color: Colors.black,
+                  color: darkthemeState! ? Colors.white : Colors.black,
                   fontWeight: FontWeight.bold)),
         ),
         actions: <Widget>[
@@ -123,7 +133,8 @@ class _chat_main_listState extends State<chat_main_list> {
             child: IconButton(
                 onPressed: () {},
                 icon: Icon(
-                  Icons.more_vert, //color: Colors.black
+                  Icons.more_vert,
+                  color: darkthemeState! ? Colors.white : Colors.black,
                 )),
           )
         ],
