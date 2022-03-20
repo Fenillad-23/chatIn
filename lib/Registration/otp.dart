@@ -27,6 +27,7 @@ class _otpScreenState extends State<otpScreen> {
     get_email = sharedPreferences.getString("email").toString();
     setState(() {});
   }
+
   @override
   void initState() {
     super.initState();
