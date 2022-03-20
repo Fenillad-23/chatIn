@@ -39,6 +39,15 @@ class _SettingState extends State<Setting> {
     super.initState();
     verify();
     setDefaults();
+    setThemeState();
+  }
+
+  bool? darkthemeState;
+  void setThemeState() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    darkthemeState = sharedPreferences.getBool("lightTheme")!;
+    setState(() {});
+    // print(sharedPreferences.getBool("lightTheme"));
   }
 
   setDefaults() async {
@@ -87,11 +96,14 @@ class _SettingState extends State<Setting> {
       appBar: AppBar(
         title: Text(
           "Settings",
-          style: TextStyle(color: Colors.black),
+          style:
+              TextStyle(color: darkthemeState! ? Colors.white : Colors.black),
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: darkthemeState! ? Colors.black54 : Colors.transparent,
+        elevation: 0,
         leading: new IconButton(
-          icon: new Icon(Icons.arrow_back, color: Colors.black),
+          icon: new Icon(Icons.arrow_back,
+              color: darkthemeState! ? Colors.white : Colors.black),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -100,7 +112,7 @@ class _SettingState extends State<Setting> {
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.all(25.0),
-          color: new Color(0xFFECEFF1),
+          color: darkthemeState! ? Colors.black54 : new Color(0xFFECEFF1),
           height: MediaQuery.of(context).size.height,
           child: Column(
             children: [

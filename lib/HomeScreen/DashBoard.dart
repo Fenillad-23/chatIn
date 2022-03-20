@@ -3,7 +3,6 @@ import 'package:chattin/Network/network_dio.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'Chat/Chat_Ui_Main.dart';
 
 class Dashboard extends StatefulWidget {
@@ -17,20 +16,20 @@ class _DashboardState extends State<Dashboard> {
   NetworkRepository nw = NetworkRepository();
   List dataList = [];
   bool loaded = false;
+  bool? darkthemeState;
   @override
   void initState() {
     super.initState();
     LoadPosts();
+    setThemeState();
   }
 
-  final List<String> imageList = [
-    "https://cdn.pixabay.com/photo/2017/12/03/18/04/christmas-balls-2995437_960_720.jpg",
-    "https://cdn.pixabay.com/photo/2017/12/13/00/23/christmas-3015776_960_720.jpg",
-    "https://cdn.pixabay.com/photo/2019/12/19/10/55/christmas-market-4705877_960_720.jpg",
-    "https://cdn.pixabay.com/photo/2019/12/20/00/03/road-4707345_960_720.jpg",
-    "https://cdn.pixabay.com/photo/2019/12/22/04/18/x-mas-4711785__340.jpg",
-    "https://cdn.pixabay.com/photo/2016/11/22/07/09/spruce-1848543__340.jpg"
-  ];
+  void setThemeState() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    darkthemeState = sharedPreferences.getBool("lightTheme")!;
+    setState(() {});
+    // print(sharedPreferences.getBool("lightTheme"));
+  }
 
   LoadPosts() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
@@ -257,14 +256,15 @@ class _DashboardState extends State<Dashboard> {
           elevation: 0,
           title: Text('Home',
               style: TextStyle(
-                  color: Colors.black,
+                  color: darkthemeState! ? Colors.white : Colors.black,
                   fontWeight: FontWeight.bold,
                   fontSize: 22)),
           actions: <Widget>[
             Padding(
               padding: const EdgeInsets.only(right: 8.0),
               child: IconButton(
-                  icon: Icon(FontAwesomeIcons.commentDots, color: Colors.black),
+                  icon: Icon(FontAwesomeIcons.commentDots,
+                      color: darkthemeState! ? Colors.white : Colors.black),
                   onPressed: () {
                     Navigator.push(
                       context,

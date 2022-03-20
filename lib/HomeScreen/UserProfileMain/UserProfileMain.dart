@@ -27,7 +27,16 @@ class _UserProfileMainState extends State<UserProfileMain> {
   @override
   void initState() {
     super.initState();
+    setThemeState();
     getDetails();
+  }
+
+  bool? darkthemeState;
+  void setThemeState() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    darkthemeState = sharedPreferences.getBool("lightTheme")!;
+    setState(() {});
+    // print(sharedPreferences.getBool("lightTheme"));
   }
 
   List data = [];
@@ -66,7 +75,8 @@ class _UserProfileMainState extends State<UserProfileMain> {
         elevation: 0,
         title: Text(
           'Profile',
-          // style: TextStyle(color: Colors.black),
+          style:
+              TextStyle(color: darkthemeState! ? Colors.white : Colors.black),
         ),
         actions: <Widget>[
           Padding(
@@ -74,7 +84,7 @@ class _UserProfileMainState extends State<UserProfileMain> {
             child: IconButton(
               icon: Icon(
                 Icons.settings_outlined,
-                // color: Colors.black,
+                color: darkthemeState! ? Colors.white : Colors.black,
               ),
               onPressed: () {
                 Navigator.push(context,

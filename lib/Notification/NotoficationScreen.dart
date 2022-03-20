@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Notificationscreen extends StatefulWidget {
   const Notificationscreen({Key? key}) : super(key: key);
@@ -10,20 +11,38 @@ class Notificationscreen extends StatefulWidget {
 
 class _NotificationState extends State<Notificationscreen> {
   @override
+  void initState() {
+    super.initState();
+    setThemeState();
+  }
+
+  @override
   List NototficationList = [];
+  bool? darkthemeState;
+  void setThemeState() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    darkthemeState = sharedPreferences.getBool("lightTheme")!;
+    setState(() {});
+    // print(sharedPreferences.getBool("lightTheme"));
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
-          title: Text("Notification", style: TextStyle(color: Colors.black)),
+          title: Text("Notification",
+              style: TextStyle(
+                  color: darkthemeState! ? Colors.white : Colors.black)),
           leading: IconButton(
               onPressed: () {},
-              icon: Icon(Icons.arrow_back, color: Colors.black)),
+              icon: Icon(Icons.arrow_back,
+                  color: darkthemeState! ? Colors.white : Colors.black)),
           actions: [
             IconButton(
                 onPressed: () {},
-                icon: Icon(Icons.more_vert, color: Colors.black)),
+                icon: Icon(Icons.more_vert,
+                    color: darkthemeState! ? Colors.white : Colors.black)),
           ],
         ),
         body: NototficationList.length < 1
