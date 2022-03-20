@@ -58,6 +58,7 @@ class _UserProfileState extends State<UserProfile> {
           response['postresult'] != null && response['postresult'].length != 0
               ? response['postresult'][0]['image']
               : [];
+      print("-----------$imageList");
       print("----------------");
       names = response['result'][0]['followers'];
       print(names);
