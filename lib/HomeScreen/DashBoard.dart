@@ -257,7 +257,7 @@ class _DashboardState extends State<Dashboard> {
           elevation: 0,
           title: Text('Home',
               style: TextStyle(
-                  // color: Colors.black,
+                  color: Colors.black,
                   fontWeight: FontWeight.bold,
                   fontSize: 22)),
           actions: <Widget>[

@@ -66,7 +66,7 @@ class _UserProfileMainState extends State<UserProfileMain> {
         elevation: 0,
         title: Text(
           'Profile',
-          style: TextStyle(color: Colors.black),
+          // style: TextStyle(color: Colors.black),
         ),
         actions: <Widget>[
           Padding(
@@ -74,7 +74,7 @@ class _UserProfileMainState extends State<UserProfileMain> {
             child: IconButton(
               icon: Icon(
                 Icons.settings_outlined,
-                color: Colors.black,
+                // color: Colors.black,
               ),
               onPressed: () {
                 Navigator.push(context,

@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:chattin/Splash_Screen/splash.dart';
 import 'package:chattin/Splash_Screen/splashstart.dart';
 import 'package:flutter/material.dart';
@@ -49,15 +51,15 @@ class _ChattinState extends State<Chattin> {
     ThemeData _light = ThemeData(
       brightness: Brightness.light,
       primarySwatch: Colors.blue,
+      iconTheme: IconThemeData(color: Colors.black),
+      //,
       fontFamily: fontFamily,
     );
     ThemeData _Dark = ThemeData(
       brightness: Brightness.dark,
       primarySwatch: Colors.blue,
+      iconTheme: IconThemeData(color: Colors.white),
       fontFamily: fontFamily,
-      iconTheme: IconThemeData(
-        color: Colors.white,
-      ),
       accentColor: Colors.white,
     );
     return loaded == false
@@ -67,6 +69,9 @@ class _ChattinState extends State<Chattin> {
             theme: ThemeData(
               fontFamily: fontFamily,
               primarySwatch: Colors.blue,
+              iconTheme: IconThemeData(
+                color: Colors.black,
+              ),
             ),
             home: SplashScreen(),
           )
