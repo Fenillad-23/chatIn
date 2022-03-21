@@ -41,7 +41,10 @@ class _UploadImageState extends State<UploadImage> {
     });
   }
 
+  bool? darkthemeState;
   void selectedImage() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    darkthemeState = sharedPreferences.getBool("lightTheme");
     final List<XFile>? selectedImage = await _picker.pickMultiImage();
     // List<XFile?> _videoFile = ImagePicker.pickVideo(source: ImageSource.gallery);
     if (selectedImage!.isNotEmpty) {
@@ -165,7 +168,9 @@ class _UploadImageState extends State<UploadImage> {
                     height: 280,
                     width: MediaQuery.of(context).size.width,
                     decoration: new BoxDecoration(
-                      color: Colors.white,
+                      color: darkthemeState == true
+                          ? Colors.black.withOpacity(0.6)
+                          : Colors.white,
                       borderRadius: new BorderRadius.only(
                           topLeft: Radius.circular(25.0),
                           topRight: Radius.circular(25.0)),
@@ -202,7 +207,9 @@ class _UploadImageState extends State<UploadImage> {
                     height: 300,
                     width: MediaQuery.of(context).size.width,
                     decoration: new BoxDecoration(
-                      color: Colors.white,
+                      color: darkthemeState == true
+                          ? Colors.black.withOpacity(0.6)
+                          : Colors.white,
                       borderRadius: new BorderRadius.only(
                           topLeft: Radius.circular(25.0),
                           topRight: Radius.circular(25.0)),
@@ -354,7 +361,10 @@ class _UploadImageState extends State<UploadImage> {
                               height: 280,
                               width: MediaQuery.of(context).size.width,
                               decoration: new BoxDecoration(
-                                color: Colors.white,
+                                color: darkthemeState == true
+                                    ? Colors.black.withOpacity(0.6)
+                                    : Colors.white,
+                                //color: Colors.white.withOpacity(0.6),
                                 borderRadius: new BorderRadius.only(
                                     topLeft: Radius.circular(25.0),
                                     topRight: Radius.circular(25.0)),
@@ -370,6 +380,9 @@ class _UploadImageState extends State<UploadImage> {
                                           Text("Add Caption",
                                               textAlign: TextAlign.left,
                                               style: TextStyle(
+                                                  color: darkthemeState == true
+                                                      ? Colors.white
+                                                      : Colors.black,
                                                   fontSize: 20,
                                                   fontWeight: FontWeight.w500)),
                                         ],
@@ -379,17 +392,21 @@ class _UploadImageState extends State<UploadImage> {
                                       ),
                                       TextFormField(
                                         decoration: InputDecoration(
-                                          prefixIcon:
-                                              Icon(Icons.description_outlined),
-                                          alignLabelWithHint: true,
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(9),
-                                          ),
-                                          labelText: 'Write a Caption',
-                                          hintText:
-                                              'Enter your caption here ...',
-                                        ),
+                                            prefixIcon: Icon(
+                                                Icons.description_outlined),
+                                            alignLabelWithHint: true,
+                                            border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(9),
+                                            ),
+                                            labelText: 'Write a Caption',
+                                            hintText:
+                                                'Enter your caption here ...',
+                                            hintStyle: TextStyle(
+                                              color: darkthemeState == true
+                                                  ? Colors.black
+                                                  : Colors.black,
+                                            )),
                                         controller: captionController,
                                       ),
                                       SizedBox(
@@ -414,7 +431,9 @@ class _UploadImageState extends State<UploadImage> {
                                           ),
                                           child: Text(
                                             "Upload",
-                                            style: TextStyle(fontSize: 20),
+                                            style: TextStyle(
+                                              fontSize: 20,
+                                            ),
                                           ),
                                         ),
                                       ),

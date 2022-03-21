@@ -10,6 +10,9 @@ class Notificationscreen extends StatefulWidget {
 }
 
 class _NotificationState extends State<Notificationscreen> {
+  List NototficationList = [];
+  bool? darkthemeState;
+
   @override
   void initState() {
     super.initState();
@@ -18,13 +21,11 @@ class _NotificationState extends State<Notificationscreen> {
   }
 
   @override
-  List NototficationList = [];
-  bool? darkthemeState;
   void setThemeState() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    darkthemeState = sharedPreferences.getBool("lightTheme")!;
+    darkthemeState = sharedPreferences.getBool("lightTheme");
     setState(() {});
-    // print(sharedPreferences.getBool("lightTheme"));
+    print(sharedPreferences.getBool("lightTheme"));
   }
 
   Widget build(BuildContext context) {
@@ -34,16 +35,17 @@ class _NotificationState extends State<Notificationscreen> {
           elevation: 0,
           title: Text("Notification",
               style: TextStyle(
-                  color: darkthemeState! ? Colors.white : Colors.black)),
+                  color: darkthemeState == true ? Colors.white : Colors.black)),
           leading: IconButton(
               onPressed: () {},
               icon: Icon(Icons.arrow_back,
-                  color: darkthemeState! ? Colors.white : Colors.black)),
+                  color: darkthemeState == true ? Colors.white : Colors.black)),
           actions: [
             IconButton(
                 onPressed: () {},
                 icon: Icon(Icons.more_vert,
-                    color: darkthemeState! ? Colors.white : Colors.black)),
+                    color:
+                        darkthemeState == true ? Colors.white : Colors.black)),
           ],
         ),
         body: NototficationList.length < 1

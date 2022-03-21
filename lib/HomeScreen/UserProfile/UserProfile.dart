@@ -25,6 +25,8 @@ class _UserProfileState extends State<UserProfile> {
   String? name, fullName, profilepic;
   bool? isDataLoading = false;
   List names = [];
+
+  bool? darkthemeState;
   void initState() {
     super.initState();
     sendUserName();
@@ -35,6 +37,7 @@ class _UserProfileState extends State<UserProfile> {
     isDataLoading = true;
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     name = sharedPreferences.getString("username")!;
+    darkthemeState = sharedPreferences.getBool("lightTheme");
     // print(name);
 
     dynamic response = await nw.httpPost("user/getData", {
@@ -102,7 +105,8 @@ class _UserProfileState extends State<UserProfile> {
       appBar: AppBar(
         title: Text(
           widget.userName.toString(),
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(),
+          //color: darkthemeState == true ? Colors.white : Colors.black),
         ),
         actions: <Widget>[
           Padding(
@@ -110,7 +114,7 @@ class _UserProfileState extends State<UserProfile> {
             child: IconButton(
               icon: Icon(
                 Icons.more_vert,
-                color: Colors.black,
+                //color: Colors.black,
               ),
               onPressed: () {
                 // do something
@@ -118,9 +122,11 @@ class _UserProfileState extends State<UserProfile> {
             ),
           )
         ],
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         leading: new IconButton(
-          icon: new Icon(Icons.arrow_back, color: Colors.black),
+          icon: new Icon(
+            Icons.arrow_back,
+          ), //color: Colors.black),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -129,7 +135,7 @@ class _UserProfileState extends State<UserProfile> {
       body: Container(
         height: MediaQuery.of(context).size.height,
         padding: EdgeInsets.fromLTRB(20, 30, 20, 0),
-        color: new Color(0xFFECEFF1),
+        //color: new Color(0xFFECEFF1),
         child: Stack(
           children: [
             SingleChildScrollView(
@@ -197,8 +203,9 @@ class _UserProfileState extends State<UserProfile> {
                                             ? fullName.toString()
                                             : " ",
                                         style: TextStyle(
-                                            color:
-                                                Colors.black.withOpacity(0.6),
+                                            color: darkthemeState == true
+                                                ? Colors.white.withOpacity(0.6)
+                                                : Colors.black.withOpacity(0.6),
                                             fontSize: 12))),
                               ],
                             ),
@@ -230,7 +237,10 @@ class _UserProfileState extends State<UserProfile> {
                                 icon: Container(
                                     padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                                     child: Icon(Icons.chat_bubble_outline,
-                                        size: 28, color: Colors.black87)),
+                                        size: 28,
+                                        color: darkthemeState == true
+                                            ? Colors.white
+                                            : Colors.black87)),
                                 label: Text("")),
                           ),
                           Padding(
@@ -308,12 +318,16 @@ class _UserProfileState extends State<UserProfile> {
                                     postCount == null
                                         ? Text("0",
                                             style: TextStyle(
-                                                color: Colors.black,
+                                                color: darkthemeState == true
+                                                    ? Colors.white
+                                                    : Colors.black,
                                                 fontSize: 20,
                                                 fontWeight: FontWeight.w500))
                                         : Text(postCount.toString(),
                                             style: TextStyle(
-                                                color: Colors.black,
+                                                color: darkthemeState == true
+                                                    ? Colors.white
+                                                    : Colors.black,
                                                 fontSize: 20,
                                                 fontWeight: FontWeight.w500)),
                                     SizedBox(
@@ -321,8 +335,9 @@ class _UserProfileState extends State<UserProfile> {
                                     ),
                                     Text("Post",
                                         style: TextStyle(
-                                            color:
-                                                Colors.black.withOpacity(0.6),
+                                            color: darkthemeState == true
+                                                ? Colors.white.withOpacity(0.6)
+                                                : Colors.black.withOpacity(0.6),
                                             fontSize: 12))
                                   ],
                                 ),
@@ -346,12 +361,16 @@ class _UserProfileState extends State<UserProfile> {
                                     followersCount == null
                                         ? Text("0",
                                             style: TextStyle(
-                                                color: Colors.black,
+                                                color: darkthemeState == true
+                                                    ? Colors.white
+                                                    : Colors.black,
                                                 fontSize: 20,
                                                 fontWeight: FontWeight.w500))
                                         : Text(followersCount.toString(),
                                             style: TextStyle(
-                                                color: Colors.black,
+                                                color: darkthemeState == true
+                                                    ? Colors.white
+                                                    : Colors.black,
                                                 fontSize: 20,
                                                 fontWeight: FontWeight.w500)),
                                     SizedBox(
@@ -359,8 +378,9 @@ class _UserProfileState extends State<UserProfile> {
                                     ),
                                     Text("Followers",
                                         style: TextStyle(
-                                            color:
-                                                Colors.black.withOpacity(0.6),
+                                            color: darkthemeState == true
+                                                ? Colors.white.withOpacity(0.6)
+                                                : Colors.black.withOpacity(0.6),
                                             fontSize: 12))
                                   ],
                                 ),
@@ -384,12 +404,16 @@ class _UserProfileState extends State<UserProfile> {
                                     followingCount == null
                                         ? Text("0",
                                             style: TextStyle(
-                                                color: Colors.black,
+                                                color: darkthemeState == true
+                                                    ? Colors.white
+                                                    : Colors.black,
                                                 fontSize: 20,
                                                 fontWeight: FontWeight.w500))
                                         : Text(followingCount.toString(),
                                             style: TextStyle(
-                                                color: Colors.black,
+                                                color: darkthemeState == true
+                                                    ? Colors.white
+                                                    : Colors.black,
                                                 fontSize: 20,
                                                 fontWeight: FontWeight.w500)),
                                     SizedBox(
@@ -397,8 +421,9 @@ class _UserProfileState extends State<UserProfile> {
                                     ),
                                     Text("Following",
                                         style: TextStyle(
-                                            color:
-                                                Colors.black.withOpacity(0.6),
+                                            color: darkthemeState == true
+                                                ? Colors.white.withOpacity(0.6)
+                                                : Colors.black.withOpacity(0.6),
                                             fontSize: 12))
                                   ],
                                 ),

@@ -17,9 +17,11 @@ class _SearchUserState extends State<SearchUser> {
 
   List loadUserList = [];
 
+  bool? darkthemeState;
   getdata() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     userMainName = sharedPreferences.getString("username");
+    darkthemeState = sharedPreferences.getBool("lightTheme");
     dynamic getUserId = await nw.httpGet('User/find');
     loadUserList = getUserId;
     loadUserList.removeWhere((data) => data['username'] == userMainName);
@@ -66,10 +68,17 @@ class _SearchUserState extends State<SearchUser> {
                 onSearchTextChanged(_textController.text);
               },
               decoration: InputDecoration(
-                  prefixIcon:
-                      IconButton(icon: Icon(Icons.search), onPressed: () {}),
+                  prefixIcon: IconButton(
+                      icon: Icon(Icons.search,
+                          color: darkthemeState == true
+                              ? Colors.black
+                              : Colors.grey),
+                      onPressed: () {}),
                   suffixIcon: IconButton(
-                    icon: Icon(Icons.clear),
+                    icon: Icon(Icons.clear,
+                        color: darkthemeState == true
+                            ? Colors.black
+                            : Colors.grey),
                     onPressed: () {
                       this.setState(() {
                         _textController.clear(); //Clear value
@@ -78,6 +87,9 @@ class _SearchUserState extends State<SearchUser> {
                     },
                   ),
                   hintText: 'Search User',
+                  hintStyle: TextStyle(
+                      color:
+                          darkthemeState == true ? Colors.black : Colors.grey),
                   border: InputBorder.none),
             ),
           ),
@@ -150,8 +162,9 @@ class _SearchUserState extends State<SearchUser> {
                                     padding: EdgeInsets.fromLTRB(2, 5, 0, 0),
                                     child: Text(datalist[index]['name'],
                                         style: TextStyle(
-                                            color:
-                                                Colors.black.withOpacity(0.6),
+                                            color: darkthemeState == true
+                                                ? Colors.white.withOpacity(0.6)
+                                                : Colors.black.withOpacity(0.6),
                                             fontSize: 12))),
                               ],
                             ),
