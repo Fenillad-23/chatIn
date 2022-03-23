@@ -28,7 +28,7 @@ class _DashboardState extends State<Dashboard> {
 
   void setThemeState() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    darkthemeState = sharedPreferences.getBool("lightTheme")!;
+    darkthemeState = sharedPreferences.getBool("lightTheme");
     setState(() {});
     // print(sharedPreferences.getBool("lightTheme"));
   }
@@ -225,7 +225,9 @@ class _DashboardState extends State<Dashboard> {
                                 '1 hour ago',
                                 // dataList[index]['duration'],
                                 style: TextStyle(
-                                  color: Colors.black.withOpacity(0.6),
+                                  color: darkthemeState == true
+                                      ? Colors.white.withOpacity(0.6)
+                                      : Colors.black.withOpacity(0.6),
                                   fontSize: 12,
                                 ),
                               )
@@ -259,7 +261,7 @@ class _DashboardState extends State<Dashboard> {
           elevation: 0,
           title: Text('Home',
               style: TextStyle(
-                  color: darkthemeState! ? Colors.white : Colors.black,
+                  color: darkthemeState == true ? Colors.white : Colors.black,
                   fontWeight: FontWeight.bold,
                   fontSize: 22)),
           actions: <Widget>[
@@ -267,7 +269,8 @@ class _DashboardState extends State<Dashboard> {
               padding: const EdgeInsets.only(right: 8.0),
               child: IconButton(
                   icon: Icon(FontAwesomeIcons.commentDots,
-                      color: darkthemeState! ? Colors.white : Colors.black),
+                      color:
+                          darkthemeState == true ? Colors.white : Colors.black),
                   onPressed: () {
                     Navigator.push(
                       context,

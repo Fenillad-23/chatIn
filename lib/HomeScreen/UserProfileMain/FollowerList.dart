@@ -26,9 +26,11 @@ class _followerListState extends State<followerList> {
     getDetails();
   }
 
+  bool? darkthemeState;
   getdata() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     username = sharedPreferences.getString('username');
+    darkthemeState = sharedPreferences.getBool("lightTheme");
     dynamic getUserId = await nw.httpGet('User/find');
     loadUserList = getUserId;
     for (int i = 0; i < dataList.length; i++) {
@@ -65,7 +67,7 @@ class _followerListState extends State<followerList> {
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
-            color: Colors.black,
+            color: darkthemeState == true ? Colors.white : Colors.black,
           ),
           onPressed: () {
             Navigator.of(context).pop();
@@ -75,13 +77,15 @@ class _followerListState extends State<followerList> {
         elevation: 0,
         title: Text(
           'Followers',
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(
+            color: darkthemeState == true ? Colors.white : Colors.black,
+          ),
         ),
       ),
       body: Container(
           height: MediaQuery.of(context).size.height,
           padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
-          color: new Color(0xFFECEFF1),
+          //color: new Color(0xFFECEFF1),
           child: ListView.builder(
               itemCount: data.length,
               shrinkWrap: true,
@@ -149,8 +153,11 @@ class _followerListState extends State<followerList> {
                                               EdgeInsets.fromLTRB(2, 5, 0, 0),
                                           child: Text(data[index]['name'],
                                               style: TextStyle(
-                                                  color: Colors.black
-                                                      .withOpacity(0.6),
+                                                  color: darkthemeState == true
+                                                      ? Colors.white
+                                                          .withOpacity(0.6)
+                                                      : Colors.black
+                                                          .withOpacity(0.6),
                                                   fontSize: 12))),
                                     ],
                                   ),

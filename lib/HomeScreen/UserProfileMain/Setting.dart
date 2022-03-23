@@ -18,6 +18,7 @@ class LocalAuthApi {
     try {
       return await _auth.canCheckBiometrics;
     } on PlatformException catch (e) {
+      print(e);
       return false;
     }
   }
@@ -28,7 +29,7 @@ class _SettingState extends State<Setting> {
   bool? Fingerprint;
   String dropdownvalue = 'Default';
   late bool lightTheme;
-  // List of items in our dropdown menu
+
   var items = [
     'Default',
     'Slabo',
@@ -46,7 +47,7 @@ class _SettingState extends State<Setting> {
   bool? darkthemeState;
   void setThemeState() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    darkthemeState = sharedPreferences.getBool("lightTheme")!;
+    darkthemeState = sharedPreferences.getBool("lightTheme");
     setState(() {});
     // print(sharedPreferences.getBool("lightTheme"));
   }
@@ -97,14 +98,15 @@ class _SettingState extends State<Setting> {
       appBar: AppBar(
         title: Text(
           "Settings",
-          style:
-              TextStyle(color: darkthemeState! ? Colors.white : Colors.black),
+          style: TextStyle(
+              color: darkthemeState == true ? Colors.white : Colors.black),
         ),
-        backgroundColor: darkthemeState! ? Colors.black54 : Colors.transparent,
+        backgroundColor:
+            darkthemeState == true ? Colors.black54 : Colors.transparent,
         elevation: 0,
         leading: new IconButton(
           icon: new Icon(Icons.arrow_back,
-              color: darkthemeState! ? Colors.white : Colors.black),
+              color: darkthemeState == true ? Colors.white : Colors.black),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -113,7 +115,8 @@ class _SettingState extends State<Setting> {
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.all(25.0),
-          color: darkthemeState! ? Colors.black54 : new Color(0xFFECEFF1),
+          color:
+              darkthemeState == true ? Colors.black54 : new Color(0xFFECEFF1),
           height: MediaQuery.of(context).size.height,
           child: Column(
             children: [
@@ -151,14 +154,16 @@ class _SettingState extends State<Setting> {
                                   child: Text("Liked Post",
                                       textAlign: TextAlign.left,
                                       style: TextStyle(
-                                          color: Colors.black,
                                           fontSize: 16,
                                           fontWeight: FontWeight.w500)),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(right: 15),
                                   child: Icon(Icons.arrow_forward_ios_rounded,
-                                      size: 20, color: Colors.black),
+                                      size: 20,
+                                      color: darkthemeState == true
+                                          ? Colors.white
+                                          : Colors.black),
                                 ),
                               ],
                             ),
@@ -190,14 +195,16 @@ class _SettingState extends State<Setting> {
                                   child: Text("Actions",
                                       textAlign: TextAlign.left,
                                       style: TextStyle(
-                                          color: Colors.black,
                                           fontSize: 16,
                                           fontWeight: FontWeight.w500)),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(right: 15),
                                   child: Icon(Icons.arrow_forward_ios_rounded,
-                                      size: 20, color: Colors.black),
+                                      size: 20,
+                                      color: darkthemeState == true
+                                          ? Colors.white
+                                          : Colors.black),
                                 ),
                               ],
                             ),
@@ -239,7 +246,6 @@ class _SettingState extends State<Setting> {
                                   child: Text("Fonts",
                                       textAlign: TextAlign.left,
                                       style: TextStyle(
-                                          color: Colors.black,
                                           fontSize: 16,
                                           fontWeight: FontWeight.w500)),
                                 ),
@@ -297,7 +303,6 @@ class _SettingState extends State<Setting> {
                                   child: Text("Dark Mode",
                                       textAlign: TextAlign.left,
                                       style: TextStyle(
-                                          color: Colors.black,
                                           fontSize: 16,
                                           fontWeight: FontWeight.w500)),
                                 ),
@@ -346,7 +351,6 @@ class _SettingState extends State<Setting> {
                                   child: Text("Notifications",
                                       textAlign: TextAlign.left,
                                       style: TextStyle(
-                                          color: Colors.black,
                                           fontSize: 16,
                                           fontWeight: FontWeight.w500)),
                                 ),
@@ -403,7 +407,6 @@ class _SettingState extends State<Setting> {
                                   child: Text("Fingerprint",
                                       textAlign: TextAlign.left,
                                       style: TextStyle(
-                                          color: Colors.black,
                                           fontSize: 16,
                                           fontWeight: FontWeight.w500)),
                                 ),
@@ -464,7 +467,6 @@ class _SettingState extends State<Setting> {
                                   child: Text("Log Out",
                                       textAlign: TextAlign.left,
                                       style: TextStyle(
-                                          color: Colors.black,
                                           fontSize: 16,
                                           fontWeight: FontWeight.w500)),
                                 ),

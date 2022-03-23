@@ -59,9 +59,11 @@ class _editProfileState extends State<editProfile> {
     }
   }
 
+  bool? darkthemeState;
   get() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     username = sharedPreferences.getString("username");
+    darkthemeState = sharedPreferences.getBool("lightTheme");
     dynamic response =
         await nw.httpPost("post/getUserAccountDetails", {'postedBy': username});
     if (response['statusCode'] != null &&
@@ -263,14 +265,16 @@ class _editProfileState extends State<editProfile> {
                                   child: Text("Change Password",
                                       textAlign: TextAlign.left,
                                       style: TextStyle(
-                                          color: Colors.black,
                                           fontSize: 16,
                                           fontWeight: FontWeight.w400)),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(right: 15),
                                   child: Icon(Icons.arrow_forward_ios_rounded,
-                                      size: 20, color: Colors.black),
+                                      size: 20,
+                                      color: darkthemeState == true
+                                          ? Colors.white
+                                          : Colors.black),
                                 ),
                               ],
                             ),
