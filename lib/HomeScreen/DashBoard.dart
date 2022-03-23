@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Chat/Chat_Ui_Main.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -137,7 +138,8 @@ class _DashboardState extends State<Dashboard> {
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(10.0),
                                   child: Image.network(
-                                    dataList[index][i]['image'][0].toString(),
+                                    dataList[index][i]['image'][index]
+                                        .toString(),
                                     // "https://images.unsplash.com/photo-1640622304233-7335e936f11b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxMXx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60",
                                     fit: BoxFit.cover,
                                   ),
