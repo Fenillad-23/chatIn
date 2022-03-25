@@ -16,7 +16,7 @@ class _SearchUserState extends State<SearchUser> {
   late TextEditingController _textController = new TextEditingController();
 
   List loadUserList = [];
-
+  List blank = [];
   bool? darkthemeState;
   getdata() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
@@ -99,7 +99,7 @@ class _SearchUserState extends State<SearchUser> {
         padding: const EdgeInsets.only(top: 20, left: 05),
         child: _searchResult.length != 0
             ? listView(datalist: _searchResult)
-            : listView(datalist: loadUserList),
+            : listView(datalist: blank),
       ),
     );
   }

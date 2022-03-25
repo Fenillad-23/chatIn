@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:chattin/HomeScreen/Home.dart';
+import 'package:chattin/Login/login.dart';
 import 'package:chattin/Splash_Screen/onBoarding.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -71,9 +72,7 @@ class _SplashScreenState extends State<SplashScreen> {
         sharedPreferences.getBool('fingerprint') == false) {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(
-          builder: (context) => Home(),
-        ),
+        MaterialPageRoute(builder: (context) => Login()),
       );
     } else {
       Navigator.pushReplacement(
