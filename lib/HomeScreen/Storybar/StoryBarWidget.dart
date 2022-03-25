@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:chattin/HomeScreen/Storybar/UploadStory.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -30,8 +32,10 @@ class _StoryBarWidgetState extends State<StoryBarWidget> {
         response['statusCode'] == "200") {
       print(
           "story data-----------------------------${response["userstories"][0]}");
+
       loadStories.addAll(response['userstories']);
-      print("..........." + loadStories[0]['image']);
+
+      // print("..........." + loadStories[0]['userstories']);
       setState(() {});
       // print(loadStories[0]['userstories']['image'][0]);
     }
@@ -103,26 +107,28 @@ class _StoryBarWidgetState extends State<StoryBarWidget> {
                     height: 60,
                     child: Stack(
                       children: <Widget>[
-                        // Container(
-                        //   decoration: BoxDecoration(
-                        //       //shape: BoxShape.circle,
-                        //       borderRadius: BorderRadius.circular(22.0),
-                        //       border: Border.all(
-                        //           color: Colors.blueAccent, width: 3)),
-                        //   child: Padding(
-                        //     padding: const EdgeInsets.all(0.0),
-                        //     child: Container(
-                        //       width: 75,
-                        //       height: 75,
-                        //       decoration: BoxDecoration(
-                        //           //shape: BoxShape.circle,
-                        //           borderRadius: BorderRadius.circular(18.5),
-                        //           image: DecorationImage(
-                        //               image: NetworkImage(loadStories[0]),
-                        //               fit: BoxFit.cover)),
-                        // ),
-                        // ),
-                        // )
+                        Container(
+                          decoration: BoxDecoration(
+                              //shape: BoxShape.circle,
+                              borderRadius: BorderRadius.circular(22.0),
+                              border: Border.all(
+                                  color: Colors.blueAccent, width: 3)),
+                          child: Padding(
+                            padding: const EdgeInsets.all(0.0),
+                            child: Container(
+                              width: 75,
+                              height: 75,
+                              decoration: BoxDecoration(
+                                  //shape: BoxShape.circle,
+                                  borderRadius: BorderRadius.circular(18.5),
+                                  image: DecorationImage(
+                                      image: NetworkImage(loadStories[index]
+                                              ['image'][index]
+                                          .toString()),
+                                      fit: BoxFit.cover)),
+                            ),
+                          ),
+                        )
 
                         // storyList[index]['isOnline']
                         //     ? Positioned(
@@ -149,7 +155,7 @@ class _StoryBarWidgetState extends State<StoryBarWidget> {
                     width: 75,
                     child: Align(
                         child: Text(
-                      "",
+                      loadStories[index]['postedBy'],
                       overflow: TextOverflow.ellipsis,
                     )),
                   )
