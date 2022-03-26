@@ -1,3 +1,4 @@
+import 'package:chattin/HomeScreen/UserProfileMain/qrCode.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -29,7 +30,6 @@ class _SettingState extends State<Setting> {
   bool? Fingerprint;
   String dropdownvalue = 'Default';
   late bool lightTheme;
-
   var items = [
     'Default',
     'Slabo',
@@ -184,7 +184,12 @@ class _SettingState extends State<Setting> {
                       child: Material(
                         color: Colors.white.withOpacity(0.0),
                         child: InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: ((context) => GenerateQRCode())));
+                          },
                           child: Ink(
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -192,7 +197,7 @@ class _SettingState extends State<Setting> {
                                 Padding(
                                   padding:
                                       const EdgeInsets.fromLTRB(23, 15, 0, 15),
-                                  child: Text("Actions",
+                                  child: Text("QR Code",
                                       textAlign: TextAlign.left,
                                       style: TextStyle(
                                           fontSize: 16,

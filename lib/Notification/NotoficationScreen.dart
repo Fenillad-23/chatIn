@@ -25,7 +25,6 @@ class _NotificationState extends State<Notificationscreen> {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     darkthemeState = sharedPreferences.getBool("lightTheme");
     setState(() {});
-    print(sharedPreferences.getBool("lightTheme"));
   }
 
   Widget build(BuildContext context) {

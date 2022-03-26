@@ -43,6 +43,8 @@ dependencies:
   flutter_switch: ^0.3.2
   font_awesome_flutter: ^9.2.0
   im_stepper: ^0.1.3
+  barcode_widget: ^2.0.2
+  flutter_qr_bar_scanner: ^3.0.2
   
  
 
