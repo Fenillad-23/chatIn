@@ -1,4 +1,5 @@
 import 'package:chattin/HomeScreen/Storybar/StoryBarWidget.dart';
+import 'package:chattin/HomeScreen/UserProfile/UserProfile.dart';
 import 'package:chattin/Network/network_dio.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -88,24 +89,49 @@ class _DashboardState extends State<Dashboard> {
                                       )),
                                   Padding(
                                     padding: EdgeInsets.only(left: 10),
-                                    child: Text(
-                                      dataList[index][i]['postedBy'].toString(),
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18),
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) => UserProfile(
+                                                userName: dataList[index][i]
+                                                        ['postedBy']
+                                                    .toString(),
+                                              ),
+                                            ));
+                                      },
+                                      child: Text(
+                                        dataList[index][i]['postedBy']
+                                            .toString(),
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18),
+                                      ),
                                     ),
                                   ),
                                 ],
                               ),
-                              Container(
-                                  height: 40,
-                                  child: Padding(
-                                    padding: EdgeInsets.only(top: 5),
-                                    child: Icon(
-                                      Icons.more_vert,
-                                      size: 30,
-                                    ),
-                                  )),
+                              // Container(
+                              //     height: 40,
+                              //     child: Padding(
+                              //       padding: EdgeInsets.only(top: 5),
+                              //       child: Icon(
+                              //         Icons.more_vert,
+                              //         size: 30,
+                              //       ),
+                              //     )),
+                              PopupMenuButton(
+                                  itemBuilder: (context) => [
+                                        PopupMenuItem(
+                                          child: Text("Unfollow User"),
+                                          value: 1,
+                                        ),
+                                        PopupMenuItem(
+                                          child: Text("Report user"),
+                                          value: 2,
+                                        )
+                                      ]),
                             ],
                           ),
                           SizedBox(

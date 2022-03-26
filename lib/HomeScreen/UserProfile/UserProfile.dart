@@ -105,28 +105,24 @@ class _UserProfileState extends State<UserProfile> {
       appBar: AppBar(
         title: Text(
           widget.userName.toString(),
-          style: TextStyle(),
-          //color: darkthemeState == true ? Colors.white : Colors.black),
+          style: TextStyle(
+              color: darkthemeState == true ? Colors.white : Colors.black),
         ),
         actions: <Widget>[
           Padding(
             padding: EdgeInsets.only(right: 5),
             child: IconButton(
-              icon: Icon(
-                Icons.more_vert,
-                //color: Colors.black,
-              ),
-              onPressed: () {
-                // do something
-              },
+              icon: Icon(Icons.more_vert,
+                  color: darkthemeState == true ? Colors.white : Colors.black),
+              onPressed: () {},
             ),
           )
         ],
         backgroundColor: Colors.transparent,
+        elevation: 0,
         leading: new IconButton(
-          icon: new Icon(
-            Icons.arrow_back,
-          ), //color: Colors.black),
+          icon: new Icon(Icons.arrow_back,
+              color: darkthemeState == true ? Colors.white : Colors.black),
           onPressed: () {
             Navigator.pop(context);
           },
