@@ -1,7 +1,9 @@
 import 'dart:convert';
 
 import 'package:chattin/HomeScreen/Storybar/UploadStory.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_stories/flutter_stories.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:chattin/Network/network_dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -14,6 +16,7 @@ class StoryBarWidget extends StatefulWidget {
 }
 
 class _StoryBarWidgetState extends State<StoryBarWidget> {
+  final _momentDuration = const Duration(seconds: 5);
   @override
   void initState() {
     super.initState();
@@ -107,25 +110,80 @@ class _StoryBarWidgetState extends State<StoryBarWidget> {
                     height: 60,
                     child: Stack(
                       children: <Widget>[
-                        Container(
-                          decoration: BoxDecoration(
-                              //shape: BoxShape.circle,
-                              borderRadius: BorderRadius.circular(22.0),
-                              border: Border.all(
-                                  color: Colors.blueAccent, width: 3)),
-                          child: Padding(
-                            padding: const EdgeInsets.all(0.0),
-                            child: Container(
-                              width: 75,
-                              height: 75,
-                              decoration: BoxDecoration(
-                                  //shape: BoxShape.circle,
-                                  borderRadius: BorderRadius.circular(18.5),
-                                  image: DecorationImage(
-                                      image: NetworkImage(loadStories[index]
-                                              ['image'][index]
-                                          .toString()),
-                                      fit: BoxFit.cover)),
+                        GestureDetector(
+                          onTap: () {
+                            loadStories[index]['image'].length == 1
+                                ? showCupertinoDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return CupertinoPageScaffold(
+                                        child: Story(
+                                          onFlashForward:
+                                              Navigator.of(context).pop,
+                                          onFlashBack:
+                                              Navigator.of(context).pop,
+                                          momentCount: loadStories[index]
+                                                  ['image']
+                                              .length,
+                                          momentDurationGetter: (idx) =>
+                                              _momentDuration,
+                                          momentBuilder: (context, idx) =>
+                                              Image.network(
+                                            loadStories[index]['image'][idx]
+                                                .toString(),
+                                            fit: BoxFit.cover,
+                                            //height: MediaQuery.of(context).size.height/2,
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  )
+                                : showCupertinoDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return CupertinoPageScaffold(
+                                        child: Story(
+                                          onFlashForward:
+                                              Navigator.of(context).pop,
+                                          onFlashBack:
+                                              Navigator.of(context).pop,
+                                          momentCount: loadStories[index]
+                                                  ['image']
+                                              .length,
+                                          momentDurationGetter: (idx) =>
+                                              _momentDuration,
+                                          momentBuilder: (context, idx) =>
+                                              Image.network(
+                                            loadStories[index]['image'][idx]
+                                                .toString(),
+                                            fit: BoxFit.cover,
+                                            //height: MediaQuery.of(context).size.height/2,
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  );
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                                //shape: BoxShape.circle,
+                                borderRadius: BorderRadius.circular(22.0),
+                                border: Border.all(
+                                    color: Colors.blueAccent, width: 3)),
+                            child: Padding(
+                              padding: const EdgeInsets.all(0.0),
+                              child: Container(
+                                width: 75,
+                                height: 75,
+                                decoration: BoxDecoration(
+                                    //shape: BoxShape.circle,
+                                    borderRadius: BorderRadius.circular(18.5),
+                                    image: DecorationImage(
+                                        image: NetworkImage(loadStories[index]
+                                                ['image'][index]
+                                            .toString()),
+                                        fit: BoxFit.cover)),
+                              ),
                             ),
                           ),
                         )

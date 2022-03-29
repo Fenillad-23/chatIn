@@ -34,6 +34,13 @@ class _SettingState extends State<Setting> {
     'Default',
     'Slabo',
     'DancingScript',
+    'Merriweather',
+    'Rajdhani',
+    'Pacifico',
+    'Cookie',
+    'Satisfy',
+    'Birthstone',
+    'ArchitectsDaughter',
   ];
 
   void initState() {
@@ -117,7 +124,7 @@ class _SettingState extends State<Setting> {
           padding: EdgeInsets.all(25.0),
           color:
               darkthemeState == true ? Colors.black54 : new Color(0xFFECEFF1),
-          height: MediaQuery.of(context).size.height,
+          // height: MediaQuery.of(context).size.height,
           child: Column(
             children: [
               Container(
