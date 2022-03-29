@@ -159,8 +159,8 @@ class _UserProfileMainState extends State<UserProfileMain> {
                                           fontSize: 20,
                                           fontWeight: FontWeight.w500),
                                     ),
-                              Container(
-                                padding: EdgeInsets.fromLTRB(2, 5, 0, 0),
+                              Padding(
+                                padding: EdgeInsets.fromLTRB(2, 0, 0, 0),
                                 child: Text(
                                   name != null ? name : "N/A",
                                   style: TextStyle(
@@ -210,7 +210,7 @@ class _UserProfileMainState extends State<UserProfileMain> {
                     height: 7,
                   ),
                   Container(
-                    height: 100,
+                    // height: 100,
                     width: MediaQuery.of(context).size.width,
                     child: Card(
                       elevation: 8,

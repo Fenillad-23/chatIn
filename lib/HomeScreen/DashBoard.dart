@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Chat/Chat_Ui_Main.dart';
-// import 'package:carousel_slider/carousel_slider.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -19,6 +19,7 @@ class _DashboardState extends State<Dashboard> {
   List dataList = [];
   bool loaded = false;
   bool? darkthemeState;
+
   @override
   void initState() {
     super.initState();
@@ -59,108 +60,102 @@ class _DashboardState extends State<Dashboard> {
                 return Container(
                   // color: Colors.blue,
                   padding: EdgeInsets.only(bottom: 20),
-                  child: Card(
-                    elevation: 8,
-                    shape: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(color: Colors.white),
-                    ),
-                    shadowColor: Color.fromRGBO(255, 255, 255, 1),
-                    child: Container(
-                      padding: EdgeInsets.all(15.0),
-                      child: Column(
-                        children: [
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  CircleAvatar(
-                                      radius: 20.0,
-                                      child: ClipOval(
-                                        child: Image.network(
-                                          // dataList[index]['profilePic'].toString(),
-                                          "https://images.unsplash.com/photo-1640622304233-7335e936f11b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxMXx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60",
-                                          height: 40,
-                                          width: 40,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      )),
-                                  Padding(
-                                    padding: EdgeInsets.only(left: 10),
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) => UserProfile(
-                                                userName: dataList[index][i]
-                                                        ['postedBy']
-                                                    .toString(),
-                                              ),
-                                            ));
-                                      },
-                                      child: Text(
-                                        dataList[index][i]['postedBy']
-                                            .toString(),
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 18),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                CircleAvatar(
+                                    radius: 20.0,
+                                    child: ClipOval(
+                                      child: Image.network(
+                                        // dataList[index]['profilePic'].toString(),
+                                        "https://images.unsplash.com/photo-1640622304233-7335e936f11b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxMXx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60",
+                                        height: 40,
+                                        width: 40,
+                                        fit: BoxFit.cover,
                                       ),
+                                    )),
+                                Padding(
+                                  padding: EdgeInsets.only(left: 10),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => UserProfile(
+                                              userName: dataList[index][i]
+                                                      ['postedBy']
+                                                  .toString(),
+                                            ),
+                                          ));
+                                    },
+                                    child: Text(
+                                      dataList[index][i]['postedBy'].toString(),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18),
                                     ),
                                   ),
-                                ],
-                              ),
-                              // Container(
-                              //     height: 40,
-                              //     child: Padding(
-                              //       padding: EdgeInsets.only(top: 5),
-                              //       child: Icon(
-                              //         Icons.more_vert,
-                              //         size: 30,
-                              //       ),
-                              //     )),
-                              PopupMenuButton(
-                                  itemBuilder: (context) => [
-                                        PopupMenuItem(
-                                          child: Text("Unfollow User"),
-                                          value: 1,
-                                        ),
-                                        PopupMenuItem(
-                                          child: Text("Report user"),
-                                          value: 2,
-                                        )
-                                      ]),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Divider(),
-                          SizedBox(
-                            height: 7,
-                          ),
-                          Row(
-                            children: [
-                              Container(
-                                width: MediaQuery.of(context).size.width - 58,
-                                child: Text(
-                                  dataList[index][i]['caption'].toString(),
-                                  style: TextStyle(
-                                      // color: Colors.black.withOpacity(0.6),
-                                      fontSize: 12),
                                 ),
-                              )
-                            ],
-                          ),
-                          SizedBox(
-                            height: 12,
-                          ),
-                          Row(
-                            children: [
-                              Container(
-                                width: MediaQuery.of(context).size.width - 58,
+                              ],
+                            ),
+                            // Container(
+                            //     height: 40,
+                            //     child: Padding(
+                            //       padding: EdgeInsets.only(top: 5),
+                            //       child: Icon(
+                            //         Icons.more_vert,
+                            //         size: 30,
+                            //       ),
+                            //     )),
+                            PopupMenuButton(
+                                itemBuilder: (context) => [
+                                      PopupMenuItem(
+                                        child: Text("Unfollow User"),
+                                        value: 1,
+                                      ),
+                                      PopupMenuItem(
+                                        child: Text("Report user"),
+                                        value: 2,
+                                      )
+                                    ]),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Divider(
+                          thickness: 1,
+                        ),
+                        SizedBox(
+                          height: 7,
+                        ),
+                        Row(
+                          children: [
+                            Container(
+                              width: MediaQuery.of(context).size.width - 58,
+                              child: Text(
+                                dataList[index][i]['caption'].toString(),
+                                style: TextStyle(
+                                    // color: Colors.black.withOpacity(0.6),
+                                    fontSize: 12),
+                              ),
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          height: 12,
+                        ),
+                        dataList[index][i]['image'].length == 1
+                            ? Container(
+                                height: 300,
+                                width: MediaQuery.of(context).size.width,
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(10.0),
                                   child: Image.network(
@@ -170,96 +165,134 @@ class _DashboardState extends State<Dashboard> {
                                   ),
                                 ),
                               )
-                            ],
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  GestureDetector(
-                                      // child: dataList[index]['isLike'] == true
-                                      //     ? Icon(
-                                      //         Icons.favorite,
-                                      //         color: Colors.red,
-                                      //         size: 32,
-                                      //       )
-                                      //     : Icon(
-                                      //         Icons.favorite_outline,
-                                      //         size: 32,
-                                      //       ),
-                                      child: Icon(
-                                        Icons.favorite_outline,
-                                        size: 32,
+                            : Container(
+                                margin: EdgeInsets.all(15),
+                                child: CarouselSlider.builder(
+                                  itemCount: dataList[index][i]['image'].length,
+                                  options: CarouselOptions(
+                                    enlargeCenterPage: true,
+                                    height: 300,
+                                    autoPlay: false,
+                                    autoPlayInterval: Duration(seconds: 3),
+                                    reverse: false,
+                                    aspectRatio: 5.0,
+                                  ),
+                                  itemBuilder: (context, n, id) {
+                                    //for onTap to redirect to another screen
+                                    return GestureDetector(
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                            border: Border.all(
+                                              color: Colors.white,
+                                            )),
+                                        //ClipRRect for image border radius
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                          child: Image.network(
+                                            dataList[index][i]['image'][n],
+                                            width: 500,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
                                       ),
                                       onTap: () {
-                                        // dataList[index]['isLike'] =
-                                        //     !dataList[index]['isLike'];
-                                        // setState(() {});
-                                      }),
-                                  SizedBox(
-                                    width: 25,
-                                  ),
-                                  Icon(FontAwesomeIcons.comment),
-                                  SizedBox(
-                                    width: 25,
-                                  ),
-                                  new Icon(FontAwesomeIcons.paperPlane),
-                                  // const Text("45",style: TextStyle(fontSize: 15),),
-                                ],
+                                        var url = imageList[i];
+                                        print(url.toString());
+                                      },
+                                    );
+                                  },
+                                ),
                               ),
-                              InkWell(
-                                onTap: () {
-                                  // dataList[index]['isSaved'] =
-                                  //     !dataList[index]['isSaved'];
-                                  // setState(() {});
-                                },
-                                child: Icon(
-                                  Icons.bookmark,
-                                  // dataList[index]['isSaved'] == true
-                                  //     ? Icons.bookmark
-                                  //     : Icons.bookmark_outline,
-                                  size: 32,
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                GestureDetector(
+                                    // child: dataList[index]['isLike'] == true
+                                    //     ? Icon(
+                                    //         Icons.favorite,
+                                    //         color: Colors.red,
+                                    //         size: 32,
+                                    //       )
+                                    //     : Icon(
+                                    //         Icons.favorite_outline,
+                                    //         size: 32,
+                                    //       ),
+                                    child: Icon(
+                                      Icons.favorite_outline,
+                                      size: 32,
+                                    ),
+                                    onTap: () {
+                                      // dataList[index]['isLike'] =
+                                      //     !dataList[index]['isLike'];
+                                      // setState(() {});
+                                    }),
+                                SizedBox(
+                                  width: 25,
                                 ),
-                              )
-                            ],
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                '0', //dataList[index]['likesCount'],
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 14,
+                                Icon(FontAwesomeIcons.comment),
+                                SizedBox(
+                                  width: 25,
                                 ),
-                              )
-                            ],
-                          ),
-                          SizedBox(
-                            height: 3,
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                '1 hour ago',
-                                // dataList[index]['duration'],
-                                style: TextStyle(
-                                  color: darkthemeState == true
-                                      ? Colors.white.withOpacity(0.6)
-                                      : Colors.black.withOpacity(0.6),
-                                  fontSize: 12,
-                                ),
-                              )
-                            ],
-                          ),
-                        ],
-                      ),
+                                new Icon(FontAwesomeIcons.paperPlane),
+                                // const Text("45",style: TextStyle(fontSize: 15),),
+                              ],
+                            ),
+                            InkWell(
+                              onTap: () {
+                                // dataList[index]['isSaved'] =
+                                //     !dataList[index]['isSaved'];
+                                // setState(() {});
+                              },
+                              child: Icon(
+                                Icons.bookmark,
+                                // dataList[index]['isSaved'] == true
+                                //     ? Icons.bookmark
+                                //     : Icons.bookmark_outline,
+                                size: 32,
+                              ),
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              '0', //dataList[index]['likesCount'],
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14,
+                              ),
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          height: 3,
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              '1 hour ago',
+                              // dataList[index]['duration'],
+                              style: TextStyle(
+                                color: darkthemeState == true
+                                    ? Colors.white.withOpacity(0.6)
+                                    : Colors.black.withOpacity(0.6),
+                                fontSize: 12,
+                              ),
+                            )
+                          ],
+                        ),
+                      ],
                     ),
                   ),
                 );

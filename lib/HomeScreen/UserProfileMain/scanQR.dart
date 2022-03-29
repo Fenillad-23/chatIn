@@ -83,30 +83,22 @@ class _ScanQRCodeState extends State<ScanQRCode> {
           },
         ),
       ),
-      backgroundColor: Color.fromARGB(255, 221, 219, 219),
+      // backgroundColor: Color.fromARGB(255, 221, 219, 219),
       body: camState
-          ? Card(
-              elevation: 8,
-              shape: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(color: Colors.white),
-              ),
-              shadowColor: Color.fromRGBO(255, 255, 255, 1),
-              child: Center(
-                child: Container(
-                  color: Colors.blue,
-                  height: MediaQuery.of(context).size.height / 2.5,
-                  width: MediaQuery.of(context).size.width / 1.3,
-                  child: QRBarScannerCamera(
-                    onError: (context, error) => Text(
-                      error.toString(),
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.red),
-                    ),
-                    qrCodeCallback: (code) {
-                      qrCallback(code);
-                    },
+          ? Center(
+              child: Container(
+                color: Colors.blue,
+                height: MediaQuery.of(context).size.height / 2.5,
+                width: MediaQuery.of(context).size.width / 1.3,
+                child: QRBarScannerCamera(
+                  onError: (context, error) => Text(
+                    error.toString(),
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.red),
                   ),
+                  qrCodeCallback: (code) {
+                    qrCallback(code);
+                  },
                 ),
               ),
             )

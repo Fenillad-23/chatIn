@@ -1,8 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:chattin/HomeScreen/Home.dart';
-import 'package:chattin/Network/network_dio.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -24,6 +22,7 @@ class _uploadState extends State<upload> {
   }
 
   final ImagePicker _picker = ImagePicker();
+  int currentIndex = 0;
   List<XFile>? images = [];
   void selectImage() async {
     final List<XFile>? selectedImage = await _picker.pickMultiImage();
@@ -64,45 +63,57 @@ class _uploadState extends State<upload> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(
-      children: [
-        ListView.builder(
-          itemCount: images!.length,
-          shrinkWrap: true,
-          itemBuilder: (context, index) {
-            return Container(
-              // width: 50,
-              height: 500,
-              child: Image.file(
-                File(images![index].path),
-                fit: BoxFit.cover,
-                //height: MediaQuery.of(context).size.height/2,
-              ),
-            );
-          },
-        ),
-        SizedBox(height: 20),
-        Container(
-          height: 50,
-          width: 150,
-          child: OutlinedButton(
-            child: Text("Add To Story",
-                style: TextStyle(fontSize: 18, color: Colors.black)),
-            onPressed: () {
-              upload(images);
-            },
-            style: OutlinedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(28.5),
-                ),
-                side: BorderSide(
-                  width: 2.0,
-                  color: Colors.blue,
-                  style: BorderStyle.solid,
-                )),
+      body: Column(
+        children: [
+          Expanded(
+            child: PageView.builder(
+              itemCount: images!.length,
+              onPageChanged: (int index) {
+                setState(() {
+                  currentIndex = index;
+                });
+              },
+              itemBuilder: (_, i) {
+                return SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height,
+                        child: Image.file(
+                          File(images![i].path),
+                          fit: BoxFit.cover,
+                          //height: MediaQuery.of(context).size.height/2,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
           ),
-        )
-      ],
-    ));
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: 50,
+            // color: Colors.white,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(15.0),
+                  topLeft: Radius.circular(15.0)),
+              color: Colors.white,
+            ),
+            child: TextButton(
+              child: Text(
+                "Upload Story",
+                style: TextStyle(fontSize: 20, color: Colors.black),
+              ),
+              onPressed: () {
+                upload(images);
+              },
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

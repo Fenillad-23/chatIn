@@ -48,7 +48,7 @@ class _GenerateQRCodeState extends State<GenerateQRCode> {
           },
         ),
       ),
-      backgroundColor: Color.fromARGB(255, 221, 219, 219),
+      // backgroundColor:darkthemeState == true ? Colors.black54 : Colors.transparent, Colors.white, //Color.fromARGB(255, 221, 219, 219),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -60,8 +60,10 @@ class _GenerateQRCodeState extends State<GenerateQRCode> {
                 elevation: 8,
                 shape: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
-                  borderSide: BorderSide(color: Colors.white),
+                  borderSide:
+                      BorderSide(color: Color.fromARGB(255, 163, 159, 159)),
                 ),
+                color: Colors.white,
                 shadowColor: Color.fromRGBO(255, 255, 255, 1),
                 child: Container(
                   padding: EdgeInsets.all(15.0),
@@ -84,7 +86,9 @@ class _GenerateQRCodeState extends State<GenerateQRCode> {
                       Text(
                         '$username',
                         style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.w500),
+                            color: Colors.black,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500),
                       )
                     ],
                   ),
