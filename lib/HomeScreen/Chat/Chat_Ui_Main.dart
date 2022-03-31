@@ -4,23 +4,26 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'individualChat.dart';
 
 class chat_main_list extends StatefulWidget {
-  const chat_main_list({Key? key}) : super(key: key);
+  chat_main_list({Key? key}) : super(key: key);
 
   @override
   _chat_main_listState createState() => _chat_main_listState();
 }
 
 class _chat_main_listState extends State<chat_main_list> {
+  bool loaded = false;
+  bool? darkthemeState;
   void initState() {
     super.initState();
     setThemeState();
-    setState(() {});
+    setState(() {
+      loaded = true;
+    });
   }
 
-  bool? darkthemeState;
   void setThemeState() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    darkthemeState = sharedPreferences.getBool("lightTheme")!;
+    darkthemeState = sharedPreferences.getBool("lightTheme");
     setState(() {});
     // print(sharedPreferences.getBool("lightTheme"));
   }
@@ -114,144 +117,154 @@ class _chat_main_listState extends State<chat_main_list> {
   ];
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        title: Padding(
-          padding: const EdgeInsets.only(left: 15.0, top: 20.0),
-          child: Text("Chats",
-              style: TextStyle(
-                  fontSize: 27,
-                  color: darkthemeState! ? Colors.white : Colors.black,
-                  fontWeight: FontWeight.bold)),
-        ),
-        actions: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(left: 15.0, top: 18.0),
-            child: IconButton(
-                onPressed: () {},
-                icon: Icon(
-                  Icons.more_vert,
-                  color: darkthemeState! ? Colors.white : Colors.black,
-                )),
-          )
-        ],
-      ),
-      body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        child: Container(
-          // color: new Color(0xFFECEFF1),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: chatUsers.length,
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    return Column(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(left: 10, right: 10),
-                          child: ListTile(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => individualChat(
-                                      username: chatUsers[index]['username'],
-                                      profile: chatUsers[index]['image']),
-                                ),
-                              );
-                            },
-                            title: Column(
-                              children: [
-                                Container(
-                                  height: 90,
-                                  child: Row(children: [
-                                    Column(children: [
+    return loaded == false
+        ? Center(child: CircularProgressIndicator())
+        : Scaffold(
+            appBar: AppBar(
+              automaticallyImplyLeading: false,
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              title: Padding(
+                padding: const EdgeInsets.only(left: 15.0, top: 20.0),
+                child: Text("Chats",
+                    style: TextStyle(
+                        fontSize: 27,
+                        color: darkthemeState! ? Colors.white : Colors.black,
+                        fontWeight: FontWeight.bold)),
+              ),
+              actions: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(left: 15.0, top: 18.0),
+                  child: IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.more_vert,
+                        color: darkthemeState! ? Colors.white : Colors.black,
+                      )),
+                )
+              ],
+            ),
+            body: SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
+              child: Container(
+                // color: new Color(0xFFECEFF1),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ListView.builder(
+                        physics: NeverScrollableScrollPhysics(),
+                        itemCount: chatUsers.length,
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          return Column(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(left: 10, right: 10),
+                                child: ListTile(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => individualChat(
+                                            username: chatUsers[index]
+                                                ['username'],
+                                            profile: chatUsers[index]['image']),
+                                      ),
+                                    );
+                                  },
+                                  title: Column(
+                                    children: [
                                       Container(
-                                        //color: Colors.blue,
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                5,
-                                        // height: 70,
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 15.0),
-                                          child: CircleAvatar(
-                                            radius: 30,
-                                            child: ClipOval(
-                                              child: Image.network(
-                                                  chatUsers[index]['image'],
-                                                  width: 60,
-                                                  height: 60,
-                                                  fit: BoxFit.cover),
-                                            ),
-                                          ),
-                                        ),
-                                      )
-                                    ]),
-                                    Padding(
-                                      padding: EdgeInsets.only(left: 10),
-                                      child: Column(children: [
-                                        Container(
-                                          //color: Colors.yellow,
-                                          padding: EdgeInsets.only(top: 20),
-                                          height: 90,
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              2,
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(chatUsers[index]['username'],
-                                                  style: TextStyle(
-                                                      fontSize: 20,
-                                                      fontWeight:
-                                                          FontWeight.w500)),
-                                              Padding(
-                                                padding:
-                                                    EdgeInsets.only(top: 5.0),
-                                                child: Text(
-                                                  chatUsers[index]['message'],
-                                                  style: TextStyle(
-                                                      // color: Colors.black
-                                                      // .withOpacity(0.6),
-                                                      fontSize: 12),
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  maxLines: 1,
+                                        height: 90,
+                                        child: Row(children: [
+                                          Column(children: [
+                                            Container(
+                                              //color: Colors.blue,
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  5,
+                                              // height: 70,
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 15.0),
+                                                child: CircleAvatar(
+                                                  radius: 30,
+                                                  child: ClipOval(
+                                                    child: Image.network(
+                                                        chatUsers[index]
+                                                            ['image'],
+                                                        width: 60,
+                                                        height: 60,
+                                                        fit: BoxFit.cover),
+                                                  ),
                                                 ),
                                               ),
-                                            ],
+                                            )
+                                          ]),
+                                          Padding(
+                                            padding: EdgeInsets.only(left: 10),
+                                            child: Column(children: [
+                                              Container(
+                                                //color: Colors.yellow,
+                                                padding:
+                                                    EdgeInsets.only(top: 20),
+                                                height: 90,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    2,
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                        chatUsers[index]
+                                                            ['username'],
+                                                        style: TextStyle(
+                                                            fontSize: 20,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w500)),
+                                                    Padding(
+                                                      padding: EdgeInsets.only(
+                                                          top: 5.0),
+                                                      child: Text(
+                                                        chatUsers[index]
+                                                            ['message'],
+                                                        style: TextStyle(
+                                                            // color: Colors.black
+                                                            // .withOpacity(0.6),
+                                                            fontSize: 12),
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        maxLines: 1,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              )
+                                            ]),
                                           ),
-                                        )
-                                      ]),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 20, bottom: 22.0),
-                                      child: CircleAvatar(
-                                          radius: 10, child: Text("1")),
-                                    )
-                                  ]),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 20, bottom: 22.0),
+                                            child: CircleAvatar(
+                                                radius: 10, child: Text("1")),
+                                          )
+                                        ]),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    );
-                  })
-            ],
-          ),
-        ),
-      ),
-    );
+                              ),
+                            ],
+                          );
+                        })
+                  ],
+                ),
+              ),
+            ),
+          );
   }
 }
