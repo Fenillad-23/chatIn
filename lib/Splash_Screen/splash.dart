@@ -72,7 +72,21 @@ class _SplashScreenState extends State<SplashScreen> {
         sharedPreferences.getBool('fingerprint') == false) {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => Login()),
+        MaterialPageRoute(builder: (context) => Home()),
+      );
+    } else if (sharedPreferences.getBool('isRememberMe') == false ||
+        sharedPreferences.getBool('fingerprint') == true) {
+      final isAuthenticated = await LocalAuthApi.authenticate();
+      if (isAuthenticated) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => Home()),
+        );
+      }
+    } else if (sharedPreferences.getBool('isRememberMe') == false ||
+        sharedPreferences.getBool('fingerprint') == false) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => onBoarding()),
       );
     } else {
       Navigator.pushReplacement(

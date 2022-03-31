@@ -44,7 +44,8 @@ class _SearchUserState extends State<SearchUser> {
     }
 
     loadUserList.forEach((userDetail) {
-      if (userDetail['username'].toLowerCase().contains(text.toLowerCase())) {
+      if (userDetail['username'].toLowerCase().contains(text.toLowerCase()) ||
+          userDetail['name'].toLowerCase().contains(text.toLowerCase())) {
         _searchResult.add(userDetail);
       }
       setState(() {});
