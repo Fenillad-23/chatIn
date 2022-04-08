@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:chattin/HomeScreen/UserProfile/Post.dart';
 import 'package:chattin/HomeScreen/UserProfileMain/FollowingList.dart';
 import 'package:chattin/HomeScreen/UserProfileMain/Setting.dart';
 import 'package:chattin/Network/network_dio.dart';
@@ -64,6 +65,20 @@ class _UserProfileMainState extends State<UserProfileMain> {
       setState(() {});
     } else {
       print(response['message']);
+    }
+    dynamic get_data = await nw.httpPost("user/getData", {
+      'newUsername': userName,
+    });
+    if (get_data != null &&
+        (get_data['statusCode'] == 200 || get_data['statusCode'] == "200")) {
+      imageList =
+          get_data['postresult'] != null && get_data['postresult'].length != 0
+              ? get_data['postresult']
+              : [];
+      userDetails = get_data['result'] != null && get_data['result'].length != 0
+          ? get_data['result']
+          : [];
+      print(imageList);
     }
   }
 
@@ -370,6 +385,15 @@ class _UserProfileMainState extends State<UserProfileMain> {
                     shrinkWrap: true,
                     itemBuilder: (BuildContext context, int index) {
                       return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => PostList(
+                                        userData: userDetails,
+                                        image: imageList,
+                                      )));
+                        },
                         onLongPress: () {
                           setState(() {
                             _showPreview = true;
@@ -424,3 +448,5 @@ class _UserProfileMainState extends State<UserProfileMain> {
 }
 
 List dataList = [];
+List userDetails = [];
+List imageList = [];

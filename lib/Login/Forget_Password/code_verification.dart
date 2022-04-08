@@ -61,6 +61,7 @@ class _codeVerificationState extends State<codeVerification> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         title: Text("Code Verification",
+            textAlign: TextAlign.center,
             style: TextStyle(
               color: Colors.white,
             )),

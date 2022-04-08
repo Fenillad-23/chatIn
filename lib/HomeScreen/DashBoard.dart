@@ -307,41 +307,41 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent,
+      // appBar: AppBar(
+      //     backgroundColor: Colors.transparent,
+      //     title: Padding(
+      //       padding: const EdgeInsets.all(8.0),
+      //       child: Text("ChatIn", style: TextStyle(color: Colors.black)),
+      //     )),
+      appBar: AppBar(
         backgroundColor: Colors.transparent,
-        // appBar: AppBar(
-        //     backgroundColor: Colors.transparent,
-        //     title: Padding(
-        //       padding: const EdgeInsets.all(8.0),
-        //       child: Text("ChatIn", style: TextStyle(color: Colors.black)),
-        //     )),
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          title: Text('Home',
-              style: TextStyle(
-                  color: darkthemeState == true ? Colors.white : Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 22)),
-          actions: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(right: 8.0),
-              child: IconButton(
-                  icon: Icon(FontAwesomeIcons.commentDots,
-                      color:
-                          darkthemeState == true ? Colors.white : Colors.black),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => chat_main_list(),
-                      ),
-                    );
-                  }),
-            )
-          ],
-        ),
-        body: SafeArea(
-            child: Padding(
+        elevation: 0,
+        title: Text('Home',
+            style: TextStyle(
+                color: darkthemeState == true ? Colors.white : Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: 22)),
+        actions: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(right: 8.0),
+            child: IconButton(
+                icon: Icon(FontAwesomeIcons.commentDots,
+                    color:
+                        darkthemeState == true ? Colors.white : Colors.black),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => chat_main_list(),
+                    ),
+                  );
+                }),
+          )
+        ],
+      ),
+      body: SafeArea(
+        child: Padding(
           padding: const EdgeInsets.only(top: 13.0),
           child: Container(
             child: ListView(
@@ -363,6 +363,8 @@ class _DashboardState extends State<Dashboard> {
               ],
             ),
           ),
-        )));
+        ),
+      ),
+    );
   }
 }
