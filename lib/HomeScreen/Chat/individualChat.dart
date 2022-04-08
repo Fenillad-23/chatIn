@@ -15,7 +15,7 @@ class _individualChatState extends State<individualChat> {
   TextEditingController sendMessage = TextEditingController();
   ScrollController _scrollController = ScrollController();
   List messages = [
-    {"messageContent": "Hello, bankim", "messageType": "receiver"},
+    {"messageContent": "Hello", "messageType": "receiver"},
     {"messageContent": "what's up", "messageType": "receiver"},
     {"messageContent": "nothing special", "messageType": "sender"},
     {"messageContent": "ehhhh, doing OK.", "messageType": "receiver"},

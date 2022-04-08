@@ -72,7 +72,7 @@ class _SplashScreenState extends State<SplashScreen> {
         sharedPreferences.getBool('fingerprint') == false) {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => Login()),
+        MaterialPageRoute(builder: (context) => Home()),
       );
     } else {
       Navigator.pushReplacement(

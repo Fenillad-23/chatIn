@@ -315,6 +315,7 @@ class _DashboardState extends State<Dashboard> {
         //       child: Text("ChatIn", style: TextStyle(color: Colors.black)),
         //     )),
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           backgroundColor: Colors.transparent,
           elevation: 0,
           title: Text('Home',
