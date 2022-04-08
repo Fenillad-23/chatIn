@@ -12,7 +12,7 @@ class chat_main_list extends StatefulWidget {
 
 class _chat_main_listState extends State<chat_main_list> {
   bool loaded = false;
-  bool? darkthemeState;
+  bool darkthemeState = false;
   void initState() {
     super.initState();
     setThemeState();
@@ -23,7 +23,7 @@ class _chat_main_listState extends State<chat_main_list> {
 
   void setThemeState() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    darkthemeState = sharedPreferences.getBool("lightTheme");
+    darkthemeState = sharedPreferences.getBool("lightTheme")!;
     setState(() {});
     // print(sharedPreferences.getBool("lightTheme"));
   }
