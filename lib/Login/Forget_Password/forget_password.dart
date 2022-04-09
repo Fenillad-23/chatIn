@@ -22,18 +22,19 @@ class _ForgetPasswordState extends State<ForgetPassword> {
     sharedPreferences.setString('VerifyEmail', emailController.text.toString());
     if (_formKey.currentState!.validate()) {
       dynamic verify_mail = await nw.httpPost(
-          'User/checkemail', {'email': emailController.text.toString()});
+          'User/checkemail', {'email': emailController.text.toString().trim()});
       Map Email = {
         'email': emailController.text.toString().trim(),
       };
       print('VerifyEmail:$Email');
+      // print(verify_mail['statusCode']);
       if (verify_mail != null &&
-          (verify_mail['statusCode'] == 200 ||
-              verify_mail['statusCode'] == '200')) {
+          (verify_mail['statusCode'] == 500 ||
+              verify_mail['statusCode'] == '500')) {
         reSendOTP();
       } else {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(verify_mail['statusCodemessage'].toString()),
+          content: Text("Invalid Email!! Please register email First"),
           action: SnackBarAction(
             label: '',
             textColor: Colors.white,

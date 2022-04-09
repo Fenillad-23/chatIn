@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:chattin/HomeScreen/UserProfileMain/EditProfile/resetPassword.dart';
+import 'package:chattin/HomeScreen/UserProfileMain/UserProfileMain.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
@@ -41,19 +42,43 @@ class _editProfileState extends State<editProfile> {
       "PATCH",
       Uri.parse("$uri"),
     );
-    request.files.add(await http.MultipartFile.fromPath("image", image!.path));
-    request.fields['bio'] = bioController.text.toString().trim();
-    request.fields['name'] = fullNameController.text.toString().trim();
-    request.fields['username'] = username.toString();
-    print("-----------${image!.path}");
+    if (_load == true) {
+      request.files
+          .add(await http.MultipartFile.fromPath("image", image!.path));
+      request.fields['bio'] = bioController.text.toString().trim() == ''
+          ? bio.toString()
+          : bioController.text.toString().trim();
+      request.fields['name'] = fullNameController.text.toString().trim() == ''
+          ? fullName.toString()
+          : fullNameController.text.toString().trim();
+      request.fields['username'] = username.toString();
+      print("1");
+    } else if (_load == false) {
+      request.fields['bio'] = bioController.text.toString().trim() == ''
+          ? bio.toString()
+          : bioController.text.toString().trim();
+      request.fields['name'] = fullNameController.text.toString().trim() == ''
+          ? fullName.toString()
+          : fullNameController.text.toString().trim();
+      request.fields['username'] = username.toString();
+      print("2");
+    }
+
+    print(request.fields['bio']);
+    print(request.fields['name']);
+    // print("-----------${image!.path}");
     var response = await request.send();
     print('Response: $response');
     var responseData = await response.stream.toBytes();
     var responseString = String.fromCharCodes(responseData);
     var msg = await json.decode(responseString);
     if (response.statusCode == 200) {
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => UserProfileMain()),
+          (route) => false);
       print("Done");
-      get();
+      // get();
     } else {
       print(response.statusCode);
     }
@@ -73,7 +98,9 @@ class _editProfileState extends State<editProfile> {
           : "Enter full Name";
       get_email = response['result'][0]['email'];
       get_contact = response['result'][0]['contactNo'];
-      profile = response['result'][0]['profilepicture'];
+      profile = response['result'][0]['profilepicture'].length != 0
+          ? response['result'][0]['profilepicture']
+          : '';
       bio = response['result'][0]['bio'] != null
           ? response['result'][0]['bio']
           : "Enter bio";
@@ -148,8 +175,20 @@ class _editProfileState extends State<editProfile> {
                               )
                             : ClipRRect(
                                 borderRadius: BorderRadius.circular(100),
-                                child: Image.network(profile.toString(),
-                                    width: 90, height: 90, fit: BoxFit.cover),
+                                child: profile.toString() != 'null'
+                                    ? Image.network(profile!,
+                                        width: 90,
+                                        height: 90,
+                                        fit: BoxFit.cover)
+                                    : ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(100),
+                                        child: Image.asset(
+                                            'assets/images/user.jpeg',
+                                            width: 90,
+                                            height: 90,
+                                            fit: BoxFit.cover),
+                                      ),
                               ),
                       ],
                     ),

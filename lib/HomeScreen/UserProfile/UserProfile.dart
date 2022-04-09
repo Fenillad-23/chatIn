@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:chattin/HomeScreen/UserProfile/Post.dart';
 import 'package:chattin/HomeScreen/UserProfileMain/FollowingList.dart';
 import 'package:chattin/Network/network_dio.dart';
 import 'package:flutter/material.dart';
@@ -55,16 +56,19 @@ class _UserProfileState extends State<UserProfile> {
           : " ";
       postCount =
           response['postresult'] != null && response['postresult'].length != 0
-              ? response['postresult'][0]['image'].length
+              ? response['postresult'].length
               : 0;
       imageList =
           response['postresult'] != null && response['postresult'].length != 0
-              ? response['postresult'][0]['image']
+              ? response['postresult']
               : [];
-      print("-----------$imageList");
-      print("----------------");
+      userDetails = response['result'] != null && response['result'].length != 0
+          ? response['result']
+          : [];
+      print("-----------${imageList[3]['image']}");
+      // print("----------------");
       names = response['result'][0]['followers'];
-      print(names);
+      // print(names);
       if (names.contains(name)) {
         print("already following");
         index = 0;
@@ -72,9 +76,9 @@ class _UserProfileState extends State<UserProfile> {
         print("not following");
         index = 1;
       }
-      print("post----------$postCount");
-      print("followcount $followersCount");
-      print("followingCount----------$followingCount");
+      // print("post----------$postCount");
+      // print("followcount $followersCount");
+      // print("followingCount----------$followingCount");
       isDataLoading = false;
       setState(() {});
     }
@@ -457,10 +461,20 @@ class _UserProfileState extends State<UserProfile> {
                           shrinkWrap: true,
                           itemBuilder: (BuildContext context, int index) {
                             return GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => PostList(
+                                              userData: userDetails,
+                                              image: imageList,
+                                            )));
+                              },
                               onLongPress: () {
                                 setState(() {
                                   _showPreview = true;
-                                  _image = imageList[index].toString();
+                                  _image =
+                                      imageList[index]['image'][0].toString();
                                 });
                               },
                               onLongPressEnd: (details) {
@@ -471,7 +485,7 @@ class _UserProfileState extends State<UserProfile> {
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(15.0),
                                 child: Image.network(
-                                  imageList[index].toString(),
+                                  imageList[index]['image'][0].toString(),
                                   width: 300,
                                   height: 150,
                                   fit: BoxFit.cover,
@@ -511,6 +525,7 @@ class _UserProfileState extends State<UserProfile> {
 }
 
 List imageList = [];
+List userDetails = [];
 // Widget __contentGridView() {
 //   return LayoutBuilder(
 //     builder: (context, constraints) {

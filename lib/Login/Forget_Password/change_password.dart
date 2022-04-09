@@ -1,3 +1,4 @@
+import 'package:chattin/Login/login.dart';
 import 'package:chattin/Network/network_dio.dart';
 import 'package:chattin/Registration/otp_success.dart';
 import 'package:chattin/validation/validation.dart';
@@ -40,7 +41,7 @@ class _change_passwordState extends State<change_password> {
             (reset_password['statusCode'] == 200 ||
                 reset_password['statusCode'] == '200')) {
           Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => otpSucceed()));
+              context, MaterialPageRoute(builder: (context) => Login()));
           // reSendOTP();
         } else {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -83,6 +84,7 @@ class _change_passwordState extends State<change_password> {
       appBar: AppBar(
         title: Text(
           'Reset Password',
+          textAlign: TextAlign.center,
           style: TextStyle(
             color: Colors.white,
           ),
