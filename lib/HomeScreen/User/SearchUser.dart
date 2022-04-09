@@ -43,11 +43,19 @@ class _SearchUserState extends State<SearchUser> {
       return;
     }
 
-    loadUserList.forEach((userDetail) {
-      if (userDetail['username'].toLowerCase().contains(text.toLowerCase()) ||
-          userDetail['name'].toLowerCase().contains(text.toLowerCase())) {
-        _searchResult.add(userDetail);
+    // loadUserList.forEach((userDetail) {
+    //   if (userDetail['username'].toLowerCase().contains(text.toLowerCase()) ||
+    //       userDetail['name'].toLowerCase().contains(text.toLowerCase())) {
+    //     _searchResult.add(userDetail);
+    //   }
+    //   setState(() {});
+    // });
+    loadUserList.forEach((Detail) {
+      if (Detail['username'].toLowerCase().contains(text.toLowerCase()) ||
+          Detail['name'].toLowerCase().contains(text.toLowerCase())) {
+        _searchResult.add(Detail);
       }
+      print(Detail);
       setState(() {});
     });
   }
@@ -65,6 +73,9 @@ class _SearchUserState extends State<SearchUser> {
           child: Center(
             child: TextFormField(
               controller: _textController,
+              style: TextStyle(
+                  fontSize: 18,
+                  color: darkthemeState == true ? Colors.black : Colors.grey),
               onChanged: (text) {
                 onSearchTextChanged(_textController.text);
               },
