@@ -316,6 +316,7 @@ class _DashboardState extends State<Dashboard> {
       //     )),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
+        automaticallyImplyLeading: false,
         elevation: 0,
         title: Text('Home',
             style: TextStyle(

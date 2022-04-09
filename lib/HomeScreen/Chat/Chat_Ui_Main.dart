@@ -129,7 +129,9 @@ class _chat_main_listState extends State<chat_main_list> {
                 child: Text("Chats",
                     style: TextStyle(
                         fontSize: 27,
-                        color: darkthemeState! ? Colors.white : Colors.black,
+                        color: darkthemeState == true
+                            ? Colors.white
+                            : Colors.black,
                         fontWeight: FontWeight.bold)),
               ),
               actions: <Widget>[
@@ -139,7 +141,9 @@ class _chat_main_listState extends State<chat_main_list> {
                       onPressed: () {},
                       icon: Icon(
                         Icons.more_vert,
-                        color: darkthemeState! ? Colors.white : Colors.black,
+                        color: darkthemeState == true
+                            ? Colors.white
+                            : Colors.black,
                       )),
                 )
               ],
