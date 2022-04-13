@@ -65,7 +65,7 @@ class _UserProfileState extends State<UserProfile> {
       userDetails = response['result'] != null && response['result'].length != 0
           ? response['result']
           : [];
-      print("-----------${imageList[3]['image']}");
+      // print("-----------${imageList[3]['image']}");
       // print("----------------");
       names = response['result'][0]['followers'];
       // print(names);

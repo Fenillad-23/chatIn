@@ -121,6 +121,7 @@ class _SettingState extends State<Setting> {
       ),
       body: SingleChildScrollView(
         child: Container(
+          height: MediaQuery.of(context).size.height,
           padding: EdgeInsets.all(25.0),
           color:
               darkthemeState == true ? Colors.black54 : new Color(0xFFECEFF1),

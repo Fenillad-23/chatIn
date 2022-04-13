@@ -1,6 +1,7 @@
 import 'package:chattin/HomeScreen/Storybar/StoryBarWidget.dart';
 import 'package:chattin/HomeScreen/UserProfile/UserProfile.dart';
 import 'package:chattin/Network/network_dio.dart';
+import 'package:chattin/Post/commentSection.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -19,13 +20,23 @@ class _DashboardState extends State<Dashboard> {
   List dataList = [];
   bool loaded = false;
   bool? darkthemeState;
-
+  int _optionValue = 0;
+  String? name, unfollowUserName;
   @override
   void initState() {
     super.initState();
     LoadPosts();
     setThemeState();
+    setCrediatials();
     setState(() {});
+  }
+
+  setCrediatials() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    name = sharedPreferences.getString('username');
+    setState(() {});
+    print('username\n');
+    print(name);
   }
 
   void setThemeState() async {
@@ -37,6 +48,8 @@ class _DashboardState extends State<Dashboard> {
 
   LoadPosts() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+
+    setState(() {});
     dynamic response = await nw.httpPost(
         "user/homepage", {'username': sharedPreferences.getString("username")});
     if (response['statusCode'] != null ||
@@ -46,6 +59,15 @@ class _DashboardState extends State<Dashboard> {
       loaded = true;
       setState(() {});
     }
+  }
+
+  unfollow(name, unfollowUserName) async {
+    dynamic unfollowResponse = await nw.httpPost('user/unfollow',
+        {'username': name, 'followUsername': unfollowUserName});
+    print('unfollow user response: \n');
+    print(unfollowResponse);
+    setState(() {});
+    LoadPosts();
   }
 
   postWidget(BuildContext context) {
@@ -74,8 +96,9 @@ class _DashboardState extends State<Dashboard> {
                                     radius: 20.0,
                                     child: ClipOval(
                                       child: Image.network(
-                                        // dataList[index]['profilePic'].toString(),
-                                        "https://images.unsplash.com/photo-1640622304233-7335e936f11b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxMXx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60",
+                                        dataList[index][i]['profilePic']
+                                            .toString(),
+                                        // "https://images.unsplash.com/photo-1640622304233-7335e936f11b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxMXx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60",
                                         height: 40,
                                         width: 40,
                                         fit: BoxFit.cover,
@@ -115,6 +138,19 @@ class _DashboardState extends State<Dashboard> {
                             //       ),
                             //     )),
                             PopupMenuButton(
+                                onSelected: (value) {
+                                  setState(() {
+                                    _optionValue = value as int;
+                                  });
+                                  // print(_optionValue);
+                                  if (_optionValue == 1) {
+                                    setState(() {
+                                      unfollowUserName =
+                                          dataList[index][i]['postedBy'];
+                                    });
+                                    unfollow(name, unfollowUserName);
+                                  } else if (_optionValue == 2) {}
+                                },
                                 itemBuilder: (context) => [
                                       PopupMenuItem(
                                         child: Text("Unfollow User"),
@@ -237,7 +273,20 @@ class _DashboardState extends State<Dashboard> {
                                 SizedBox(
                                   width: 25,
                                 ),
-                                Icon(FontAwesomeIcons.comment),
+                                IconButton(
+                                    icon: Icon(FontAwesomeIcons.comment),
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => commentBox(
+                                                // name: dataList[index][i]
+                                                //     ['postedBy'],
+                                                // profilePic: dataList[index][i]
+                                                //     ['profile']
+                                                )),
+                                      );
+                                    }),
                                 SizedBox(
                                   width: 25,
                                 ),
@@ -307,42 +356,36 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent,
-      // appBar: AppBar(
-      //     backgroundColor: Colors.transparent,
-      //     title: Padding(
-      //       padding: const EdgeInsets.all(8.0),
-      //       child: Text("ChatIn", style: TextStyle(color: Colors.black)),
-      //     )),
-      appBar: AppBar(
         backgroundColor: Colors.transparent,
-        automaticallyImplyLeading: false,
-        elevation: 0,
-        title: Text('Home',
-            style: TextStyle(
-                color: darkthemeState == true ? Colors.white : Colors.black,
-                fontWeight: FontWeight.bold,
-                fontSize: 22)),
-        actions: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(right: 8.0),
-            child: IconButton(
-                icon: Icon(FontAwesomeIcons.commentDots,
-                    color:
-                        darkthemeState == true ? Colors.white : Colors.black),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => chat_main_list(),
-                    ),
-                  );
-                }),
-          )
-        ],
-      ),
-      body: SafeArea(
-        child: Padding(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          title: Text('Home',
+              style: TextStyle(
+                  color: darkthemeState == true ? Colors.white : Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 22)),
+          actions: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(right: 8.0),
+              child: IconButton(
+                  icon: Icon(FontAwesomeIcons.commentDots,
+                      color:
+                          darkthemeState == true ? Colors.white : Colors.black),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => chat_main_list(),
+                      ),
+                    );
+                  }),
+            )
+          ],
+        ),
+        body: SafeArea(
+            child: Padding(
           padding: const EdgeInsets.only(top: 13.0),
           child: Container(
             child: ListView(
@@ -364,8 +407,6 @@ class _DashboardState extends State<Dashboard> {
               ],
             ),
           ),
-        ),
-      ),
-    );
+        )));
   }
 }

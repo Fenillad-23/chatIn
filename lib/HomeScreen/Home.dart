@@ -13,9 +13,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  String? currentPage;
   int currentTab = 0;
-  final List<Widget> screens = [
+  var screens = <Widget>[
     Dashboard(),
     SearchUser(),
     UserProfileMain(),

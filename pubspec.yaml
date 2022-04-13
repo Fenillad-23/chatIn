@@ -46,6 +46,7 @@ dependencies:
   flutter_qr_bar_scanner: ^3.0.2
   carousel_slider: ^4.0.0
   flutter_stories: ^0.3.1
+  comment_box: ^0.0.17
   
  
 
